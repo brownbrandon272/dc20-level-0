@@ -4,7 +4,6 @@ import { useCharacterStore } from '../context/characterStore';
 import ChoiceCard from '../components/ChoiceCard';
 import otherData from '../data/other.json';
 import { applyArchetype, recalculateStats } from '../utils/calculateStats';
-import './ModePage.css';
 
 function PreAdventurerPage() {
   const navigate = useNavigate();
@@ -64,11 +63,11 @@ function PreAdventurerPage() {
   };
 
   return (
-    <div className="pre-adventurer-page">
-      <div className="page-header">
-        <h1>Pre-Adventurer Setup</h1>
-        <p className="level-badge">Pre-Adventurer (Level -0.5)</p>
-        <p>
+    <div className="max-w-[1000px] mx-auto px-4">
+      <div className="text-center mb-12">
+        <h1 className="font-title text-4xl md:text-5xl font-bold text-brown-accent mb-2">Pre-Adventurer Setup</h1>
+        <p className="font-body text-base md:text-lg text-brown-text mb-1">Pre-Adventurer <span className="level-number">(Level -1)</span></p>
+        <p className="font-body text-lg md:text-xl text-brown-medium">
           {character.creationMode === 'streamlined'
             ? 'Choose an archetype that fits your character concept.'
             : 'Set up your attributes, skills, and languages.'}
@@ -76,7 +75,7 @@ function PreAdventurerPage() {
       </div>
 
       {character.creationMode === 'streamlined' ? (
-        <div className="choice-grid">
+        <div className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 md:gap-8 mb-8">
           {archetypes.map((archetype) => (
             <ChoiceCard
               key={archetype.id}
@@ -87,9 +86,9 @@ function PreAdventurerPage() {
           ))}
         </div>
       ) : (
-        <div className="customizable-container">
+        <div className="flex justify-center">
           <button
-            className="btn btn-primary btn-large"
+            className="bg-brown-accent text-parchment-light px-8 py-4 rounded-ornate font-body font-semibold text-lg min-w-[300px] hover:bg-brown-medium transition-all duration-200 hover:-translate-y-0.5 shadow-parchment"
             onClick={() => handleArchetypeSelect(null)}
           >
             Continue to Attribute & Skill Setup

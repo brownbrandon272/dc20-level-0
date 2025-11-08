@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCharacterStore } from '../context/characterStore';
 import maneuversData from '../data/maneuvers.json';
-import './Level0MartialPage.css';
 
 function Level0MartialPage() {
   const navigate = useNavigate();

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCharacterStore } from '../context/characterStore';
 import LocalStorageModal from '../components/LocalStorageModal';
-import './LandingPage.css';
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -35,35 +34,28 @@ function LandingPage() {
   };
 
   return (
-    <div className="landing-page">
-      <div className="landing-content">
-        <h1 className="landing-title">Welcome to the DC20 Character Creator</h1>
-        <p className="landing-tagline">
-          Create your Novice character and level them up to Level 0 for your next one-shot adventure!
+    <div className="flex justify-center items-center min-h-[calc(100vh-200px)]">
+      <div className="text-center max-w-[900px] w-full">
+        <h1 className="font-title text-5xl md:text-6xl font-bold text-gold mb-4">
+          Welcome to DC20 Level 0
+        </h1>
+        <p className="font-body text-xl md:text-2xl text-brown-text mb-12 leading-relaxed">
+          Create your character from Novice (Level -2) to Level 0 for your next one-shot adventure!
         </p>
 
-        <div className="landing-buttons">
-          <button className="btn btn-primary btn-large" onClick={handleCreateCharacter}>
+        <div className="flex flex-col md:flex-row gap-6 justify-center mb-16">
+          <button
+            className="bg-brown-accent text-parchment-light px-8 py-4 rounded-ornate font-body font-semibold text-lg min-w-[200px] hover:bg-brown-medium transition-all duration-200 hover:-translate-y-0.5 shadow-parchment-lg"
+            onClick={handleCreateCharacter}
+          >
             Create a Character
           </button>
-          <button className="btn btn-outline btn-large" disabled>
+          <button
+            className="bg-transparent border-2 border-brown-accent text-brown-accent px-8 py-4 rounded-ornate font-body font-semibold text-lg min-w-[200px] opacity-50 cursor-not-allowed"
+            disabled
+          >
             DMing a Session (Coming Soon)
           </button>
-        </div>
-
-        <div className="landing-info">
-          <div className="info-card">
-            <h3>Quick Start</h3>
-            <p>Use the Streamlined mode to create a character in minutes with pre-selected options.</p>
-          </div>
-          <div className="info-card">
-            <h3>Customizable</h3>
-            <p>Dive deep with the Customizable mode to build your character exactly how you want.</p>
-          </div>
-          <div className="info-card">
-            <h3>Progressive Leveling</h3>
-            <p>Experience your character's growth from Novice to Level 0, step by step.</p>
-          </div>
         </div>
       </div>
 

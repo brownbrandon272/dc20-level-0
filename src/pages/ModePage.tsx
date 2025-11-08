@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCharacterStore } from '../context/characterStore';
 import ChoiceCard from '../components/ChoiceCard';
-import './ModePage.css';
 
 function ModePage() {
   const navigate = useNavigate();
@@ -16,13 +15,13 @@ function ModePage() {
   };
 
   return (
-    <div className="mode-page">
-      <div className="page-header">
-        <h1>Choose Your Creation Mode</h1>
-        <p>How would you like to build your character?</p>
+    <div className="max-w-[1000px] mx-auto px-4">
+      <div className="text-center mb-12">
+        <h1 className="font-title text-4xl md:text-5xl font-bold text-brown-accent mb-2">Choose Your Creation Mode</h1>
+        <p className="font-body text-lg md:text-xl text-brown-medium">How would you like to build your character?</p>
       </div>
 
-      <div className="choice-grid">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
         <ChoiceCard
           title="Streamlined"
           description="Get playing fast with simplified options. Perfect for new players or quick sessions."

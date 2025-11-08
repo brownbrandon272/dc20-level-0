@@ -4,7 +4,6 @@ import { useCharacterStore } from '../context/characterStore';
 import ChoiceCard from '../components/ChoiceCard';
 import weaponsData from '../data/weapons.json';
 import { calculateNoviceStats } from '../utils/calculateStats';
-import './ModePage.css';
 
 function NoviceWeaponPage() {
   const navigate = useNavigate();
@@ -34,14 +33,14 @@ function NoviceWeaponPage() {
   };
 
   return (
-    <div className="weapon-page">
-      <div className="page-header">
-        <h1>Choose Your Weapon</h1>
-        <p className="level-badge">Novice (Level -1)</p>
-        <p>Select the weapon you'll use to defend yourself in combat.</p>
+    <div className="max-w-[1000px] mx-auto px-4">
+      <div className="text-center mb-12">
+        <h1 className="font-title text-4xl md:text-5xl font-bold text-brown-accent mb-2">Choose Your Weapon</h1>
+        <p className="font-body text-base md:text-lg text-brown-text mb-1">Novice <span className="level-number">(Level -2)</span></p>
+        <p className="font-body text-lg md:text-xl text-brown-medium">Select the weapon you'll use to defend yourself in combat.</p>
       </div>
 
-      <div className="choice-grid">
+      <div className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 md:gap-8 mb-8">
         {weapons.map((weapon) => (
           <ChoiceCard
             key={weapon.id}

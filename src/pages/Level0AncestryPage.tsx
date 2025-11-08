@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useCharacterStore } from '../context/characterStore';
 import { recalculateStats } from '../utils/calculateStats';
 import ancestriesData from '../data/ancestries.json';
-import './Level0AncestryPage.css';
 
 function Level0AncestryPage() {
   const navigate = useNavigate();

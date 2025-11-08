@@ -2,6 +2,7 @@
   {
     "id": "throwingDagger",
     "name": "Throwing Dagger",
+    "tagline": "A sneaky, versatile weapon",
     "category": "Melee",
     "style": "Sword",
     "hands": "1H",
@@ -12,6 +13,7 @@
   {
     "id": "shortsword",
     "name": "Shortsword",
+    "tagline": "Quick and defensive",
     "category": "Melee",
     "style": "Sword",
     "hands": "1H",
@@ -22,6 +24,7 @@
   {
     "id": "quarterstaff",
     "name": "Quarterstaff",
+    "tagline": "Versatile reach weapon",
     "category": "Melee",
     "style": "Polearm",
     "hands": "2H",

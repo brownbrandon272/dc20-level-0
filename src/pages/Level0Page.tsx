@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCharacterStore } from '../context/characterStore';
 import ChoiceCard from '../components/ChoiceCard';
-import './ModePage.css';
 
 function Level0Page() {
   const navigate = useNavigate();
@@ -33,14 +32,14 @@ function Level0Page() {
   };
 
   return (
-    <div className="level0-page">
-      <div className="page-header">
-        <h1>Choose Your Path</h1>
-        <p className="level-badge">Level 0</p>
-        <p>Will you be a martial warrior or a spell caster?</p>
+    <div className="max-w-[1000px] mx-auto px-4">
+      <div className="text-center mb-12">
+        <h1 className="font-title text-4xl md:text-5xl font-bold text-brown-accent mb-2">Choose Your Path</h1>
+        <p className="font-body text-base md:text-lg text-brown-text mb-1">Level 0</p>
+        <p className="font-body text-lg md:text-xl text-brown-medium">Will you be a martial warrior or a spell caster?</p>
       </div>
 
-      <div className="choice-grid">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
         <ChoiceCard
           title="Martial"
           description="Master weapons and physical combat. Use maneuvers and stamina to dominate the battlefield."

@@ -2,11 +2,19 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Quick Links to Documentation
+
+- **[Architecture & MCP Servers](docs/mcp-browser-architecture.md)** - Available MCP tools and when to use them
+- **[Fantasy Aesthetic Guide](docs/fantasy-aesthetic-guide.md)** - Complete visual design system and styling guidelines
+- **[Technical Considerations](docs/technical_considerations.md)** - Recent changes, decisions, and known issues
+- **[Project Cleanup Plan](docs/project-cleanup-plan.md)** - Current cleanup tasks and CSS fixes needed
+- **[Docs System README](docs/README.md)** - Understanding the documentation philosophy
+
 ## Project Overview
 
-DC20 Novice Character Creator - A React + TypeScript web application for creating DC20 TTRPG characters from Novice (Level -1) to Level 0. The app features two creation modes (Streamlined/Customizable), progressive leveling, and automatic state persistence via localStorage.
+DC20 Level 0 Character Creator - A React + TypeScript web application for creating DC20 TTRPG characters from Novice (Level -2) to Level 0. The app features two creation modes (Streamlined/Customizable), progressive leveling, and automatic state persistence via localStorage.
 
-**Tech Stack**: React 19, TypeScript 5.7, Zustand 5, React Router 7, Vite 6
+**Tech Stack**: React 19, TypeScript 5.7, Zustand 5, React Router 7, Vite 6, Tailwind CSS 3
 
 ## Development Commands
 
@@ -46,12 +54,13 @@ npm install          # Install dependencies
 
 The app follows a strict 3-stage progression:
 
-1. **Novice (Level -1)**:
+1. **Novice (Level -2)**:
    - Routes: `/create/novice/*`
    - Choices: Ancestry → Weapon
    - Stats: Flat values (HP: 6, PD/MD/AD: 8)
+   - Character Modifier (CM) = 0
 
-2. **Pre-Adventurer (Level -0.5)**:
+2. **Pre-Adventurer (Level -1)**:
    - Routes: `/create/pre-adventurer/*`
    - Streamlined: Choose archetype (auto-assigns attributes/skills)
    - Customizable: Manual attribute allocation (3,1,0,-2) + skill points (5 + INT)
@@ -63,6 +72,8 @@ The app follows a strict 3-stage progression:
    - Martial: Select maneuvers + equipment
    - Caster: Select spell list
    - Final ancestry features
+
+**Note:** Level numbering was updated in Nov 2025 to align with official DC20 system. See [technical_considerations.md](docs/technical_considerations.md) for details.
 
 ### Stat Calculation System
 
@@ -147,21 +158,40 @@ if (creationMode === 'streamlined') {
 - Detects via `hasExistingCharacter()` (checks for name + ancestry)
 - Returns to `character.lastStep` or falls back to `/character/sheet`
 
-### Component Patterns
+### Component Patterns & Styling
+
+**IMPORTANT:** This app uses **Tailwind CSS** for all styling. Component-specific CSS files have been removed. All styling is done via Tailwind utility classes in JSX.
+
+**Tailwind Configuration:**
+- Location: `tailwind.config.js`
+- Theme: Fantasy parchment aesthetic
+- Colors: Parchment backgrounds, brown text, gold accents, stat-specific colors
+- Fonts: Cinzel (titles), Merriweather (body), Pirata One, Lato
+- See [fantasy-aesthetic-guide.md](docs/fantasy-aesthetic-guide.md) for complete design system
+
+**Global Styles:**
+- Location: `src/styles/index.css`
+- Contains: Google Fonts imports, Tailwind directives, CSS custom properties, global resets
+- Body background: Parchment with SVG noise texture
 
 **ChoiceCard**: Universal selection component
 - Used for all major choices (mode, ancestry, weapon, class, etc.)
-- Props: `title`, `description`, `onClick`, `selected`, `disabled`
-- Images use placeholder URLs: `https://via.placeholder.com/300x200/{color}/{textColor}?text={title}`
+- Props: `title`, `description`, `imageUrl`, `onClick`, `selected`, `disabled`
+- Styling: Tailwind classes for parchment background, ornate borders, hover effects
+- **Known Issue:** Placeholder image URLs currently fail to load (needs fix - see project-cleanup-plan.md)
 
 **StatBox**: Character stat display
-- Supports `shape` prop: `'square'`, `'heart'` (HP), `'shield'` (PD)
-- Tooltips on hover
+- Props: `label`, `value`, `tooltip`, `shape`, `color`
+- Supports `shape` prop: `'square'` (default), `'heart'` (HP), `'shield'` (PD)
+- Supports `color` prop: `'primary'`, `'heart'`, `'shield'`, etc.
+- **Known Issue:** Custom shapes (heart/shield) not fully implemented (needs clip-path refinement)
+- Tooltips on hover with arrow indicator
 - Used in CharacterSheetPage for all stats
 
 **CharacterSheetPage tabs**:
 - Tab 1: Stats + Attributes + Equipment + Resources
 - Tab 2: Actions + Reactions (dynamically populated based on level/class)
+- Styling: Parchment cards with brown accents
 
 ### Critical Implementation Details
 
@@ -255,10 +285,24 @@ const setWeapon = useCharacterStore((state) => state.setWeapon);
 - Check `character.creationMode` value (type: `CreationMode | null`)
 - Ensure conditional logic properly handles both 'streamlined' and 'customizable'
 
-## Tech Stack
+## Tech Stack & Styling System
 
-- React 19 + React Router 7
-- TypeScript 5.7
-- Zustand 5 (with persist middleware)
-- Vite 6 (build tool)
-- CSS custom properties (see `src/styles/index.css` for design tokens)
+- **React 19** + React Router 7
+- **TypeScript 5.7**
+- **Zustand 5** (with persist middleware)
+- **Vite 6** (build tool)
+- **Tailwind CSS 3** (utility-first styling)
+- **PostCSS** (CSS processing)
+- **Google Fonts** (Cinzel, Merriweather, Pirata One, Lato)
+
+**Styling Approach:**
+- Tailwind utility classes for all component styling
+- CSS custom properties in `src/styles/index.css` for theme values
+- No component-specific CSS files (all removed in Tailwind migration)
+- Fantasy parchment theme with brown/gold color palette
+- See [fantasy-aesthetic-guide.md](docs/fantasy-aesthetic-guide.md) for complete design system
+
+**Current Status:**
+- Tailwind integration complete
+- Many aesthetic features from design guide still need implementation
+- See [project-cleanup-plan.md](docs/project-cleanup-plan.md) for detailed fix list

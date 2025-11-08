@@ -95,12 +95,6 @@
       "desc": "Move up to your Speed in spaces."
     },
     {
-      "id": "dash",
-      "name": "Dash",
-      "cost": "2 AP",
-      "desc": "Move up to your Speed in spaces, then move again up to your Speed."
-    },
-    {
       "id": "help",
       "name": "Help",
       "cost": "1 AP",

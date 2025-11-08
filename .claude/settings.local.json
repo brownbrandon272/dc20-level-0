@@ -19,7 +19,9 @@
       "mcp__playwright__browser_console_messages",
       "mcp__playwright__browser_tab_close",
       "mcp__playwright__browser_type",
-      "mcp__playwright__browser_*"
+      "mcp__playwright__browser_*",
+      "Bash(npm test:*)",
+      "Bash(npm run:*)"
     ],
     "deny": [],
     "ask": []

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useCharacterStore } from '../context/characterStore';
 import { recalculateStats } from '../utils/calculateStats';
 import otherData from '../data/other.json';
-import './PreAdventurerSkillsPage.css';
 
 function PreAdventurerSkillsPage() {
   const navigate = useNavigate();
@@ -99,7 +98,7 @@ function PreAdventurerSkillsPage() {
     <div className="pre-adventurer-skills-page">
       <div className="page-header">
         <h1>Customize Your Character</h1>
-        <p className="level-badge">Pre-Adventurer (Level -0.5)</p>
+        <p className="level-badge">Pre-Adventurer <span className="level-number">(Level -1)</span></p>
       </div>
 
       <div className="customization-content">

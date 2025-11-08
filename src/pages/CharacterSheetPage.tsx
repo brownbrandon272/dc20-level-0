@@ -6,7 +6,6 @@ import ancestriesData from '../data/ancestries.json';
 import maneuversData from '../data/maneuvers.json';
 import spellsData from '../data/spells.json';
 import otherData from '../data/other.json';
-import './CharacterSheetPage.css';
 
 function CharacterSheetPage() {
   const navigate = useNavigate();
@@ -67,7 +66,15 @@ function CharacterSheetPage() {
     <div className="character-sheet-page">
       <div className="sheet-header">
         <h1>{character.name}</h1>
-        <p className="level-badge">{character.level === 'Novice' ? 'Novice (Level -1)' : character.level === 'PreAdventurer' ? 'Pre-Adventurer (Level -0.5)' : 'Level 0'}</p>
+        <p className="level-badge">
+          {character.level === 'Novice' ? (
+            <>Novice <span className="level-number">(Level -2)</span></>
+          ) : character.level === 'PreAdventurer' ? (
+            <>Pre-Adventurer <span className="level-number">(Level -1)</span></>
+          ) : (
+            'Level 0'
+          )}
+        </p>
         <p className="ancestry-label">{ancestry?.name}</p>
       </div>
 
