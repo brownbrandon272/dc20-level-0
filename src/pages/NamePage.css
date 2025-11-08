@@ -1,0 +1,40 @@
+.name-input-container {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.name-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.25rem;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  transition: border-color 0.2s ease;
+}
+
+.name-input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+.name-input-container .btn-large {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .name-input-container {
+    padding: 1.5rem;
+  }
+
+  .name-input {
+    font-size: 1rem;
+  }
+}

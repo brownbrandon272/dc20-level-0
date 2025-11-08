@@ -1,0 +1,83 @@
+[
+  {
+    "id": "attack",
+    "name": "Attack",
+    "type": "action",
+    "category": "basic",
+    "cost": "1 AP",
+    "desc": "Make a weapon attack against a target within range.",
+    "autoSelected": true
+  },
+  {
+    "id": "powerAttack",
+    "name": "Power Attack",
+    "type": "action",
+    "category": "maneuver",
+    "cost": "2 AP",
+    "desc": "Make a weapon attack with advantage. On hit, deal +2 damage.",
+    "autoSelected": false
+  },
+  {
+    "id": "sweepAttack",
+    "name": "Sweep Attack",
+    "type": "action",
+    "category": "maneuver",
+    "cost": "2 AP",
+    "desc": "Make a weapon attack against up to two adjacent targets within range.",
+    "autoSelected": false
+  },
+  {
+    "id": "extendAttack",
+    "name": "Extend Attack",
+    "type": "action",
+    "category": "maneuver",
+    "cost": "2 AP",
+    "desc": "Make a weapon attack with +1 range. Works only with weapons that have the Extend property.",
+    "autoSelected": false
+  },
+  {
+    "id": "parry",
+    "name": "Parry",
+    "type": "reaction",
+    "category": "maneuver",
+    "cost": "1 AP",
+    "desc": "When an enemy attacks you, increase your PD by 2 against that attack.",
+    "autoSelected": false
+  },
+  {
+    "id": "disarm",
+    "name": "Disarm",
+    "type": "action",
+    "category": "maneuver",
+    "cost": "2 AP",
+    "desc": "Make a contested Martial check. On success, the target drops one held item.",
+    "autoSelected": false
+  },
+  {
+    "id": "grapple",
+    "name": "Grapple",
+    "type": "action",
+    "category": "maneuver",
+    "cost": "2 AP",
+    "desc": "Make a contested Martial check. On success, the target is grappled (Speed 0).",
+    "autoSelected": false
+  },
+  {
+    "id": "shove",
+    "name": "Shove",
+    "type": "action",
+    "category": "maneuver",
+    "cost": "2 AP",
+    "desc": "Make a contested Martial check. On success, push the target 1 space.",
+    "autoSelected": false
+  },
+  {
+    "id": "defensiveStance",
+    "name": "Defensive Stance",
+    "type": "action",
+    "category": "maneuver",
+    "cost": "1 AP",
+    "desc": "Until the start of your next turn, gain +2 to PD and AD.",
+    "autoSelected": false
+  }
+]

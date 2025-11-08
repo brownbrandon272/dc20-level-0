@@ -1,0 +1,74 @@
+.choice-card {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+}
+
+.choice-card:hover:not(.disabled) {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
+}
+
+.choice-card.selected {
+  border-color: var(--success-color);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.choice-card.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.choice-card-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: var(--background-light);
+}
+
+.choice-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.choice-card-content {
+  padding: 1.5rem;
+}
+
+.choice-card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: var(--text-dark);
+}
+
+.choice-card-description {
+  font-size: 1rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .choice-card-image {
+    height: 150px;
+  }
+
+  .choice-card-content {
+    padding: 1rem;
+  }
+
+  .choice-card-title {
+    font-size: 1.25rem;
+  }
+
+  .choice-card-description {
+    font-size: 0.875rem;
+  }
+}

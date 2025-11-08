@@ -1,0 +1,136 @@
+{
+  "skills": [
+    "Athletics",
+    "Acrobatics",
+    "Stealth",
+    "Sleight of Hand",
+    "Arcana",
+    "History",
+    "Investigation",
+    "Nature",
+    "Religion",
+    "Animal Handling",
+    "Insight",
+    "Medicine",
+    "Perception",
+    "Survival",
+    "Deception",
+    "Intimidation",
+    "Performance",
+    "Persuasion"
+  ],
+  "languages": [
+    "Common",
+    "Dwarvish",
+    "Elvish",
+    "Giant",
+    "Gnomish",
+    "Goblin",
+    "Halfling",
+    "Orc",
+    "Draconic",
+    "Infernal",
+    "Celestial",
+    "Primordial"
+  ],
+  "archetypes": {
+    "smart": {
+      "id": "smart",
+      "name": "Smart",
+      "desc": "You rely on your intellect and knowledge.",
+      "attributes": {
+        "might": 0,
+        "agility": 1,
+        "charisma": -2,
+        "intelligence": 3
+      },
+      "suggestedSkills": ["Arcana", "History", "Investigation"],
+      "suggestedLanguages": ["Elvish", "Draconic"]
+    },
+    "quick": {
+      "id": "quick",
+      "name": "Quick",
+      "desc": "You're nimble and fast on your feet.",
+      "attributes": {
+        "might": 0,
+        "agility": 3,
+        "charisma": 1,
+        "intelligence": -2
+      },
+      "suggestedSkills": ["Acrobatics", "Stealth", "Sleight of Hand"],
+      "suggestedLanguages": ["Halfling", "Goblin"]
+    },
+    "tough": {
+      "id": "tough",
+      "name": "Tough",
+      "desc": "You're strong and resilient.",
+      "attributes": {
+        "might": 3,
+        "agility": 1,
+        "charisma": 0,
+        "intelligence": -2
+      },
+      "suggestedSkills": ["Athletics", "Intimidation", "Survival"],
+      "suggestedLanguages": ["Dwarvish", "Giant"]
+    },
+    "charming": {
+      "id": "charming",
+      "name": "Charming",
+      "desc": "You have a way with people.",
+      "attributes": {
+        "might": -2,
+        "agility": 0,
+        "charisma": 3,
+        "intelligence": 1
+      },
+      "suggestedSkills": ["Persuasion", "Deception", "Performance"],
+      "suggestedLanguages": ["Elvish", "Celestial"]
+    }
+  },
+  "baseActions": [
+    {
+      "id": "move",
+      "name": "Move",
+      "cost": "1 AP",
+      "desc": "Move up to your Speed in spaces."
+    },
+    {
+      "id": "dash",
+      "name": "Dash",
+      "cost": "2 AP",
+      "desc": "Move up to your Speed in spaces, then move again up to your Speed."
+    },
+    {
+      "id": "help",
+      "name": "Help",
+      "cost": "1 AP",
+      "desc": "Give an ally advantage on their next check or attack."
+    },
+    {
+      "id": "hide",
+      "name": "Hide",
+      "cost": "1 AP",
+      "desc": "Make a Stealth check to hide from enemies."
+    },
+    {
+      "id": "search",
+      "name": "Search",
+      "cost": "1 AP",
+      "desc": "Make a Perception or Investigation check to find something."
+    },
+    {
+      "id": "use",
+      "name": "Use Object/Item",
+      "cost": "1 AP",
+      "desc": "Interact with an object or use an item."
+    }
+  ],
+  "baseReactions": [
+    {
+      "id": "opportunityAttack",
+      "name": "Opportunity Attack",
+      "cost": "1 AP",
+      "desc": "When an enemy leaves your reach, make a weapon attack against them."
+    }
+  ]
+}

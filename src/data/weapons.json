@@ -1,0 +1,132 @@
+[
+  {
+    "id": "throwingDagger",
+    "name": "Throwing Dagger",
+    "category": "Melee",
+    "style": "Sword",
+    "hands": "1H",
+    "damage": "1 S",
+    "properties": ["Concealable", "Toss (5/10)"],
+    "streamlined": true
+  },
+  {
+    "id": "shortsword",
+    "name": "Shortsword",
+    "category": "Melee",
+    "style": "Sword",
+    "hands": "1H",
+    "damage": "2 S",
+    "properties": ["Parry"],
+    "streamlined": true
+  },
+  {
+    "id": "quarterstaff",
+    "name": "Quarterstaff",
+    "category": "Melee",
+    "style": "Polearm",
+    "hands": "2H",
+    "damage": "2 B",
+    "properties": ["Extend (1)", "Versatile"],
+    "streamlined": true
+  },
+  {
+    "id": "shortbow",
+    "name": "Shortbow",
+    "category": "Ranged",
+    "style": "Bow",
+    "hands": "2H",
+    "damage": "2 P",
+    "properties": ["Range (20/40)"],
+    "streamlined": true
+  },
+  {
+    "id": "battleaxe",
+    "name": "Battleaxe",
+    "category": "Melee",
+    "style": "Axe",
+    "hands": "1H",
+    "damage": "3 S",
+    "properties": ["Versatile"],
+    "streamlined": false
+  },
+  {
+    "id": "longsword",
+    "name": "Longsword",
+    "category": "Melee",
+    "style": "Sword",
+    "hands": "1H",
+    "damage": "3 S",
+    "properties": ["Parry", "Versatile"],
+    "streamlined": false
+  },
+  {
+    "id": "spear",
+    "name": "Spear",
+    "category": "Melee",
+    "style": "Polearm",
+    "hands": "1H",
+    "damage": "2 P",
+    "properties": ["Extend (1)", "Toss (5/10)", "Versatile"],
+    "streamlined": false
+  },
+  {
+    "id": "handaxe",
+    "name": "Handaxe",
+    "category": "Melee",
+    "style": "Axe",
+    "hands": "1H",
+    "damage": "2 S",
+    "properties": ["Toss (5/10)"],
+    "streamlined": false
+  },
+  {
+    "id": "mace",
+    "name": "Mace",
+    "category": "Melee",
+    "style": "Mace",
+    "hands": "1H",
+    "damage": "2 B",
+    "properties": [],
+    "streamlined": false
+  },
+  {
+    "id": "greatsword",
+    "name": "Greatsword",
+    "category": "Melee",
+    "style": "Sword",
+    "hands": "2H",
+    "damage": "4 S",
+    "properties": ["Parry"],
+    "streamlined": false
+  },
+  {
+    "id": "greataxe",
+    "name": "Greataxe",
+    "category": "Melee",
+    "style": "Axe",
+    "hands": "2H",
+    "damage": "5 S",
+    "properties": [],
+    "streamlined": false
+  },
+  {
+    "id": "longbow",
+    "name": "Longbow",
+    "category": "Ranged",
+    "style": "Bow",
+    "hands": "2H",
+    "damage": "3 P",
+    "properties": ["Range (30/60)"],
+    "streamlined": false
+  },
+  {
+    "id": "crossbow",
+    "name": "Crossbow",
+    "category": "Ranged",
+    "style": "Crossbow",
+    "hands": "2H",
+    "damage": "3 P",
+    "properties": ["Range (25/50)", "Reload"],
+    "streamlined": false
+  }
+]

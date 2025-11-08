@@ -1,0 +1,86 @@
+{
+  "lightning": {
+    "id": "lightning",
+    "name": "Lightning",
+    "desc": "Harness the power of storms and electricity.",
+    "spells": [
+      {
+        "id": "shockingGrasp",
+        "name": "Shocking Grasp",
+        "level": 0,
+        "cost": "1 AP, 1 Mana",
+        "desc": "Touch attack. On hit, deal 2 Lightning damage and target can't take reactions until start of their next turn."
+      },
+      {
+        "id": "lightningBolt",
+        "name": "Lightning Bolt",
+        "level": 0,
+        "cost": "2 AP, 2 Mana",
+        "desc": "Line 6 spaces. All creatures in line make an AD save or take 3 Lightning damage."
+      },
+      {
+        "id": "chainLightning",
+        "name": "Chain Lightning",
+        "level": 0,
+        "cost": "3 AP, 3 Mana",
+        "desc": "Ranged spell attack. On hit, deal 2 Lightning damage. The lightning then jumps to up to 2 other targets within 3 spaces of the first."
+      }
+    ]
+  },
+  "psychic": {
+    "id": "psychic",
+    "name": "Psychic",
+    "desc": "Manipulate minds and bend reality with mental power.",
+    "spells": [
+      {
+        "id": "mindSliver",
+        "name": "Mind Sliver",
+        "level": 0,
+        "cost": "1 AP, 1 Mana",
+        "desc": "Ranged spell attack. On hit, deal 2 Psychic damage and target has disadvantage on their next save."
+      },
+      {
+        "id": "confusion",
+        "name": "Confusion",
+        "level": 0,
+        "cost": "2 AP, 2 Mana",
+        "desc": "Target makes an MD save or is confused (acts randomly) until the end of their next turn."
+      },
+      {
+        "id": "psychicScream",
+        "name": "Psychic Scream",
+        "level": 0,
+        "cost": "3 AP, 3 Mana",
+        "desc": "Burst 2. All creatures in area make an MD save or take 3 Psychic damage and are stunned until the end of their next turn."
+      }
+    ]
+  },
+  "holy": {
+    "id": "holy",
+    "name": "Holy",
+    "desc": "Channel divine light to heal allies and smite foes.",
+    "spells": [
+      {
+        "id": "sacredFlame",
+        "name": "Sacred Flame",
+        "level": 0,
+        "cost": "1 AP, 1 Mana",
+        "desc": "Target makes an AD save or takes 2 Radiant damage. Ignores cover."
+      },
+      {
+        "id": "healingWord",
+        "name": "Healing Word",
+        "level": 0,
+        "cost": "1 AP, 1 Mana",
+        "desc": "Touch. Target regains 2 HP."
+      },
+      {
+        "id": "bless",
+        "name": "Bless",
+        "level": 0,
+        "cost": "2 AP, 2 Mana",
+        "desc": "Up to 3 targets within 6 spaces gain +1 to attack checks and saves for 1 minute."
+      }
+    ]
+  }
+}

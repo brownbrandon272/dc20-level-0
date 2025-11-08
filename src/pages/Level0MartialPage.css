@@ -1,0 +1,117 @@
+.level0-martial-page,
+.level0-caster-page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.martial-content,
+.caster-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.choice-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.choice-button {
+  padding: 1.5rem;
+  background-color: var(--card-background);
+  border: 3px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.choice-button:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.choice-button.selected {
+  border-color: var(--success-color);
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.maneuvers-grid,
+.spells-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.maneuver-card,
+.spell-card {
+  padding: 1.5rem;
+  background-color: var(--background-light);
+  border: 3px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.maneuver-card:hover,
+.spell-card:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.maneuver-card.selected,
+.spell-card.selected {
+  border-color: var(--success-color);
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.maneuver-card h3,
+.spell-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--primary-color);
+  font-size: 1.125rem;
+}
+
+.maneuver-cost,
+.spell-cost {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.maneuver-card p,
+.spell-card p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.martial-content > .btn-large,
+.caster-content > .btn-large {
+  align-self: center;
+  min-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .choice-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .maneuvers-grid,
+  .spells-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .martial-content > .btn-large,
+  .caster-content > .btn-large {
+    width: 100%;
+    min-width: 0;
+  }
+}

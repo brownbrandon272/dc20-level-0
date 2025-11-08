@@ -1,0 +1,68 @@
+{
+  "human": {
+    "id": "human",
+    "name": "Human",
+    "noviceFeature": {
+      "name": "Human Determination",
+      "desc": "Once per rest, you can reroll any check and use the new result."
+    },
+    "level0Features": [
+      {
+        "id": "attributeIncrease",
+        "type": "choice",
+        "name": "Attribute Increase",
+        "desc": "Increase one Attribute of your choice by 1."
+      },
+      {
+        "id": "resilience",
+        "type": "choice",
+        "name": "Resilience",
+        "desc": "Your maximum Hit Points increase by 2."
+      }
+    ]
+  },
+  "elf": {
+    "id": "elf",
+    "name": "Elf",
+    "noviceFeature": {
+      "name": "Elven Grace",
+      "desc": "You have advantage on saves against being charmed, and magic can't put you to sleep."
+    },
+    "level0Features": [
+      {
+        "id": "keenSenses",
+        "type": "choice",
+        "name": "Keen Senses",
+        "desc": "You gain a +2 bonus to Perception checks."
+      },
+      {
+        "id": "fleetOfFoot",
+        "type": "choice",
+        "name": "Fleet of Foot",
+        "desc": "Your base Speed increases by 1."
+      }
+    ]
+  },
+  "dwarf": {
+    "id": "dwarf",
+    "name": "Dwarf",
+    "noviceFeature": {
+      "name": "Dwarven Resilience",
+      "desc": "You have advantage on saves against poison."
+    },
+    "level0Features": [
+      {
+        "id": "toxicFortitude",
+        "type": "choice",
+        "name": "Toxic Fortitude",
+        "desc": "You have resistance to poison damage."
+      },
+      {
+        "id": "stonecunning",
+        "type": "choice",
+        "name": "Stonecunning",
+        "desc": "You gain a +2 bonus to History checks related to stonework."
+      }
+    ]
+  }
+}

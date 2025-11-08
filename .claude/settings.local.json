@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(do [ -f \"$file\" ])",
+      "Bash(xargs rm:*)",
+      "Bash(netstat:*)",
+      "Bash(awk:*)",
+      "Bash(taskkill:*)",
+      "Bash(findstr:*)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_press_key",
+      "mcp__playwright__browser_resize",
+      "mcp__playwright__browser_close",
+      "mcp__playwright__browser_console_messages",
+      "mcp__playwright__browser_tab_close",
+      "mcp__playwright__browser_type",
+      "mcp__playwright__browser_*"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
