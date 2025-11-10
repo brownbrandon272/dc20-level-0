@@ -2,6 +2,7 @@
   "human": {
     "id": "human",
     "name": "Human",
+    "image": "/ancestry/ancestry-human-portrait-1.png",
     "noviceFeature": {
       "name": "Human Determination",
       "desc": "Once per rest, you can reroll any check and use the new result."
@@ -24,6 +25,7 @@
   "elf": {
     "id": "elf",
     "name": "Elf",
+    "image": "/ancestry/ancestry-elf-portrait-1.png",
     "noviceFeature": {
       "name": "Elven Grace",
       "desc": "You have advantage on saves against being charmed, and magic can't put you to sleep."
@@ -46,6 +48,7 @@
   "dwarf": {
     "id": "dwarf",
     "name": "Dwarf",
+    "image": "/ancestry/ancestry-dwarf-portrait-1.png",
     "noviceFeature": {
       "name": "Dwarven Resilience",
       "desc": "You have advantage on saves against poison."

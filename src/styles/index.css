@@ -1,12 +1,61 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Merriweather:wght@300;400;700&family=Pirata+One&family=Lato:wght@300;400;700&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-parchment-light: #F5E8C3;
+  --color-parchment: #E8D9B0;
+  --color-parchment-dark: #D4C29E;
+  --color-brown-text: #3E2723;
+  --color-brown-accent: #8B4513;
+  --color-brown-medium: #6D4C41;
+  --color-brown-light: #A0826D;
+  --color-gold: #D4AF37;
+  --color-gold-light: #E5C158;
+  --color-gold-dark: #B8941F;
+  --color-charcoal-light: #2E2E2E;
+  --color-charcoal: #212121;
+  --color-charcoal-dark: #1A1A1A;
+  --color-hp: #C62828;
+  --color-hp-light: #EF5350;
+  --color-hp-dark: #B71C1C;
+  --color-pd: #757575;
+  --color-pd-light: #BDBDBD;
+  --color-pd-dark: #424242;
+  --color-md: #5E35B1;
+  --color-md-light: #9575CD;
+  --color-md-dark: #4527A0;
+  --color-ad: #2E7D32;
+  --color-ad-light: #66BB6A;
+  --color-ad-dark: #1B5E20;
+
+  /* Font Families */
+  --font-family-title: 'Cinzel', serif;
+  --font-family-display: 'Pirata One', cursive;
+  --font-family-medieval: 'Uncial Antiqua', serif;
+  --font-family-gothic: 'New Rocker', cursive;
+  --font-family-body: 'Merriweather', serif;
+  --font-family-sans: 'Lato', sans-serif;
+
+  /* Shadows */
+  --shadow-parchment: 0 2px 8px rgba(62, 39, 35, 0.15);
+  --shadow-parchment-lg: 0 4px 16px rgba(62, 39, 35, 0.2);
+  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-inset-sm: inset 0 2px 4px rgba(62, 39, 35, 0.1);
+  --shadow-gold: 0 0 12px rgba(212, 175, 55, 0.4);
+
+  /* Border Radius */
+  --radius-ornate: 0.5rem;
+
+  /* Spacing */
+  --spacing-18: 4.5rem;
+  --spacing-88: 22rem;
+}
 
 :root {
-  /* Fantasy Parchment Theme Colors */
+  /* Legacy CSS custom properties for non-Tailwind use */
   --parchment-light: #F5E8C3;
   --parchment: #E8D9B0;
   --parchment-dark: #D4C29E;
@@ -15,17 +64,13 @@
   --brown-medium: #6D4C41;
   --gold: #D4AF37;
   --gold-light: #E5C158;
-
-  /* Stat Colors */
   --hp-color: #C62828;
   --pd-color: #757575;
   --md-color: #5E35B1;
   --ad-color: #2E7D32;
-
   --shadow-parchment: 0 2px 8px rgba(62, 39, 35, 0.15);
   --shadow-parchment-lg: 0 4px 16px rgba(62, 39, 35, 0.2);
   --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.15);
-
   --border-radius-ornate: 0.5rem;
 }
 
@@ -40,7 +85,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--parchment-light);
-  background-image: var(--tw-gradient-parchment-texture, url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27100%27 height=%27100%27%3E%3Cfilter id=%27noise%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%274%27 /%3E%3CfeColorMatrix type=%27saturate%27 values=%270%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noise)%27 opacity=%270.05%27/%3E%3C/svg%3E'));
+  background-image: url('/texture/parchment-paper-texture-seamless.jpg');
+  background-size: 400px 400px;
+  background-repeat: repeat;
+  background-attachment: fixed;
   color: var(--brown-text);
   line-height: 1.6;
 }

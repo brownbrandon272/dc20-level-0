@@ -31,6 +31,7 @@ function Level0CasterPage() {
             key={spellList.id}
             title={spellList.name}
             description={`${spellList.desc} Includes spells like: ${spellList.spells.map(s => s.name).join(', ')}`}
+            imageUrl={spellList.image}
             onClick={() => handleSpellListSelect(spellList.id)}
           />
         ))}

@@ -38,6 +38,7 @@
       "id": "smart",
       "name": "Smart",
       "desc": "You rely on your intellect and knowledge.",
+      "image": "/stats-archetype/archetype-smart.png",
       "attributes": {
         "might": 0,
         "agility": 1,
@@ -51,6 +52,7 @@
       "id": "quick",
       "name": "Quick",
       "desc": "You're nimble and fast on your feet.",
+      "image": "/stats-archetype/archetype-quick.png",
       "attributes": {
         "might": 0,
         "agility": 3,
@@ -64,6 +66,7 @@
       "id": "tough",
       "name": "Tough",
       "desc": "You're strong and resilient.",
+      "image": "/stats-archetype/archetype-strong.png",
       "attributes": {
         "might": 3,
         "agility": 1,
@@ -77,6 +80,7 @@
       "id": "charming",
       "name": "Charming",
       "desc": "You have a way with people.",
+      "image": "/stats-archetype/archetype-charismatic.png",
       "attributes": {
         "might": -2,
         "agility": 0,

@@ -1,13 +1,31 @@
 # DC20 Level 0 - Project Cleanup & CSS Enhancement Plan
 
 **Date Created:** 2025-11-08
-**Status:** Ready for Implementation
+**Last Updated:** 2025-11-08 (Asset Integration Update)
+**Status:** ✅ Assets Provided - Ready for Implementation
+
+---
+
+## 🎉 Major Update: Professional Assets Received!
+
+**ALL CRITICAL ASSETS HAVE BEEN PROVIDED!** See [asset-inventory.md](asset-inventory.md) for complete details.
+
+**Asset Summary:**
+- ✅ 4 ancestry portraits (Human, Elf, Dwarf + alternate)
+- ✅ 12 weapon icons (all weapons covered)
+- ✅ 13 maneuver action illustrations
+- ✅ 3 spellbook character art pieces
+- ✅ 8 archetype character images
+- ✅ 24 ornate frames (gold, silver, circular, square)
+- ✅ 1 seamless parchment texture
+
+**Quality:** Professional, D&D Beyond-level artwork with consistent style
 
 ---
 
 ## Executive Summary
 
-This document outlines a comprehensive plan to clean up the repository and fix formatting/aesthetic issues after the recent Tailwind CSS integration. Multiple CSS files were removed but the visual implementation is incomplete, resulting in numerous styling inconsistencies throughout the app.
+This plan addresses formatting/aesthetic issues after Tailwind CSS integration AND implements the professional asset collection to transform the app's visual quality to match D&D Beyond standards.
 
 ---
 
@@ -93,27 +111,135 @@ I navigated through the entire app flow and captured screenshots of all major pa
 
 ---
 
-## Project Cleanup Plan
+## 🚀 REVISED Implementation Plan (Asset-Driven Approach)
 
-### Phase 1: Repository Housekeeping (High Priority)
+**Now that we have professional assets, we're focusing on visual transformation first, then technical cleanup.**
 
-**Goal:** Clean up git state and ensure consistency
+---
 
-#### Tasks:
+## Phase 1: Quick Wins - Immediate Visual Impact (2-3 hours)
+
+**Goal:** Get beautiful imagery showing on screen ASAP
+
+### 1.1 Apply Parchment Background Texture (15 min)
+
+**File:** `src/styles/index.css`
+
+**Implementation:**
+```css
+body {
+  background-image: url('/texture/parchment-paper-texture-seamless.jpg');
+  background-size: 400px 400px;  /* Adjust for tiling */
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-blend-mode: multiply;
+}
+```
+
+**Test:** Refresh any page, should see textured background immediately
+
+### 1.2 Update Data Files with Image Paths (30-45 min)
+
+**Files to update:**
+- `src/data/ancestries.json`
+- `src/data/weapons.json`
+- `src/data/spells.json`
+- `src/data/maneuvers.json`
+- `src/data/other.json` (archetypes)
+
+**Example changes:**
+```json
+// ancestries.json
+{
+  "human": {
+    "name": "Human",
+    "image": "/ancestry/ancestry-human-portrait-1.png",
+    "noviceFeature": { ... }
+  }
+}
+
+// weapons.json
+[
+  {
+    "name": "Shortsword",
+    "icon": "/weapon/weapon-shortsword.png",
+    ...
+  }
+]
+```
+
+### 1.3 Fix ChoiceCard to Use Real Images (45-60 min)
+
+**File:** `src/components/ChoiceCard.tsx`
+
+**Changes:**
+1. Remove placeholder URL fallback
+2. Add proper image loading
+3. Add gradient overlay for text readability
+4. Error handling for missing images
+
+**Implementation:**
+```tsx
+function ChoiceCard({ title, description, imageUrl, onClick, selected }) {
+  return (
+    <div className={`...existing classes...`} onClick={onClick}>
+      {/* Image Section with Gradient Overlay */}
+      <div className="relative h-64 overflow-hidden">
+        <img
+          src={imageUrl || '/ancestry/ancestry-human-portrait-1.png'}
+          alt={title}
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          onError={(e) => {
+            e.currentTarget.src = '/ancestry/ancestry-human-portrait-1.png';
+          }}
+        />
+        {/* Gradient for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+      </div>
+
+      {/* Content Section */}
+      <div className="p-4 bg-parchment">
+        <h3 className="font-title text-2xl text-brown-text mb-2">{title}</h3>
+        <p className="text-sm text-brown-medium">{description}</p>
+      </div>
+    </div>
+  );
+}
+```
+
+### 1.4 Test with Playwright (30 min)
+
+**Test all pages:**
+- Landing → Mode → Name → Ancestry → Weapon → Character Sheet
+- Pre-Adventurer archetype page
+- Level 0 class selection
+- Spell/Maneuver pages
+
+**Verify:**
+- All images load correctly
+- No broken images
+- Cards look professional
+- Background texture visible
+
+---
+
+## Phase 2: Repository Housekeeping (30-45 min)
+
+**Goal:** Clean up git state
+
+### Tasks:
 
 1. **Commit CSS File Deletions**
-   - These files are already deleted and replaced by Tailwind
-   - Should be committed to clean up git status
-   - Files: All 13 deleted CSS files listed above
+   - All 13 deleted CSS files
 
-2. **Review Uncommitted Changes**
-   - Many `.tsx` files have Tailwind classes but need refinement
-   - Package.json changes (Tailwind dependencies) should be committed
-   - postcss.config.js changes should be committed
+2. **Commit Asset Integration Changes**
+   - Updated data files
+   - Updated ChoiceCard component
+   - Updated index.css
 
-3. **Clean Up Unused Assets**
-   - `.playwright-mcp/` directory with screenshots can be added to .gitignore
-   - Review and remove any other temporary files
+3. **Add to .gitignore**
+   - `.playwright-mcp/` directory
+   - Any temp files
 
 ---
 

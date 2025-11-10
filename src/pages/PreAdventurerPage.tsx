@@ -63,11 +63,11 @@ function PreAdventurerPage() {
   };
 
   return (
-    <div className="max-w-[1000px] mx-auto px-4">
-      <div className="text-center mb-12">
-        <h1 className="font-title text-4xl md:text-5xl font-bold text-brown-accent mb-2">Pre-Adventurer Setup</h1>
-        <p className="font-body text-base md:text-lg text-brown-text mb-1">Pre-Adventurer <span className="level-number">(Level -1)</span></p>
-        <p className="font-body text-lg md:text-xl text-brown-medium">
+    <div className="max-w-[1400px] mx-auto px-4 py-4">
+      <div className="text-center mb-6">
+        <h1 className="font-title text-3xl md:text-4xl font-bold text-brown-accent mb-2">Pre-Adventurer Setup</h1>
+        <p className="font-body text-sm md:text-base text-brown-text mb-1">Pre-Adventurer <span className="level-number">(Level -1)</span></p>
+        <p className="font-body text-base md:text-lg text-brown-medium">
           {character.creationMode === 'streamlined'
             ? 'Choose an archetype that fits your character concept.'
             : 'Set up your attributes, skills, and languages.'}
@@ -75,12 +75,13 @@ function PreAdventurerPage() {
       </div>
 
       {character.creationMode === 'streamlined' ? (
-        <div className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 md:gap-8 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
           {archetypes.map((archetype) => (
             <ChoiceCard
               key={archetype.id}
               title={archetype.name}
               description={archetype.desc}
+              imageUrl={archetype.image}
               onClick={() => handleArchetypeSelect(archetype.id)}
             />
           ))}

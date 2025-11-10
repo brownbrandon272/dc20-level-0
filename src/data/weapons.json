@@ -3,6 +3,7 @@
     "id": "throwingDagger",
     "name": "Throwing Dagger",
     "tagline": "A sneaky, versatile weapon",
+    "icon": "/weapon/weapon-throwing-dagger.png",
     "category": "Melee",
     "style": "Sword",
     "hands": "1H",
@@ -14,6 +15,7 @@
     "id": "shortsword",
     "name": "Shortsword",
     "tagline": "Quick and defensive",
+    "icon": "/weapon/weapon-shortsword.png",
     "category": "Melee",
     "style": "Sword",
     "hands": "1H",
@@ -25,6 +27,7 @@
     "id": "quarterstaff",
     "name": "Quarterstaff",
     "tagline": "Versatile reach weapon",
+    "icon": "/weapon/weapon-quarterstaff.png",
     "category": "Melee",
     "style": "Polearm",
     "hands": "2H",
@@ -35,6 +38,7 @@
   {
     "id": "shortbow",
     "name": "Shortbow",
+    "icon": "/weapon/weapon-shortbow.png",
     "category": "Ranged",
     "style": "Bow",
     "hands": "2H",
@@ -45,6 +49,7 @@
   {
     "id": "battleaxe",
     "name": "Battleaxe",
+    "icon": "/weapon/weapon-battleaxe.png",
     "category": "Melee",
     "style": "Axe",
     "hands": "1H",
@@ -55,6 +60,7 @@
   {
     "id": "longsword",
     "name": "Longsword",
+    "icon": "/weapon/weapon-longsword.png",
     "category": "Melee",
     "style": "Sword",
     "hands": "1H",
@@ -65,6 +71,7 @@
   {
     "id": "spear",
     "name": "Spear",
+    "icon": "/weapon/weapon-spear.png",
     "category": "Melee",
     "style": "Polearm",
     "hands": "1H",
@@ -73,18 +80,9 @@
     "streamlined": false
   },
   {
-    "id": "handaxe",
-    "name": "Handaxe",
-    "category": "Melee",
-    "style": "Axe",
-    "hands": "1H",
-    "damage": "2 S",
-    "properties": ["Toss (5/10)"],
-    "streamlined": false
-  },
-  {
-    "id": "mace",
-    "name": "Mace",
+    "id": "club",
+    "name": "Club",
+    "icon": "/weapon/weapon-club.png",
     "category": "Melee",
     "style": "Mace",
     "hands": "1H",
@@ -95,6 +93,7 @@
   {
     "id": "greatsword",
     "name": "Greatsword",
+    "icon": "/weapon/weapon-greatsword.png",
     "category": "Melee",
     "style": "Sword",
     "hands": "2H",
@@ -103,18 +102,20 @@
     "streamlined": false
   },
   {
-    "id": "greataxe",
-    "name": "Greataxe",
+    "id": "pike",
+    "name": "Pike",
+    "icon": "/weapon/weapon-pike.png",
     "category": "Melee",
-    "style": "Axe",
+    "style": "Polearm",
     "hands": "2H",
-    "damage": "5 S",
-    "properties": [],
+    "damage": "3 P",
+    "properties": ["Extend (2)"],
     "streamlined": false
   },
   {
     "id": "longbow",
     "name": "Longbow",
+    "icon": "/weapon/weapon-longbow.png",
     "category": "Ranged",
     "style": "Bow",
     "hands": "2H",
@@ -125,6 +126,7 @@
   {
     "id": "crossbow",
     "name": "Crossbow",
+    "icon": "/weapon/weapon-crossbow.png",
     "category": "Ranged",
     "style": "Crossbow",
     "hands": "2H",

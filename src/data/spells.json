@@ -3,6 +3,7 @@
     "id": "lightning",
     "name": "Lightning",
     "desc": "Harness the power of storms and electricity.",
+    "image": "/spellbook/spellbook-lightning-character.png",
     "spells": [
       {
         "id": "shockingGrasp",
@@ -31,6 +32,7 @@
     "id": "psychic",
     "name": "Psychic",
     "desc": "Manipulate minds and bend reality with mental power.",
+    "image": "/spellbook/spellbook-psychic-character.png",
     "spells": [
       {
         "id": "mindSliver",
@@ -59,6 +61,7 @@
     "id": "holy",
     "name": "Holy",
     "desc": "Channel divine light to heal allies and smite foes.",
+    "image": "/spellbook/spellbook-holy-character.png",
     "spells": [
       {
         "id": "sacredFlame",

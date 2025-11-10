@@ -33,19 +33,20 @@ function NoviceWeaponPage() {
   };
 
   return (
-    <div className="max-w-[1000px] mx-auto px-4">
-      <div className="text-center mb-12">
-        <h1 className="font-title text-4xl md:text-5xl font-bold text-brown-accent mb-2">Choose Your Weapon</h1>
-        <p className="font-body text-base md:text-lg text-brown-text mb-1">Novice <span className="level-number">(Level -2)</span></p>
-        <p className="font-body text-lg md:text-xl text-brown-medium">Select the weapon you'll use to defend yourself in combat.</p>
+    <div className="max-w-[1400px] mx-auto px-4 py-4">
+      <div className="text-center mb-6">
+        <h1 className="font-title text-3xl md:text-4xl font-bold text-brown-accent mb-2">Choose Your Weapon</h1>
+        <p className="font-body text-sm md:text-base text-brown-text mb-1">Novice <span className="level-number">(Level -2)</span></p>
+        <p className="font-body text-base md:text-lg text-brown-medium">Select the weapon you'll use to defend yourself in combat.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 md:gap-8 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
         {weapons.map((weapon) => (
           <ChoiceCard
             key={weapon.id}
             title={weapon.name}
             description={`${weapon.hands} ${weapon.category} weapon. Damage: ${weapon.damage}. Properties: ${formatProperties(weapon.properties)}`}
+            imageUrl={weapon.icon}
             onClick={() => handleWeaponSelect(weapon)}
           />
         ))}
