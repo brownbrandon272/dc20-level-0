@@ -1,0 +1,82 @@
+{
+    "info_section": {
+        "player_name": {"level": -2, "shape": "rectangle_with_label"},
+        "character_name": {"level": -2, "shape": "rectangle_with_label"},
+        "class_and_subclass": {"level": "DO_NOT_INCLUDE"},
+        "ancestry": {"level": -2, "shape": "rectangle_with_label"},
+        "level": {"level": -2, "shape": "rectangle_with_label"},
+        "combat_mastery": {"level": -2, "shape": "rectangle_with_label"}
+    },
+    "attribute_section": {
+        "attribute_prime": {"level": -1, "shape": "square_with_label"},
+        "save_prime": {"level": -1, "shape": "thin_rectangle"},
+        "skill_prime_awareness": {"level": -1, "shape": "two_circular_tick_boxes_next_to_square"},
+        "attribute_might": {"level": -1, "shape": "square_with_label"},
+        "save_might": {"level": -1, "shape": "thin_rectangle"},
+        "skill_might_athletics": {"level": -1, "shape": "two_circular_tick_boxes_next_to_square"},
+        "skill_might_intimidation": {"level": -1, "shape": "two_circular_tick_boxes_next_to_square"},
+        "attribute_agility": {"level": -1, "shape": "square_with_label"},
+        "save_agility": {"level": -1, "shape": "thin_rectangle"},
+        "skill_agility_acrobatics": {"level": -1, "shape": "two_circular_tick_boxes_next_to_square"},
+        "skill_agility_trickery": {"level": -1, "shape": "two_circular_tick_boxes_next_to_square"},
+        "skill_agility_stealth": {"level": -1, "shape": "two_circular_tick_boxes_next_to_square"},
+        "attribute_charisma": {"level": -1, "shape": "square_with_label"},
+        "save_charisma": {"level": -1, "shape": "thin_rectangle"},
+        "skill_charisma_animal": {"level": -1, "shape": "two_circular_tick_boxes_next_to_square"},
+        "skill_charisma_influence": {"level": -1, "shape": "two_circular_tick_boxes_next_to_square"},
+        "skill_charisma_insight": {"level": -1, "shape": "two_circular_tick_boxes_next_to_square"},
+        "attribute_intelligence": {"level": -1, "shape": "square_with_label"},
+        "save_intelligence": {"level": -1, "shape": "thin_rectangle"},
+        "skill_intelligence_investigation": {"level": -1, "shape": "two_circular_tick_boxes_next_to_square"},
+        "skill_intelligence_medicine": {"level": -1, "shape": "two_circular_tick_boxes_next_to_square"},
+        "skill_intelligence_survival": {"level": -1, "shape": "two_circular_tick_boxes_next_to_square"}
+    },
+    "language_section": {
+        "language_1_name_and_fluency": {"level": -1, "shape": "two_circular_tick_boxes_next_to_square"},
+        "language_2_name_and_fluency": {"level": -1, "shape": "two_circular_tick_boxes_next_to_square"},
+        "language_3_name_and_fluency": {"level": -1, "shape": "two_circular_tick_boxes_next_to_square"}
+    },
+    "hp_and_defense_section": {
+        "health_points": {"level": -2, "shape": "gold_double_circle"}, // heart preferred '{current} / {max}': current editable
+        "temp_hp": {"shape": "DO_NOT_INCLUDE"},
+        "precision_defense": {"level": -2, "shape": "gold_single_circle"}, // shield preferred
+        "area_defense": {"level": -2, "shape": "gold_single_circle"}, // shield preferred
+        "limit_heavy": {"level": -2, "shape": "thin_wide_rectangle"},
+        "limit_brutal": {"level": -2, "shape": "thin_wide_rectangle"},
+        "PDR": {"level": "DO_NOT_INCLUDE"},
+        "EDR": {"level": "DO_NOT_INCLUDE"},
+        "MDR": {"level": "DO_NOT_INCLUDE"}
+    },
+    "resource_section": {
+        "stamina_points": {"level": 0, "shape": "silver_circle"},
+        "mana_points": {"level": 0, "shape": "silver_circle"},
+        "rest_points": {"level": 0, "shape": "thin_rectangle"},
+        "grit_points": {"level": 0, "shape": "thin_rectangle"},
+    },
+    "physical_section": {
+        "move_speed": {"level": -2, "shape": "thin_wide_rectangle"},
+        "hold_breath": {"level": -2, "shape": "thin_wide_rectangle"},
+        "jump_distance": {"level": -2, "shape": "thin_wide_rectangle"},
+    },
+    "combat_section": {
+        "attack_check": {"level": -2, "shape": "thin_wide_rectangle"},
+        "save_dc": {"level": 0, "shape": "thin_wide_rectangle"},
+        "initiative": {"level": -2, "shape": "thin_wide_rectangle"},
+    },
+    "attack_section": {
+        "attack_1_name": {"level": -2, "shape": "rectangle_with_label"},
+        "attack_1_bonus": {"level": -2, "shape": "thin_wide_rectangle"},
+        "attack_1_damage": {"level": -2, "shape": "thin_wide_rectangle"},
+        "attack_2_name": {"level": -2, "shape": "rectangle_with_label"},
+        "attack_2_bonus": {"level": -2, "shape": "thin_wide_rectangle"},
+        "attack_2_damage": {"level": -2, "shape": "thin_wide_rectangle"},
+        "attack_3_name": {"level": -2, "shape": "rectangle_with_label"},
+        "attack_3_bonus": {"level": -2, "shape": "thin_wide_rectangle"},
+        "attack_3_damage": {"level": -2, "shape": "thin_wide_rectangle"}
+    },
+    "features_section": {
+        "feature_1_name_and_description": {"level": -2, "shape": "large_rectangle_with_label"},
+        "feature_2_name_and_description": {"level": -2, "shape": "large_rectangle_with_label"},
+        "feature_3_name_and_description": {"level": -2, "shape": "large_rectangle_with_label"}
+    }
+}

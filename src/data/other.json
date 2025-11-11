@@ -1,23 +1,17 @@
 {
   "skills": [
+    "Awareness",
     "Athletics",
-    "Acrobatics",
-    "Stealth",
-    "Sleight of Hand",
-    "Arcana",
-    "History",
-    "Investigation",
-    "Nature",
-    "Religion",
-    "Animal Handling",
-    "Insight",
-    "Medicine",
-    "Perception",
-    "Survival",
-    "Deception",
     "Intimidation",
-    "Performance",
-    "Persuasion"
+    "Acrobatics",
+    "Trickery",
+    "Stealth",
+    "Animal Handling",
+    "Influence",
+    "Insight",
+    "Investigation",
+    "Medicine",
+    "Survival"
   ],
   "languages": [
     "Common",

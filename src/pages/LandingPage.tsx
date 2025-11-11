@@ -36,6 +36,15 @@ function LandingPage() {
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-200px)]">
       <div className="text-center max-w-[900px] w-full">
+        {/* DC20 Logo */}
+        <div className="flex justify-center mb-8">
+          <img
+            src="/DC20_Logo.png"
+            alt="DC20"
+            className="h-32 md:h-40 w-auto object-contain"
+          />
+        </div>
+
         <h1 className="font-title text-5xl md:text-6xl font-bold text-gold mb-4">
           Welcome to DC20 Level 0
         </h1>

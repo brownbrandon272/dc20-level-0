@@ -55,7 +55,6 @@ export interface CalculatedStats {
   hp: number;
   hpMax: number;
   pd: number;
-  md: number;
   ad: number;
   attackCheck: number;
   saveDC: number;

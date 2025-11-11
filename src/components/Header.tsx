@@ -19,7 +19,7 @@ function Header() {
         </h1>
         {!isHomePage && (
           <button
-            className="bg-parchment-light text-brown-accent px-4 py-2 rounded-ornate font-body font-semibold hover:bg-gold hover:text-brown-text transition-all duration-200 hover:-translate-y-0.5 shadow-parchment text-sm md:text-base"
+            className="bg-parchment-light text-brown-accent px-6 py-3 rounded-ornate font-body font-semibold hover:bg-gold hover:text-brown-text transition-all duration-200 hover:-translate-y-0.5 shadow-parchment text-sm md:text-base"
             onClick={handleHome}
           >
             Home

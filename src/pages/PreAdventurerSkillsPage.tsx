@@ -16,10 +16,10 @@ function PreAdventurerSkillsPage() {
 
   // Standard Array: 3, 1, 0, -2
   const [attributes, setAttributesLocal] = useState({
-    might: 0,
-    agility: 0,
-    charisma: 0,
-    intelligence: 0
+    might: '',
+    agility: '',
+    charisma: '',
+    intelligence: ''
   });
 
   const [availablePoints] = useState([3, 1, 0, -2]);
@@ -35,13 +35,30 @@ function PreAdventurerSkillsPage() {
   const languagePointsUsed = Object.values(languages).filter(v => v > 0).length - 1; // Exclude Common
 
   const handleAttributeChange = (attr, value) => {
-    const numValue = parseInt(value);
     const oldValue = attributes[attr];
 
-    // Remove old value from used points
-    const newUsedPoints = usedPoints.filter(p => p !== oldValue);
+    // If value is empty string (Select...), reset to empty
+    if (value === '') {
+      setAttributesLocal({
+        ...attributes,
+        [attr]: ''
+      });
+      // Remove old value from used points only if it was a valid number
+      if (oldValue !== '') {
+        setUsedPoints(usedPoints.filter(p => p !== oldValue));
+      }
+      return;
+    }
 
-    // Add new value
+    const numValue = parseInt(value);
+
+    // Remove old value from used points only if it was a valid number
+    let newUsedPoints = usedPoints;
+    if (oldValue !== '') {
+      newUsedPoints = usedPoints.filter(p => p !== oldValue);
+    }
+
+    // Add new value if it's available
     if (availablePoints.includes(numValue) && !newUsedPoints.includes(numValue)) {
       setAttributesLocal({
         ...attributes,
@@ -110,7 +127,7 @@ function PreAdventurerSkillsPage() {
               <div key={attr} className="form-group">
                 <label>{attr.charAt(0).toUpperCase() + attr.slice(1)}</label>
                 <select value={attributes[attr]} onChange={(e) => handleAttributeChange(attr, e.target.value)}>
-                  <option value="0">Select...</option>
+                  <option value="">Select...</option>
                   {availablePoints.map(point => (
                     <option
                       key={point}

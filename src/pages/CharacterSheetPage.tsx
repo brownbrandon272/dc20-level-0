@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCharacterStore } from '../context/characterStore';
-import StatBox from '../components/StatBox';
+import CharacterHeader from '../components/CharacterHeader';
+import FramedStat from '../components/FramedStat';
+import AttributeBlock from '../components/AttributeBlock';
 import ancestriesData from '../data/ancestries.json';
 import maneuversData from '../data/maneuvers.json';
 import spellsData from '../data/spells.json';
@@ -16,6 +18,9 @@ function CharacterSheetPage() {
   const ancestry = ancestriesData[character.ancestry.id];
   const stats = character.calculatedStats;
 
+  // Combat Mastery = Character Modifier (CM)
+  const combatMastery = character.level === 'Novice' ? 0 : 1;
+
   const handleLevelUp = () => {
     if (character.level === 'Novice') {
       setLastStep('/character/sheet');
@@ -27,6 +32,31 @@ function CharacterSheetPage() {
   };
 
   const showLevelUpButton = character.level !== 'Level0';
+
+  // Helper to get Prime attribute (highest attribute)
+  const getPrimeAttribute = () => {
+    const attrs = character.attributes;
+    const attrEntries = Object.entries(attrs);
+    const highest = attrEntries.reduce((max, curr) => curr[1] > max[1] ? curr : max);
+    return highest[0];
+  };
+
+  const primeAttribute = character.level !== 'Novice' ? getPrimeAttribute() : null;
+
+  // Skill mappings based on DC20 system (from official character sheet)
+  const skillsByAttribute = {
+    prime: ['Awareness'],
+    might: ['Athletics', 'Intimidation'],
+    agility: ['Acrobatics', 'Trickery', 'Stealth'],
+    charisma: ['Animal Handling', 'Influence', 'Insight'],
+    intelligence: ['Investigation', 'Medicine', 'Survival']
+  };
+
+  // Get skill proficiency from character.skills
+  const getSkillProficiency = (skillName: string): 0 | 1 | 2 => {
+    const prof = character.skills[skillName] || 0;
+    return (prof >= 2 ? 2 : prof >= 1 ? 1 : 0) as 0 | 1 | 2;
+  };
 
   // Get available actions based on level
   const getAvailableActions = () => {
@@ -63,201 +93,481 @@ function CharacterSheetPage() {
   };
 
   return (
-    <div className="character-sheet-page">
-      <div className="sheet-header">
-        <h1>{character.name}</h1>
-        <p className="level-badge">
-          {character.level === 'Novice' ? (
-            <>Novice <span className="level-number">(Level -2)</span></>
-          ) : character.level === 'PreAdventurer' ? (
-            <>Pre-Adventurer <span className="level-number">(Level -1)</span></>
-          ) : (
-            'Level 0'
-          )}
-        </p>
-        <p className="ancestry-label">{ancestry?.name}</p>
-      </div>
+    <div className="min-h-screen bg-parchment-light py-8">
+      <div className="max-w-7xl mx-auto" style={{ paddingLeft: '2rem', paddingRight: '2rem' }}>
+        {/* Character Header */}
+        <CharacterHeader
+          characterName={character.name}
+          ancestry={ancestry?.name || 'Unknown'}
+          level={character.level}
+          combatMastery={combatMastery}
+          classType={character.classType || undefined}
+        />
 
-      <div className="sheet-tabs">
-        <button
-          className={`tab-button ${activeTab === 'sheet' ? 'active' : ''}`}
-          onClick={() => setActiveTab('sheet')}
-        >
-          Character Sheet
-        </button>
-        <button
-          className={`tab-button ${activeTab === 'actions' ? 'active' : ''}`}
-          onClick={() => setActiveTab('actions')}
-        >
-          Actions & Reactions
-        </button>
-      </div>
+        {/* Tab Navigation */}
+        <div className="flex gap-4 mb-8">
+          <button
+            className={`font-title text-lg rounded-lg transition-all ${
+              activeTab === 'sheet'
+                ? 'bg-brown-accent text-parchment-light border-brown-accent shadow-parchment-lg'
+                : 'bg-parchment border-brown-medium text-brown-text hover:border-brown-accent'
+            }`}
+            style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem', paddingTop: '1.25rem', paddingBottom: '1.25rem', borderWidth: '3px', borderStyle: 'solid' }}
+            onClick={() => setActiveTab('sheet')}
+          >
+            Character Sheet
+          </button>
+          <button
+            className={`font-title text-lg rounded-lg transition-all ${
+              activeTab === 'actions'
+                ? 'bg-brown-accent text-parchment-light border-brown-accent shadow-parchment-lg'
+                : 'bg-parchment border-brown-medium text-brown-text hover:border-brown-accent'
+            }`}
+            style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem', paddingTop: '1.25rem', paddingBottom: '1.25rem', borderWidth: '3px', borderStyle: 'solid' }}
+            onClick={() => setActiveTab('actions')}
+          >
+            Actions & Reactions
+          </button>
+        </div>
 
-      <div className="sheet-content">
+        {/* Main Content */}
         {activeTab === 'sheet' && (
-          <div className="sheet-tab">
-            <div className="stats-grid">
-              <StatBox
-                label="HP"
-                value={`${stats.hp}/${stats.hpMax}`}
-                tooltip="Hit Points: Your health"
-                shape="heart"
-                color="primary"
-              />
-              <StatBox
-                label="PD"
-                value={stats.pd}
-                tooltip="Physical Defense: Armor class against physical attacks"
-                shape="shield"
-                color="primary"
-              />
-              <StatBox
-                label="MD"
-                value={stats.md}
-                tooltip="Mental Defense: Resistance against mental attacks"
-                shape="square"
-                color="secondary"
-              />
-              <StatBox
-                label="AD"
-                value={stats.ad}
-                tooltip="Agility Defense: Dodge and reflex saves"
-                shape="square"
-                color="secondary"
-              />
-              <StatBox
-                label="Speed"
-                value={stats.speed}
-                tooltip="Movement speed in spaces per turn"
-                shape="square"
-                color="success"
-              />
-              <StatBox
-                label="AP"
-                value={stats.actionPoints}
-                tooltip="Action Points: Points to spend on actions each turn"
-                shape="square"
-                color="success"
-              />
-            </div>
-
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Left Column: Attributes (Only shown for Pre-Adventurer and Level 0) */}
             {character.level !== 'Novice' && (
-              <div className="attributes-section">
-                <h2>Attributes</h2>
-                <div className="attributes-grid">
-                  <div className="attribute-item">
-                    <span className="attribute-label">Might</span>
-                    <span className="attribute-value">{character.attributes.might >= 0 ? '+' : ''}{character.attributes.might}</span>
-                  </div>
-                  <div className="attribute-item">
-                    <span className="attribute-label">Agility</span>
-                    <span className="attribute-value">{character.attributes.agility >= 0 ? '+' : ''}{character.attributes.agility}</span>
-                  </div>
-                  <div className="attribute-item">
-                    <span className="attribute-label">Charisma</span>
-                    <span className="attribute-value">{character.attributes.charisma >= 0 ? '+' : ''}{character.attributes.charisma}</span>
-                  </div>
-                  <div className="attribute-item">
-                    <span className="attribute-label">Intelligence</span>
-                    <span className="attribute-value">{character.attributes.intelligence >= 0 ? '+' : ''}{character.attributes.intelligence}</span>
-                  </div>
-                </div>
+              <div className="lg:col-span-3 space-y-4">
+                <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
+                  Attributes
+                </h2>
+
+                {primeAttribute && (
+                  <AttributeBlock
+                    name="Prime"
+                    abbreviation="PRM"
+                    value={character.attributes[primeAttribute as keyof typeof character.attributes]}
+                    skills={skillsByAttribute.prime.map(skill => ({
+                      name: skill,
+                      proficiency: getSkillProficiency(skill)
+                    }))}
+                    isPrime={true}
+                  />
+                )}
+
+                <AttributeBlock
+                  name="Might"
+                  abbreviation="MIG"
+                  value={character.attributes.might}
+                  save={character.attributes.might + combatMastery}
+                  skills={skillsByAttribute.might.map(skill => ({
+                    name: skill,
+                    proficiency: getSkillProficiency(skill)
+                  }))}
+                />
+
+                <AttributeBlock
+                  name="Agility"
+                  abbreviation="AGI"
+                  value={character.attributes.agility}
+                  save={character.attributes.agility + combatMastery}
+                  skills={skillsByAttribute.agility.map(skill => ({
+                    name: skill,
+                    proficiency: getSkillProficiency(skill)
+                  }))}
+                />
+
+                <AttributeBlock
+                  name="Charisma"
+                  abbreviation="CHA"
+                  value={character.attributes.charisma}
+                  save={character.attributes.charisma + combatMastery}
+                  skills={skillsByAttribute.charisma.map(skill => ({
+                    name: skill,
+                    proficiency: getSkillProficiency(skill)
+                  }))}
+                />
+
+                <AttributeBlock
+                  name="Intelligence"
+                  abbreviation="INT"
+                  value={character.attributes.intelligence}
+                  save={character.attributes.intelligence + combatMastery}
+                  skills={skillsByAttribute.intelligence.map(skill => ({
+                    name: skill,
+                    proficiency: getSkillProficiency(skill)
+                  }))}
+                />
               </div>
             )}
 
-            <div className="equipment-section">
-              <h2>Equipment</h2>
-              <div className="equipment-list">
-                {character.inventory.weapon && (
-                  <div className="equipment-item">
-                    <strong>Weapon:</strong> {character.inventory.weapon.name}
-                    <span className="equipment-detail">
-                      ({character.inventory.weapon.damage} damage, {character.inventory.weapon.hands})
-                    </span>
+            {/* Center/Right Column: Stats, Combat, Equipment, Resources */}
+            <div className={character.level !== 'Novice' ? 'lg:col-span-9' : 'lg:col-span-12'}>
+              {/* Health & Defense Stats */}
+              <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 mb-6 shadow-parchment-lg">
+                <div className="px-2">
+                  <h2 className="font-title text-2xl text-brown-text mb-6 border-b-2 border-brown-accent pb-3">
+                    Health & Defense
+                  </h2>
+                </div>
+
+                <div className="flex flex-wrap gap-8 justify-center items-start py-4">
+                  {/* Health Points */}
+                  <div className="flex flex-col items-center gap-2 px-4">
+                    <div className="text-xs font-sans uppercase tracking-wide text-brown-text font-semibold mb-1">
+                      Health Points
+                    </div>
+                    <FramedStat
+                      label=""
+                      value={`${stats.hp}/${stats.hpMax}`}
+                      frameType="silver-circle"
+                      size="large"
+                      tooltip="Hit Points: Your health"
+                    />
                   </div>
-                )}
-                {character.inventory.armor && (
-                  <div className="equipment-item">
-                    <strong>Armor:</strong> {character.inventory.armor.name}
+
+                  {/* Precision Defense */}
+                  <div className="flex flex-col items-center gap-2 px-4">
+                    <div className="text-xs font-sans uppercase tracking-wide text-brown-text font-semibold mb-1">
+                      Precision Defense
+                    </div>
+                    <FramedStat
+                      label=""
+                      value={stats.pd}
+                      frameType="silver-square"
+                      size="large"
+                      tooltip="Precision Defense: Defense against targeted attacks"
+                    />
+                    {/* Heavy and Brutal limits for PD */}
+                    <div className="mt-1 bg-parchment-light border border-brown-medium rounded px-4 py-2 text-center">
+                      <span className="text-xs font-sans text-brown-text">
+                        <span className="font-semibold">{stats.pd + 5}</span> Heavy{' '}
+                        <span className="font-semibold">{stats.pd + 10}</span> Brutal
+                      </span>
+                    </div>
                   </div>
-                )}
-                {character.inventory.shield && (
-                  <div className="equipment-item">
-                    <strong>Shield:</strong> {character.inventory.shield.name}
+
+                  {/* Area Defense */}
+                  <div className="flex flex-col items-center gap-2 px-4">
+                    <div className="text-xs font-sans uppercase tracking-wide text-brown-text font-semibold mb-1">
+                      Area Defense
+                    </div>
+                    <FramedStat
+                      label=""
+                      value={stats.ad}
+                      frameType="silver-square"
+                      size="large"
+                      tooltip="Area Defense: Defense against area effects"
+                    />
+                    {/* Heavy and Brutal limits for AD */}
+                    <div className="mt-1 bg-parchment-light border border-brown-medium rounded px-4 py-2 text-center">
+                      <span className="text-xs font-sans text-brown-text">
+                        <span className="font-semibold">{stats.ad + 5}</span> Heavy{' '}
+                        <span className="font-semibold">{stats.ad + 10}</span> Brutal
+                      </span>
+                    </div>
                   </div>
-                )}
-                {character.inventory.additionalWeapon && (
-                  <div className="equipment-item">
-                    <strong>Additional Weapon:</strong> {character.inventory.additionalWeapon.name}
+                </div>
+              </div>
+
+              {/* Combat Stats */}
+              <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 mb-6 shadow-parchment-lg">
+                <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
+                  Combat
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="bg-parchment-light border border-brown-medium rounded-lg p-4 text-center">
+                    <div className="text-sm font-sans uppercase tracking-wide text-brown-medium mb-2">
+                      Attack Check
+                    </div>
+                    <div className="font-title text-3xl font-bold text-brown-text">
+                      +{stats.attackCheck}
+                    </div>
+                    <div className="text-xs text-brown-medium mt-1">
+                      CM + Prime
+                    </div>
+                  </div>
+                  {character.level === 'Level0' && (
+                    <div className="bg-parchment-light border border-brown-medium rounded-lg p-4 text-center">
+                      <div className="text-sm font-sans uppercase tracking-wide text-brown-medium mb-2">
+                        Save DC
+                      </div>
+                      <div className="font-title text-3xl font-bold text-brown-text">
+                        {stats.saveDC}
+                      </div>
+                      <div className="text-xs text-brown-medium mt-1">
+                        10 + CM + Prime
+                      </div>
+                    </div>
+                  )}
+                  <div className="bg-parchment-light border border-brown-medium rounded-lg p-4 text-center">
+                    <div className="text-sm font-sans uppercase tracking-wide text-brown-medium mb-2">
+                      Initiative
+                    </div>
+                    <div className="font-title text-3xl font-bold text-brown-text">
+                      +{combatMastery + character.attributes.agility}
+                    </div>
+                    <div className="text-xs text-brown-medium mt-1">
+                      CM + AGI
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Physical Stats */}
+              <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 mb-6 shadow-parchment-lg">
+                <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
+                  Physical
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="bg-parchment-light border border-brown-medium rounded-lg p-4 text-center">
+                    <div className="text-sm font-sans uppercase tracking-wide text-brown-medium mb-2">
+                      Move Speed
+                    </div>
+                    <div className="font-title text-3xl font-bold text-brown-text">
+                      {stats.speed}
+                    </div>
+                  </div>
+                  <div className="bg-parchment-light border border-brown-medium rounded-lg p-4 text-center">
+                    <div className="text-sm font-sans uppercase tracking-wide text-brown-medium mb-2">
+                      Hold Breath
+                    </div>
+                    <div className="font-title text-3xl font-bold text-brown-text">
+                      {character.attributes.might + combatMastery} min
+                    </div>
+                  </div>
+                  <div className="bg-parchment-light border border-brown-medium rounded-lg p-4 text-center">
+                    <div className="text-sm font-sans uppercase tracking-wide text-brown-medium mb-2">
+                      Jump Distance
+                    </div>
+                    <div className="font-title text-3xl font-bold text-brown-text">
+                      {stats.speed / 2}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Attacks */}
+              <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 mb-6 shadow-parchment-lg">
+                <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
+                  Attacks
+                </h2>
+                {character.inventory.weapon ? (
+                  <div className="bg-parchment-light border border-brown-medium rounded-lg p-4">
+                    {/* Table header */}
+                    <div className="grid grid-cols-12 gap-2 mb-3 pb-2 border-b border-brown-medium">
+                      <div className="col-span-6 text-xs font-sans uppercase tracking-wide text-brown-medium font-semibold">
+                        Name
+                      </div>
+                      <div className="col-span-3 text-xs font-sans uppercase tracking-wide text-brown-medium font-semibold text-center">
+                        Bonus
+                      </div>
+                      <div className="col-span-3 text-xs font-sans uppercase tracking-wide text-brown-medium font-semibold text-center">
+                        Damage
+                      </div>
+                    </div>
+
+                    {/* Attack row */}
+                    <div className="grid grid-cols-12 gap-2 items-center">
+                      <div className="col-span-6 flex items-center gap-2">
+                        <img
+                          src={`/weapon/weapon-${character.inventory.weapon.id}.png`}
+                          alt={character.inventory.weapon.name}
+                          className="w-10 h-10 object-contain"
+                          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                        />
+                        <div>
+                          <div className="font-title text-base font-semibold text-brown-text">
+                            {character.inventory.weapon.name}
+                          </div>
+                          <div className="text-xs text-brown-medium">
+                            {character.inventory.weapon.hands}
+                            {character.inventory.weapon.properties.length > 0 &&
+                              ` • ${character.inventory.weapon.properties.join(', ')}`
+                            }
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-span-3 text-center">
+                        <div className="font-title text-xl font-bold text-brown-text">
+                          +{stats.attackCheck}
+                        </div>
+                      </div>
+                      <div className="col-span-3 text-center">
+                        <div className="font-title text-xl font-bold text-brown-text">
+                          {character.inventory.weapon.damage}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center text-brown-medium py-4 bg-parchment-light border border-brown-medium rounded-lg">
+                    No weapon equipped
                   </div>
                 )}
               </div>
+
+              {/* Languages (Pre-Adventurer and Level 0 only) */}
+              {character.level !== 'Novice' && (
+                <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 mb-6 shadow-parchment-lg">
+                  <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
+                    Languages
+                  </h2>
+                  <div className="space-y-2">
+                    {Object.entries(character.languages).map(([lang, fluency]) => {
+                      if (fluency === 0) return null;
+                      return (
+                        <div key={lang} className="flex items-center gap-3 bg-parchment-light border border-brown-medium rounded-lg p-3">
+                          <div className="flex gap-1">
+                            {/* Fluency circles */}
+                            <div className={`w-4 h-4 rounded-full border-2 ${fluency >= 1 ? 'bg-brown-accent border-brown-accent' : 'bg-transparent border-brown-medium'}`}></div>
+                            <div className={`w-4 h-4 rounded-full border-2 ${fluency >= 2 ? 'bg-brown-accent border-brown-accent' : 'bg-transparent border-brown-medium'}`}></div>
+                          </div>
+                          <div className="flex-1 font-body text-brown-text">
+                            {lang}
+                          </div>
+                          <div className="text-xs font-sans uppercase tracking-wide text-brown-medium">
+                            {fluency === 1 ? 'Limited' : fluency === 2 ? 'Fluent' : ''}
+                          </div>
+                        </div>
+                      );
+                    })}
+                    {Object.values(character.languages).every(f => f === 0) && (
+                      <div className="text-center text-brown-medium py-4">
+                        No languages learned yet
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Resources (Level 0 only) */}
+              {character.level === 'Level0' && (
+                <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 mb-6 shadow-parchment-lg">
+                  <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
+                    Resources
+                  </h2>
+                  <div className="flex flex-wrap gap-6 justify-center">
+                    {character.classType === 'Martial' && (
+                      <FramedStat
+                        label="Stamina"
+                        value={stats.stamina}
+                        frameType="silver-circle"
+                        size="medium"
+                        tooltip="Stamina Points: Used for martial maneuvers"
+                      />
+                    )}
+                    {character.classType === 'Caster' && (
+                      <FramedStat
+                        label="Mana"
+                        value={stats.mana}
+                        frameType="gold-circle"
+                        size="medium"
+                        tooltip="Mana Points: Used for casting spells"
+                      />
+                    )}
+                    <FramedStat
+                      label="Grit"
+                      value={character.attributes.charisma + 2}
+                      frameType="silver-square"
+                      size="medium"
+                      tooltip="Grit Points: CHA + 2"
+                    />
+                    <FramedStat
+                      label="Rest"
+                      value={stats.hpMax}
+                      frameType="gold-square"
+                      size="medium"
+                      tooltip="Rest Points: Max HP"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Features */}
+              {ancestry?.noviceFeature && (
+                <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 shadow-parchment-lg">
+                  <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
+                    Features
+                  </h2>
+                  <div className="space-y-4">
+                    <div className="bg-parchment-light border border-brown-medium rounded-lg p-4">
+                      <h3 className="font-title text-lg font-semibold text-brown-text mb-2">
+                        {ancestry.noviceFeature.name}
+                      </h3>
+                      <p className="font-body text-brown-text">
+                        {ancestry.noviceFeature.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-
-            {character.level === 'Level0' && (
-              <div className="resources-section">
-                <h2>Resources</h2>
-                <div className="resources-grid">
-                  {character.classType === 'Martial' && (
-                    <div className="resource-item">
-                      <span className="resource-label">Stamina</span>
-                      <span className="resource-value">{stats.stamina}</span>
-                    </div>
-                  )}
-                  {character.classType === 'Caster' && (
-                    <div className="resource-item">
-                      <span className="resource-label">Mana</span>
-                      <span className="resource-value">{stats.mana}</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
           </div>
         )}
 
         {activeTab === 'actions' && (
-          <div className="actions-tab">
-            <div className="actions-section">
-              <h2>Actions</h2>
-              <div className="action-list">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Actions Section */}
+            <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 shadow-parchment-lg">
+              <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
+                Actions
+              </h2>
+              <div className="space-y-3">
                 {getAvailableActions().map((action, index) => (
-                  <div key={action.id || index} className="action-card">
-                    <div className="action-header">
-                      <h3>{action.name}</h3>
-                      <span className="action-cost">{action.cost}</span>
+                  <div key={action.id || index} className="bg-parchment-light border border-brown-medium rounded-lg p-4">
+                    <div className="flex items-start justify-between mb-2">
+                      <h3 className="font-title text-lg font-semibold text-brown-text">
+                        {action.name}
+                      </h3>
+                      <span className="bg-brown-accent text-parchment-light px-3 py-1 rounded-full text-sm font-sans font-semibold">
+                        {action.cost}
+                      </span>
                     </div>
-                    <p className="action-desc">{action.desc}</p>
+                    <p className="font-body text-sm text-brown-text">
+                      {action.desc}
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="reactions-section">
-              <h2>Reactions</h2>
-              <div className="action-list">
+            {/* Reactions Section */}
+            <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 shadow-parchment-lg">
+              <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
+                Reactions
+              </h2>
+              <div className="space-y-3">
                 {getAvailableReactions().map((reaction, index) => (
-                  <div key={reaction.id || index} className="action-card reaction-card">
-                    <div className="action-header">
-                      <h3>{reaction.name}</h3>
-                      <span className="action-cost">{reaction.cost}</span>
+                  <div key={reaction.id || index} className="bg-parchment-light border border-gold-dark rounded-lg p-4">
+                    <div className="flex items-start justify-between mb-2">
+                      <h3 className="font-title text-lg font-semibold text-brown-text">
+                        {reaction.name}
+                      </h3>
+                      <span className="bg-gold text-parchment-light px-3 py-1 rounded-full text-sm font-sans font-semibold">
+                        {reaction.cost}
+                      </span>
                     </div>
-                    <p className="action-desc">{reaction.desc}</p>
+                    <p className="font-body text-sm text-brown-text">
+                      {reaction.desc}
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
           </div>
         )}
-      </div>
 
-      {showLevelUpButton && (
-        <div className="level-up-section">
-          <button className="btn btn-primary btn-large" onClick={handleLevelUp}>
-            Level Up to {character.level === 'Novice' ? 'Pre-Adventurer' : 'Level 0'}
-          </button>
-        </div>
-      )}
+        {/* Level Up Button */}
+        {showLevelUpButton && (
+          <div className="mt-8 text-center">
+            <button
+              className="px-10 py-5 bg-gradient-to-br from-gold-light to-gold-dark text-brown-text font-title text-xl font-bold rounded-lg border-2 border-gold shadow-gold hover:shadow-parchment-lg hover:-translate-y-1 transition-all duration-200"
+              onClick={handleLevelUp}
+            >
+              Level Up to {character.level === 'Novice' ? 'Pre-Adventurer (Level -1)' : 'Level 0'}
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

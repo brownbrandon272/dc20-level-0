@@ -50,7 +50,12 @@
   --radius-ornate: 0.5rem;
 
   /* Spacing */
+  --spacing-8: 2rem;
+  --spacing-16: 4rem;
   --spacing-18: 4.5rem;
+  --spacing-20: 5rem;
+  --spacing-24: 6rem;
+  --spacing-32: 8rem;
   --spacing-88: 22rem;
 }
 

@@ -1,7 +1,7 @@
 import type { Character, CalculatedStats, OtherData, Maneuver, SpellListMap, Attributes } from '../types';
 
 /**
- * Calculate stats for a Novice character (Level -1)
+ * Calculate stats for a Novice character (Level -2)
  * At this stage, character has basic stats
  */
 export function calculateNoviceStats(_character: Character): CalculatedStats {
@@ -9,7 +9,6 @@ export function calculateNoviceStats(_character: Character): CalculatedStats {
     hp: 6,
     hpMax: 6,
     pd: 8,
-    md: 8,
     ad: 8,
     attackCheck: 0,
     saveDC: 10,
@@ -39,7 +38,6 @@ export function recalculateStats(character: Character): CalculatedStats {
     hp: 0,
     hpMax: 0,
     pd: 0,
-    md: 0,
     ad: 0,
     attackCheck: 0,
     saveDC: 0,
@@ -73,11 +71,10 @@ export function recalculateStats(character: Character): CalculatedStats {
   if (level === 'Novice') {
     // Novice has flat defenses
     stats.pd = 8;
-    stats.md = 8;
     stats.ad = 8;
   } else {
     // Pre-Adventurer and Level 0 calculations
-    // PD = 8 + CM + Agility + Armor Bonus
+    // PD (Precision Defense) = 8 + CM + Agility + Armor Bonus + Shield Bonus
     let armorBonus = 0;
     if (inventory.armor) {
       armorBonus = inventory.armor.pdBonus || 0;
@@ -88,10 +85,7 @@ export function recalculateStats(character: Character): CalculatedStats {
     }
     stats.pd = 8 + cm + agility + armorBonus + shieldBonus;
 
-    // MD = 8 + CM + Charisma + Intelligence
-    stats.md = 8 + cm + charisma + intelligence;
-
-    // AD = 8 + CM + Agility + Might
+    // AD (Area Defense) = 8 + CM + Agility + Might
     stats.ad = 8 + cm + agility + might;
   }
 
