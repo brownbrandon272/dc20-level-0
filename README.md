@@ -46,6 +46,23 @@ npm run build
 npm run preview
 ```
 
+### Deployment
+
+This is a **static site** (no server required) and can be deployed to:
+- **Digital Ocean App Platform** (recommended) - [See deployment guide](docs/deployment-guide.md)
+- **Netlify** - Drag and drop the `dist/` folder
+- **Vercel** - Import GitHub repository
+- **GitHub Pages** - Enable in repository settings
+
+**Quick Deploy to Digital Ocean**:
+1. Update `.do/app.yaml` with your GitHub username
+2. Push to GitHub
+3. Create app on Digital Ocean App Platform
+4. Select "Static Site" as component type
+5. Deploy!
+
+For detailed instructions, see [docs/deployment-guide.md](docs/deployment-guide.md)
+
 ## User Flow
 
 1. **Landing Page**: Choose to create a character or return to an existing one

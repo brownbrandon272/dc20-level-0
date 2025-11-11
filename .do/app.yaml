@@ -1,0 +1,44 @@
+# Digital Ocean App Platform Configuration
+# This file configures DC20 Level 0 as a Static Site
+
+name: dc20-level-0
+
+# Static site configuration (NOT a service - no Node.js runtime needed)
+static_sites:
+  - name: dc20-character-creator
+
+    # Source repository configuration
+    # REQUIRED: Update these values with your GitHub repository details
+    github:
+      branch: main                           # Deploy from main branch
+      deploy_on_push: true                   # Auto-deploy on git push
+      repo: brownbrandon272/dc20-level-0 # GitHub repo in format: owner/repo
+
+    # Build configuration
+    build_command: npm run build             # Runs: vite build
+    output_dir: dist                         # Vite outputs to dist/ directory
+
+    # SPA routing configuration (CRITICAL for React Router)
+    # This serves index.html for all routes with HTTP 200 (not 404)
+    # Without this, refreshing /create/novice/ancestry returns 404
+    catchall_document: index.html
+
+    # Optional: Environment variables (if needed in future)
+    # envs:
+    #   - key: VITE_API_URL
+    #     value: https://api.example.com
+    #     scope: BUILD_TIME
+
+    # Optional: Custom domain configuration
+    # domains:
+    #   - domain: dc20.yourdomain.com
+    #     type: PRIMARY
+
+# Optional: Ingress configuration for advanced routing
+# ingress:
+#   rules:
+#     - match:
+#         path:
+#           prefix: /
+#       component:
+#         name: dc20-character-creator
