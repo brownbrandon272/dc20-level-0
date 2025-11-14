@@ -4,6 +4,7 @@
     "name": "Human",
     "image": "/ancestry/ancestry-human-portrait-1.png",
     "noviceFeature": {
+      "displayOnly": true,
       "name": "Human Determination",
       "desc": "Once per rest, you can reroll any check and use the new result."
     },
@@ -11,14 +12,16 @@
       {
         "id": "attributeIncrease",
         "type": "choice",
+        "displayOnly": false,
         "name": "Attribute Increase",
-        "desc": "Increase one Attribute of your choice by 1."
+        "desc": "Increase one Attribute of your choice by 1 (up to maximum of +3)."
       },
       {
-        "id": "resilience",
+        "id": "skillExpertise",
         "type": "choice",
-        "name": "Resilience",
-        "desc": "Your maximum Hit Points increase by 2."
+        "displayOnly": false,
+        "name": "Skill Expertise",
+        "desc": "Choose a Skill. Your Mastery Cap and Mastery Level in the chosen Skill both increase by 1."
       }
     ]
   },
@@ -27,21 +30,24 @@
     "name": "Elf",
     "image": "/ancestry/ancestry-elf-portrait-1.png",
     "noviceFeature": {
-      "name": "Elven Grace",
-      "desc": "You have advantage on saves against being charmed, and magic can't put you to sleep."
+      "displayOnly": true,
+      "name": "Peerless Sight",
+      "desc": "You don't have disadvantage as a result of making an Attack with a Weapon at Long Range."
     },
     "level0Features": [
       {
-        "id": "keenSenses",
+        "id": "nimble",
         "type": "choice",
-        "name": "Keen Senses",
-        "desc": "You gain a +2 bonus to Perception checks."
+        "displayOnly": true,
+        "name": "Nimble",
+        "desc": "When you take the Dodge Action, you instead gain the benefits of the Full Dodge Action."
       },
       {
-        "id": "fleetOfFoot",
+        "id": "agileExplorer",
         "type": "choice",
-        "name": "Fleet of Foot",
-        "desc": "Your base Speed increases by 1."
+        "displayOnly": true,
+        "name": "Agile Explorer",
+        "desc": "You are not affected by Difficult Terrain."
       }
     ]
   },
@@ -50,21 +56,24 @@
     "name": "Dwarf",
     "image": "/ancestry/ancestry-dwarf-portrait-1.png",
     "noviceFeature": {
+      "displayOnly": false,
       "name": "Dwarven Resilience",
-      "desc": "You have advantage on saves against poison."
+      "desc": "Your HP maximum increases by 1."
     },
     "level0Features": [
       {
         "id": "toxicFortitude",
         "type": "choice",
+        "displayOnly": true,
         "name": "Toxic Fortitude",
-        "desc": "You have resistance to poison damage."
+        "desc": "You have Poison Resistance (Half) and ADV on Saves against being Poisoned."
       },
       {
-        "id": "stonecunning",
+        "id": "physicallySturdy",
         "type": "choice",
-        "name": "Stonecunning",
-        "desc": "You gain a +2 bonus to History checks related to stonework."
+        "displayOnly": true,
+        "name": "Physically Sturdy",
+        "desc": "You have ADV on Saves against being Impaired, Deafened, or Petrified."
       }
     ]
   }
