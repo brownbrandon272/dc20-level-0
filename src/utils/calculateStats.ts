@@ -17,7 +17,8 @@ export function calculateNoviceStats(_character: Character): CalculatedStats {
     speed: 6,
     stamina: 2,
     mana: 2,
-    actionPoints: 3
+    actionPoints: 4,
+    gritPoints: 0
   };
 }
 
@@ -32,7 +33,7 @@ export function recalculateStats(character: Character): CalculatedStats {
   // Base stats
   const stats: CalculatedStats = {
     speed: 6,
-    actionPoints: 3,
+    actionPoints: 4,
     stamina: 2,
     mana: 2,
     hp: 0,
@@ -42,7 +43,8 @@ export function recalculateStats(character: Character): CalculatedStats {
     attackCheck: 0,
     saveDC: 0,
     martialCheck: 0,
-    spellCheck: 0
+    spellCheck: 0,
+    gritPoints: 0
   };
 
   // Calculate HP
@@ -74,7 +76,7 @@ export function recalculateStats(character: Character): CalculatedStats {
     stats.ad = 8;
   } else {
     // Pre-Adventurer and Level 0 calculations
-    // PD (Precision Defense) = 8 + CM + Agility + Armor Bonus + Shield Bonus
+    // PD (Precision Defense) = 8 + CM + Agility + Intelligence + Armor Bonus + Shield Bonus
     let armorBonus = 0;
     if (inventory.armor) {
       armorBonus = inventory.armor.pdBonus || 0;
@@ -83,10 +85,15 @@ export function recalculateStats(character: Character): CalculatedStats {
     if (inventory.shield) {
       shieldBonus = inventory.shield.pdBonus || 0;
     }
-    stats.pd = 8 + cm + agility + armorBonus + shieldBonus;
+    stats.pd = 8 + cm + agility + intelligence + armorBonus + shieldBonus;
 
-    // AD (Area Defense) = 8 + CM + Agility + Might
-    stats.ad = 8 + cm + agility + might;
+    // AD (Area Defense) = 8 + CM + Might + Charisma
+    stats.ad = 8 + cm + might + charisma;
+  }
+
+  // Calculate Grit Points (Level 0 only)
+  if (level === 'Level0') {
+    stats.gritPoints = 2 + charisma;
   }
 
   // Apply ancestry bonuses

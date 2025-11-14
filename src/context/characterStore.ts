@@ -23,7 +23,8 @@ const initialCharacterState: Character = {
 
   ancestry: {
     id: null,
-    level0Choices: []
+    level0Choices: [],
+    level0ChoiceDetails: {}
   },
 
   attributes: {
@@ -48,12 +49,12 @@ const initialCharacterState: Character = {
   chosenManeuvers: [],
   chosenSpellList: null,
   chosenArchetype: null,
+  chosenMartialPath: null,
 
   calculatedStats: {
     hp: 6,
     hpMax: 6,
     pd: 8,
-    md: 8,
     ad: 8,
     attackCheck: 0,
     saveDC: 10,
@@ -62,7 +63,8 @@ const initialCharacterState: Character = {
     speed: 6,
     stamina: 2,
     mana: 2,
-    actionPoints: 3
+    actionPoints: 4,
+    gritPoints: 0
   }
 };
 
@@ -101,6 +103,20 @@ export const useCharacterStore = create<CharacterStore>()(
           ancestry: {
             ...state.character.ancestry,
             level0Choices: [...state.character.ancestry.level0Choices, choiceId]
+          }
+        }
+      })),
+
+      // Set ancestry feature choice (for dropdown selections)
+      setAncestryFeatureChoice: (featureId: string, selectedOption: string) => set((state) => ({
+        character: {
+          ...state.character,
+          ancestry: {
+            ...state.character.ancestry,
+            level0ChoiceDetails: {
+              ...state.character.ancestry.level0ChoiceDetails,
+              [featureId]: selectedOption
+            }
           }
         }
       })),
@@ -151,6 +167,11 @@ export const useCharacterStore = create<CharacterStore>()(
       // Set spell list
       setSpellList: (spellListId: string) => set((state) => ({
         character: { ...state.character, chosenSpellList: spellListId }
+      })),
+
+      // Set martial path
+      setMartialPath: (pathId: string) => set((state) => ({
+        character: { ...state.character, chosenMartialPath: pathId }
       })),
 
       // Set armor

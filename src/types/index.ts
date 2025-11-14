@@ -49,6 +49,9 @@ export interface Inventory {
 export interface Ancestry {
   id: string | null;
   level0Choices: string[];
+  level0ChoiceDetails: {
+    [featureId: string]: string; // Feature ID -> Selected option (e.g., 'attributeIncrease' -> 'might')
+  };
 }
 
 export interface CalculatedStats {
@@ -64,6 +67,7 @@ export interface CalculatedStats {
   stamina: number;
   mana: number;
   actionPoints: number;
+  gritPoints: number;
 }
 
 export interface Character {
@@ -80,6 +84,7 @@ export interface Character {
   chosenManeuvers: string[];
   chosenSpellList: string | null;
   chosenArchetype: string | null;
+  chosenMartialPath: string | null;
   calculatedStats: CalculatedStats;
 }
 
@@ -87,6 +92,7 @@ export interface Character {
 export interface AncestryFeature {
   id: string;
   type: 'choice' | 'passive';
+  displayOnly: boolean;
   name: string;
   desc: string;
 }
@@ -112,6 +118,8 @@ export interface Maneuver {
   category: 'basic' | 'maneuver';
   cost: string;
   desc: string;
+  descSummary: string;
+  descExtremeSummary: string;
   autoSelected: boolean;
 }
 
@@ -121,6 +129,8 @@ export interface Spell {
   level: number;
   cost: string;
   desc: string;
+  descSummary: string;
+  descExtremeSummary: string;
 }
 
 export interface SpellList {
@@ -139,6 +149,8 @@ export interface Action {
   name: string;
   cost: string;
   desc: string;
+  descSummary: string;
+  descExtremeSummary: string;
 }
 
 export interface Archetype {
@@ -152,6 +164,18 @@ export interface Archetype {
 
 export interface ArchetypeMap {
   [key: string]: Archetype;
+}
+
+export interface MartialPath {
+  id: string;
+  name: string;
+  desc: string;
+  conditionalLogic?: {
+    weaponChoice?: string[]; // For Rogue: shortsword or throwing dagger
+  };
+  weapon?: string; // For Knight/Brawler: fixed weapon ID
+  armor?: string; // armor name
+  shield?: boolean; // true if shield is included
 }
 
 export interface OtherData {
@@ -170,6 +194,7 @@ export interface CharacterStore {
   setLastStep: (step: string) => void;
   setAncestry: (ancestryId: string) => void;
   addAncestryLevel0Choice: (choiceId: string) => void;
+  setAncestryFeatureChoice: (featureId: string, selectedOption: string) => void;
   setWeapon: (weapon: Weapon) => void;
   setLevel: (level: CharacterLevel) => void;
   setAttributes: (attributes: Attributes) => void;
@@ -179,6 +204,7 @@ export interface CharacterStore {
   setClassType: (classType: ClassType) => void;
   setManeuvers: (maneuvers: string[]) => void;
   setSpellList: (spellListId: string) => void;
+  setMartialPath: (pathId: string) => void;
   setArmor: (armor: Armor) => void;
   setShield: (shield: Shield) => void;
   setAdditionalWeapon: (weapon: Weapon) => void;

@@ -674,7 +674,7 @@ const handleContinue = () => {
 
 **File:** `src/pages/PreAdventurerPage.tsx`
 
-#### 3.2.1 Update Archetype Application
+#### 3.2.1 Update Stat Archetype Application
 
 **Function:** `applyArchetype()` in `src/utils/calculateStats.ts`
 
@@ -766,7 +766,7 @@ export default function Level0EquipmentPage() {
     // Apply shield or additional weapon (Martial only)
     if (classType === 'Martial') {
       if (equipmentChoice === 'shield') {
-        setShield({ name: 'Shield', pdBonus: 1 });
+        setShield({ name: 'Shield', pdBonus: 2 });
       } else if (equipmentChoice === 'weapon') {
         // Additional weapon selection handled on next page
       }
@@ -1031,7 +1031,7 @@ export default function Level0MartialPathPage() {
     } else {
       // Standard path application
       if (path.shield) {
-        setShield({ name: 'Shield', pdBonus: 1 });
+        setShield({ name: 'Shield', pdBonus: 2 });
       }
 
       if (path.weapons.length > 0) {

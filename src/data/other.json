@@ -14,18 +14,12 @@
     "Survival"
   ],
   "languages": [
-    "Common",
-    "Dwarvish",
+    "Human",
+    "Dwarven",
     "Elvish",
-    "Giant",
     "Gnomish",
-    "Goblin",
     "Halfling",
-    "Orc",
-    "Draconic",
-    "Infernal",
-    "Celestial",
-    "Primordial"
+    "Orcish"
   ],
   "archetypes": {
     "smart": {
@@ -35,12 +29,12 @@
       "image": "/stats-archetype/archetype-smart.png",
       "attributes": {
         "might": 0,
-        "agility": 1,
+        "agility": 3,
         "charisma": -2,
         "intelligence": 3
       },
-      "suggestedSkills": ["Arcana", "History", "Investigation"],
-      "suggestedLanguages": ["Elvish", "Draconic"]
+      "suggestedSkills": ["Investigation", "Medicine", "Insight"],
+      "suggestedLanguages": ["Elvish", "Gnomish"]
     },
     "quick": {
       "id": "quick",
@@ -50,11 +44,11 @@
       "attributes": {
         "might": 0,
         "agility": 3,
-        "charisma": 1,
-        "intelligence": -2
+        "charisma": 2,
+        "intelligence": -1
       },
-      "suggestedSkills": ["Acrobatics", "Stealth", "Sleight of Hand"],
-      "suggestedLanguages": ["Halfling", "Goblin"]
+      "suggestedSkills": ["Acrobatics", "Stealth", "Trickery"],
+      "suggestedLanguages": ["Halfling", "Human"]
     },
     "tough": {
       "id": "tough",
@@ -63,12 +57,12 @@
       "image": "/stats-archetype/archetype-strong.png",
       "attributes": {
         "might": 3,
-        "agility": 1,
-        "charisma": 0,
+        "agility": 2,
+        "charisma": 1,
         "intelligence": -2
       },
       "suggestedSkills": ["Athletics", "Intimidation", "Survival"],
-      "suggestedLanguages": ["Dwarvish", "Giant"]
+      "suggestedLanguages": ["Dwarven", "Orcish"]
     },
     "charming": {
       "id": "charming",
@@ -76,13 +70,13 @@
       "desc": "You have a way with people.",
       "image": "/stats-archetype/archetype-charismatic.png",
       "attributes": {
-        "might": -2,
+        "might": 0,
         "agility": 0,
         "charisma": 3,
         "intelligence": 1
       },
-      "suggestedSkills": ["Persuasion", "Deception", "Performance"],
-      "suggestedLanguages": ["Elvish", "Celestial"]
+      "suggestedSkills": ["Influence", "Insight", "Animal Handling"],
+      "suggestedLanguages": ["Elvish", "Gnomish"]
     }
   },
   "baseActions": [
@@ -90,31 +84,41 @@
       "id": "move",
       "name": "Move",
       "cost": "1 AP",
-      "desc": "Move up to your Speed in spaces."
+      "desc": "Move up to your Speed in spaces.",
+      "descSummary": "Move up to Speed",
+      "descExtremeSummary": "Move"
     },
     {
       "id": "help",
       "name": "Help",
       "cost": "1 AP",
-      "desc": "Give an ally advantage on their next check or attack."
+      "desc": "Give an ally advantage on their next check or attack.",
+      "descSummary": "Give ally ADV",
+      "descExtremeSummary": "Help"
     },
     {
       "id": "hide",
       "name": "Hide",
       "cost": "1 AP",
-      "desc": "Make a Stealth check to hide from enemies."
+      "desc": "Make a Stealth check to hide from enemies.",
+      "descSummary": "Stealth check to hide",
+      "descExtremeSummary": "Hide"
     },
     {
       "id": "search",
       "name": "Search",
       "cost": "1 AP",
-      "desc": "Make a Perception or Investigation check to find something."
+      "desc": "Make a Perception or Investigation check to find something.",
+      "descSummary": "Find something",
+      "descExtremeSummary": "Search"
     },
     {
       "id": "use",
       "name": "Use Object/Item",
       "cost": "1 AP",
-      "desc": "Interact with an object or use an item."
+      "desc": "Interact with an object or use an item.",
+      "descSummary": "Use object/item",
+      "descExtremeSummary": "Use"
     }
   ],
   "baseReactions": [
@@ -122,7 +126,9 @@
       "id": "opportunityAttack",
       "name": "Opportunity Attack",
       "cost": "1 AP",
-      "desc": "When an enemy leaves your reach, make a weapon attack against them."
+      "desc": "When an enemy leaves your reach, make a weapon attack against them.",
+      "descSummary": "Attack when enemy leaves reach",
+      "descExtremeSummary": "Opp Attack"
     }
   ]
 }
