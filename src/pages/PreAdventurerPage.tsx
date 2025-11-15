@@ -35,11 +35,12 @@ function PreAdventurerPage() {
       });
       setSkills(skills);
 
-      // Auto-set languages (assign suggested languages as fluent)
-      const languages = { 'Common': 2 }; // Common is fluent
-      archetypeData.suggestedLanguages.slice(0, 1).forEach(lang => {
-        languages[lang] = 2; // Fluent
-      });
+      // Auto-set languages (2 pts total: 1 Fluent or 2 Limited)
+      const languages = {};
+      // Assign first suggested language as Fluent (2 pts)
+      if (archetypeData.suggestedLanguages.length > 0) {
+        languages[archetypeData.suggestedLanguages[0]] = 2; // Fluent
+      }
       setLanguages(languages);
 
       // Recalculate stats
