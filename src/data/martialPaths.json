@@ -1,0 +1,31 @@
+{
+  "brawler": {
+    "id": "brawler",
+    "name": "Brawler",
+    "desc": "A tough, close-quarters fighter who uses raw strength.",
+    "weapon": "battleaxe",
+    "shield": false,
+    "maneuvers": ["taunt", "bodyBlock", "throw"]
+  },
+  "rogue": {
+    "id": "rogue",
+    "name": "Rogue",
+    "desc": "A cunning combatant who relies on speed and trickery.",
+    "conditionalLogic": {
+      "weaponChoice": ["throwingDagger", "shortbow"]
+    },
+    "shield": false,
+    "maneuvers": ["parry", "trip", "hamstring"]
+  },
+  "knight": {
+    "id": "knight",
+    "name": "Knight",
+    "desc": "A noble warrior who defends with sword and shield.",
+    "conditionalLogic": {
+      "weaponChoice": ["longsword"]
+    },
+    "armor": "Light Armor",
+    "shield": true,
+    "maneuvers": ["expose", "parry", "raiseShield"]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "defensiveActions": [
+    {
+      "id": "dodge",
+      "name": "Dodge",
+      "cost": "1 AP",
+      "desc": "Until the start of your next turn, attacks against you have disadvantage.",
+      "descSummary": "Dodge (1 AP): Attacks vs you have DisADV until your next turn.",
+      "descExtremeSummary": "Attacks have DisADV"
+    },
+    {
+      "id": "dash",
+      "name": "Dash",
+      "cost": "1 AP",
+      "desc": "Your movement Speed is doubled until the end of your turn.",
+      "descSummary": "Dash (1 AP): Double movement Speed this turn.",
+      "descExtremeSummary": "Double Speed"
+    },
+    {
+      "id": "disengage",
+      "name": "Disengage",
+      "cost": "1 AP",
+      "desc": "Your movement doesn't provoke opportunity attacks for the rest of your turn.",
+      "descSummary": "Disengage (1 AP): No opportunity attacks this turn.",
+      "descExtremeSummary": "No opp attacks"
+    }
+  ],
+  "offensiveActions": [
+    {
+      "id": "attack",
+      "name": "Attack",
+      "cost": "1 AP",
+      "desc": "Make a weapon attack or unarmed strike against a target within range.",
+      "descSummary": "Attack (1 AP): Basic weapon attack.",
+      "descExtremeSummary": "Basic attack"
+    },
+    {
+      "id": "disarm",
+      "name": "Disarm",
+      "cost": "1 AP",
+      "desc": "Attack Check vs Athletics, Acrobatics, or Trickery.",
+      "descSummary": "Disarm (1 AP): Contested check to remove item.",
+      "descExtremeSummary": "Remove held item from target"
+    },
+    {
+      "id": "grapple",
+      "name": "Grapple",
+      "cost": "1 AP",
+      "desc": "Use a free hand, Athletics Check vs Martial Check. Depends on creature size.",
+      "descSummary": "Grapple (1 AP): Athletics vs Martial, restrain target.",
+      "descExtremeSummary": "Restrain target"
+    },
+    {
+      "id": "shove",
+      "name": "Shove",
+      "cost": "1 AP",
+      "desc": "Athletics Check vs Martial Check to push 1 space or knock Prone.",
+      "descSummary": "Shove (1 AP): Push 1 space or knock Prone.",
+      "descExtremeSummary": "Push or Prone"
+    }
+  ],
+  "otherActions": [
+    {
+      "id": "ready",
+      "name": "Ready",
+      "cost": "1 AP",
+      "desc": "Choose a trigger and an action. When the trigger occurs, you can use your reaction to perform that action.",
+      "descSummary": "Ready (1 AP): Set trigger for reaction.",
+      "descExtremeSummary": "Set trigger"
+    }
+  ]
+}

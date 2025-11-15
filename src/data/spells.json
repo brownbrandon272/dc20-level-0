@@ -1,88 +1,103 @@
 {
-  "lightning": {
-    "id": "lightning",
-    "name": "Lightning",
-    "desc": "Harness the power of storms and electricity.",
-    "image": "/spellbook/spellbook-lightning-character.png",
+  "lightningTeleportation": {
+    "id": "lightningTeleportation",
+    "name": "Lightning & Teleportation",
+    "desc": "Harness the power of storms and electricity, and bend space to your will.",
     "spells": [
-      {
-        "id": "shockingGrasp",
-        "name": "Shocking Grasp",
-        "level": 0,
-        "cost": "1 AP, 1 Mana",
-        "desc": "Touch attack. On hit, deal 2 Lightning damage and target can't take reactions until start of their next turn."
-      },
       {
         "id": "lightningBolt",
         "name": "Lightning Bolt",
         "level": 0,
-        "cost": "2 AP, 2 Mana",
-        "desc": "Line 6 spaces. All creatures in line make an AD save or take 3 Lightning damage."
+        "cost": "1 AP",
+        "desc": "Destruction (Cantrip) Cost: 1 AP | Range: 10 Spaces | Duration: Instantaneous\n\nEffects:\n- Spell Attack: Make a Spell Check against the PD of a target within range. Hit: The target takes 2 Lightning damage.\n- Lightning Orb: Create crackling lightning between your hands for up to 10 minutes, shedding Bright Light in a 10 Space radius. The energy is harmless to you and your equipment. The Spell ends early if you: Dismiss it (no cost), Cast it again, Stop using both hands, or Spend 1 AP to make a Spell Attack with it.\n- Cantrip Passive: Deal +1 damage to creatures wearing metal armor.\n\nAction Point Enhancements:\n- Damage (1 AP): +1 Lightning damage.\n- Range (1 AP): Increase range by +5 Spaces.\n- Chain (1 AP): Target 1 additional creature within 2 Spaces of the previous target. Make a separate Spell Check against the new target. Hit: The additional target takes 2 Lightning damage (not affected by extra damage sources like Heavy Hits or higher-level effects). This Enhancement can be used multiple times, chaining to additional targets within 2 Spaces of the previous one.",
+        "descSummary": "2 Lightning dmg vs PD OR create light orb. Cantrip: +1 dmg vs metal armor. Enhance: +dmg, +range, chain targets.",
+        "descExtremeSummary": "2 Lightning dmg"
       },
       {
-        "id": "chainLightning",
-        "name": "Chain Lightning",
-        "level": 0,
-        "cost": "3 AP, 3 Mana",
-        "desc": "Ranged spell attack. On hit, deal 2 Lightning damage. The lightning then jumps to up to 2 other targets within 3 spaces of the first."
+        "id": "cracklingLightning",
+        "name": "Crackling Lightning",
+        "level": 1,
+        "cost": "2 AP + 1 MP",
+        "desc": "Destruction Cost: 2 AP + 1 MP | Range: Self (10 Spaces) | Duration: Instantaneous\n\nCrackling lightning forms around you. Choose a type of area: Line, Cone, or Sphere. You are the Spell's Point of Origin.\n- Line: Affects every target in a 1 Space wide and 10 Space long area.\n- Cone: Affects every target in a 3 Space long Cone.\n- Sphere: Affects every target within a 2 Space radius.\n\nMake a Spell Check against each target's PD within the area.\n- Hit: Targets take 2 Lightning damage.\n\nMana Point Enhancements:\n- Frazzled (1 MP): Targets must Save against the Dazed Condition for 1 minute.\n- Range (1 MP): Change the Spell's origin point to 15 Spaces (instead of Self).",
+        "descSummary": "2 Lightning dmg in Line/Cone/Sphere vs PD. Enhance: Dazed save, remote origin.",
+        "descExtremeSummary": "AoE Lightning"
+      },
+      {
+        "id": "mistyStep",
+        "name": "Misty Step",
+        "level": 1,
+        "cost": "1 AP + 1 MP",
+        "desc": "Astromancy Cost: 1 AP + 1 MP | Range: Self | Duration: Instantaneous\n\nBriefly surrounded by silvery mist, you attempt to teleport to a new location.\n\nMake a DC 20 Spell Check.\n- Success: Teleport up to 5 Spaces to an unoccupied space you can see. For every 5 points above the DC, increase the teleport distance by +2 Spaces.\n- Failure: Teleport 3 Spaces instead.\n\nMana Point Enhancements:\n- Far Step (1 MP): Increase the teleport distance by +4 Spaces.",
+        "descSummary": "DC 20: Teleport 5 spaces (or 3 on fail). +2 spaces per 5 over DC. Enhance: +4 spaces.",
+        "descExtremeSummary": "Teleport 5"
       }
     ]
   },
-  "psychic": {
-    "id": "psychic",
-    "name": "Psychic",
+  "psychicEnchantment": {
+    "id": "psychicEnchantment",
+    "name": "Psychic & Enchantment",
     "desc": "Manipulate minds and bend reality with mental power.",
-    "image": "/spellbook/spellbook-psychic-character.png",
     "spells": [
       {
-        "id": "mindSliver",
-        "name": "Mind Sliver",
+        "id": "psiBolt",
+        "name": "Psi Bolt",
         "level": 0,
-        "cost": "1 AP, 1 Mana",
-        "desc": "Ranged spell attack. On hit, deal 2 Psychic damage and target has disadvantage on their next save."
+        "cost": "1 AP",
+        "desc": "Destruction (Cantrip) Cost: 1 AP | Range: 10 Spaces | Duration: Instantaneous\n\nEffects:\n- Spell Attack: Make a Spell Check against the MD of a target within range. Hit: The target takes 1 Psychic damage.\n- Headache: Cause a mild headache in one creature you can see within range for 1 minute, or spend 1 AP to make a Spell Attack.\n\nCantrip Passive:\n- Deal +1 damage to creatures that are Dazed.\n\nAction Point Enhancements:\n- Damage (1 AP): +1 Psychic damage.\n- Range (1 AP): Increase range by +5 Spaces.\n- Dazed (1 AP): Target makes a Mental Save. Failure: The target becomes Dazed (DisADV on Mental Checks) on its next Mental Check before the end of your next turn.",
+        "descSummary": "1 Psychic dmg vs MD OR cause headache. Cantrip: +1 dmg vs Dazed. Enhance: +dmg, +range, Dazed save.",
+        "descExtremeSummary": "1 Psychic dmg"
       },
       {
-        "id": "confusion",
-        "name": "Confusion",
-        "level": 0,
-        "cost": "2 AP, 2 Mana",
-        "desc": "Target makes an MD save or is confused (acts randomly) until the end of their next turn."
+        "id": "psychicFear",
+        "name": "Psychic Fear",
+        "level": 1,
+        "cost": "2 AP + 1 MP",
+        "desc": "Enchantment Cost: 2 AP + 1 MP | Range: 10 Spaces | Duration: Instantaneous\n\nWhisper a discordant melody to one creature you can see within range, causing it terrible pain.\n\nMake a Spell Check against the target's MD while it makes an Intelligence Save.\n- Hit: The target takes 2 Psychic damage.\n- Save Failure: If the target has any AP, it spends 1 AP to move as far as its Speed allows away from you. The creature avoids obviously dangerous ground (e.g., fire or pits).\n\nMana Point Enhancements:\n- Loud Whispers (1 MP): The creature loses an additional 1 AP (if available) and moves that many extra Spaces away.",
+        "descSummary": "2 Psychic dmg vs MD + INT save: spend 1 AP to flee. Enhance: lose extra AP, move farther.",
+        "descExtremeSummary": "2 Psychic + fear"
       },
       {
-        "id": "psychicScream",
-        "name": "Psychic Scream",
-        "level": 0,
-        "cost": "3 AP, 3 Mana",
-        "desc": "Burst 2. All creatures in area make an MD save or take 3 Psychic damage and are stunned until the end of their next turn."
+        "id": "command",
+        "name": "Command",
+        "level": 1,
+        "cost": "2 AP + 1 MP",
+        "desc": "Enchantment Cost: 2 AP + 1 MP | Range: 10 Spaces | Duration: 1 Round\n\nSpeak a command to a creature within range that can hear you. The creature doesn't need to be visible to you if you've seen it within the last minute.\n\nMake a Spell Check contested by the target's Charisma Save.\n- Success: The target immediately spends 2 AP to follow your command, regardless of the usual AP cost. The creature also cannot spend any resources (AP, SP, MP) to modify the action.\n\nIgnoring a Command: The spell has no effect if the target doesn't understand your language, is unable to follow the command, or would be harmed directly by following the command.\n\nChoosing a Command: You can choose from the following example commands or improvise with GM approval:\n- Move: The target moves up to its Speed to a location or direction of your choice.\n- Prone: The target falls Prone.\n- Drop: The target drops anything it's holding.\n- Attack: The target makes 1 Attack Check or Spell Check (your choice) that costs 1 AP. You choose the target, which must be within the creature's range.\n\nMana Point Enhancements:\n- Duration (1 MP): Increase the duration by 1 Round.\n- Targets (2 MP): Add 1 additional target.",
+        "descSummary": "CHA save: target spends 2 AP to obey command (Move/Prone/Drop/Attack). Enhance: +duration, +targets.",
+        "descExtremeSummary": "Command (2 AP)"
       }
     ]
   },
-  "holy": {
-    "id": "holy",
-    "name": "Holy",
+  "holyRestoration": {
+    "id": "holyRestoration",
+    "name": "Holy & Restoration",
     "desc": "Channel divine light to heal allies and smite foes.",
-    "image": "/spellbook/spellbook-holy-character.png",
     "spells": [
       {
-        "id": "sacredFlame",
-        "name": "Sacred Flame",
+        "id": "sacredBolt",
+        "name": "Sacred Bolt",
         "level": 0,
-        "cost": "1 AP, 1 Mana",
-        "desc": "Target makes an AD save or takes 2 Radiant damage. Ignores cover."
-      },
-      {
-        "id": "healingWord",
-        "name": "Healing Word",
-        "level": 0,
-        "cost": "1 AP, 1 Mana",
-        "desc": "Touch. Target regains 2 HP."
+        "cost": "1 AP",
+        "desc": "Destruction (Cantrip) Cost: 1 AP | Range: 10 Spaces | Duration: Instantaneous\n\nEffects:\n- Spell Attack: Make a Spell Check against the MD of a target within range. Hit: The target takes 1 Radiant damage.\n- Bright Beam: Cause a subtle light to descend upon a creature you can see within range, making it glow for 10 minutes or make a Spell Attack.\n\nCantrip Passive:\n- Deal +1 Radiant damage to Undead and Exposed creatures.\n\nAction Point Enhancements:\n- Damage (1 AP): +1 Radiant damage.\n- Range (1 AP): Increase the range by +5 Spaces.\n- Holy Bolt (1 AP): The target makes a Mental Save. Failure: The target becomes Exposed (Attack Checks against it have ADV) until the end of your next turn or until the next Attack Check made against it.",
+        "descSummary": "1 Radiant dmg vs MD OR glow target. Cantrip: +1 vs Undead/Exposed. Enhance: +dmg, +range, Exposed save.",
+        "descExtremeSummary": "1 Radiant dmg"
       },
       {
         "id": "bless",
         "name": "Bless",
-        "level": 0,
-        "cost": "2 AP, 2 Mana",
-        "desc": "Up to 3 targets within 6 spaces gain +1 to attack checks and saves for 1 minute."
+        "level": 1,
+        "cost": "2 AP + 1 MP",
+        "desc": "Divination Cost: 2 AP + 1 MP | Range: 5 Spaces | Duration: 1 minute (Concentration)\n\nMake a DC 10 Spell Check.\n- Success: Bless up to 3 creatures of your choice within range. For every 10 points above the DC, bless +1 additional creature.\n- Failure: Bless only 2 creatures.\n\nEffect: While the spell lasts, whenever a blessed target makes a Check or Save, it can roll a d4 and add the result to the total.\n\nMana Point Enhancements:\n- Targets (1 MP): Increase the number of targets by +1.\n- Grace (2 MP): Change the die rolled from a d4 to a d6.",
+        "descSummary": "DC 10: Bless 3 targets (or 2 on fail). Add d4 to checks/saves (1 min, conc). Enhance: +targets, d4→d6.",
+        "descExtremeSummary": "Bless 3 (+d4)"
+      },
+      {
+        "id": "heal",
+        "name": "Heal",
+        "level": 1,
+        "cost": "2 AP + 1 MP",
+        "desc": "Restoration Cost: 2 AP + 1 MP | Range: 10 Spaces | Duration: Instantaneous\n\nMake a DC 10 Spell Check.\n- Success: Heal a creature within range for 3 HP. For every 5 points above the DC, heal an additional +1 HP. On a Nat 20, heal an additional +2 HP.\n- Failure: Heal for only 2 HP.\n\nAdditional Effect: If touching the target when you cast this spell, it heals for an additional 1 HP.\n\nMana Point Enhancements:\n- Quick Heal (1 MP): Reduce the AP cost by 1 AP.\n- Bolster: Spend 1 MP to increase healing by +3 HP for each MP spent.",
+        "descSummary": "DC 10: Heal 3 HP (or 2 on fail). +1 HP per 5 over DC, +2 on Nat 20, +1 if touch. Enhance: -1 AP, +3 HP per MP.",
+        "descExtremeSummary": "Heal 3 HP"
       }
     ]
   }
