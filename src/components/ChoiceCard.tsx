@@ -19,9 +19,6 @@ function ChoiceCard({
 }: ChoiceCardProps) {
   const [imageError, setImageError] = useState(false);
 
-  // Fallback image if none provided
-  const displayImage = imageUrl || '/ancestry/ancestry-human-portrait-1.png';
-
   const handleImageError = () => {
     setImageError(true);
   };
@@ -37,14 +34,14 @@ function ChoiceCard({
     >
       {/* Image Section with Gradient Overlay */}
       <div className="relative w-full aspect-square overflow-hidden bg-parchment-dark">
-        {imageError ? (
-          // Fallback colored background if image fails
+        {!imageUrl || imageError ? (
+          // Fallback colored background if no image provided or image fails
           <div className="w-full h-full bg-gradient-to-br from-brown-accent to-brown-medium flex items-center justify-center">
             <span className="font-title text-3xl text-parchment-light opacity-50">{title[0]}</span>
           </div>
         ) : (
           <img
-            src={displayImage}
+            src={imageUrl}
             alt={title}
             className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
             onError={handleImageError}

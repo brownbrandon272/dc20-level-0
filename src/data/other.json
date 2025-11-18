@@ -33,7 +33,7 @@
         "charisma": -2,
         "intelligence": 3
       },
-      "suggestedSkills": ["Investigation", "Medicine", "Insight"],
+      "suggestedSkills": ["Investigation", "Medicine", "Insight", "Survival", "Acrobatics", "Stealth", "Awareness", "Trickery"],
       "suggestedLanguages": ["Elvish", "Gnomish"]
     },
     "quick": {
@@ -47,7 +47,7 @@
         "charisma": 2,
         "intelligence": -1
       },
-      "suggestedSkills": ["Acrobatics", "Stealth", "Trickery"],
+      "suggestedSkills": ["Acrobatics", "Stealth", "Trickery", "Athletics"],
       "suggestedLanguages": ["Halfling", "Human"]
     },
     "tough": {
@@ -75,7 +75,7 @@
         "charisma": 3,
         "intelligence": 1
       },
-      "suggestedSkills": ["Influence", "Insight", "Animal Handling"],
+      "suggestedSkills": ["Influence", "Insight", "Animal Handling", "Awareness", "Athletics", "Acrobatics"],
       "suggestedLanguages": ["Elvish", "Gnomish"]
     }
   },

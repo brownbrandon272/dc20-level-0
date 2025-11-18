@@ -12,6 +12,9 @@ function NoviceAncestryPage() {
   const ancestries = Object.values(ancestriesData);
 
   const handleAncestrySelect = (ancestryId) => {
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     setAncestry(ancestryId);
     setLastStep('/create/novice/ancestry');
     navigate('/create/novice/weapon');

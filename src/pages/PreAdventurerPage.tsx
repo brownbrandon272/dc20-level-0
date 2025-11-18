@@ -19,6 +19,9 @@ function PreAdventurerPage() {
   const archetypes = Object.values(otherData.archetypes);
 
   const handleArchetypeSelect = (archetypeId) => {
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     // Set level
     setLevel('PreAdventurer');
 

@@ -9,6 +9,9 @@ function ModePage() {
   const setLastStep = useCharacterStore((state) => state.setLastStep);
 
   const handleModeSelect = (mode) => {
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     setCreationMode(mode);
     setLastStep('/create/mode');
     navigate('/create/name');

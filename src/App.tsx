@@ -10,6 +10,8 @@ import CharacterSheetPage from './pages/CharacterSheetPage';
 import PreAdventurerPage from './pages/PreAdventurerPage';
 import PreAdventurerSkillsPage from './pages/PreAdventurerSkillsPage';
 import Level0Page from './pages/Level0Page';
+import Level0EquipmentPage from './pages/Level0EquipmentPage';
+import Level0MartialPathPage from './pages/Level0MartialPathPage';
 import Level0MartialPage from './pages/Level0MartialPage';
 import Level0CasterPage from './pages/Level0CasterPage';
 import Level0AncestryPage from './pages/Level0AncestryPage';
@@ -28,6 +30,8 @@ function App() {
           <Route path="/create/pre-adventurer" element={<PreAdventurerPage />} />
           <Route path="/create/pre-adventurer/skills" element={<PreAdventurerSkillsPage />} />
           <Route path="/create/level0" element={<Level0Page />} />
+          <Route path="/create/level0/equipment" element={<Level0EquipmentPage />} />
+          <Route path="/create/level0/martial-path" element={<Level0MartialPathPage />} />
           <Route path="/create/level0/martial" element={<Level0MartialPage />} />
           <Route path="/create/level0/caster" element={<Level0CasterPage />} />
           <Route path="/create/level0/ancestry" element={<Level0AncestryPage />} />

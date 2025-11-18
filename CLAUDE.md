@@ -193,6 +193,59 @@ if (creationMode === 'streamlined') {
 - Tab 2: Actions + Reactions (dynamically populated based on level/class)
 - Styling: Parchment cards with brown accents
 
+**Common UI Patterns (Established 2025-11-18):**
+
+1. **Inline Badge Layout** - For cards with multiple metadata indicators:
+   ```tsx
+   <div className="flex items-center gap-2">
+     <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full text-xs">Action</span>
+     <span className="bg-brown-accent text-parchment-light px-2 py-1 rounded-full text-xs">1 AP</span>
+   </div>
+   ```
+   - Use `flex gap-2` to keep badges together horizontally
+   - Reduces vertical card height while maintaining readability
+   - Applied to maneuvers, spells, and similar ability cards
+
+2. **Categorized List Display** - For large lists with natural groupings:
+   ```tsx
+   // Group items by category
+   const itemsByCategory = items.reduce((acc, item) => {
+     const category = item.category || 'Other';
+     if (!acc[category]) acc[category] = [];
+     acc[category].push(item);
+     return acc;
+   }, {});
+
+   // Define display order
+   const categoryOrder = ['Category1', 'Category2', 'Other'];
+
+   // Render in order
+   {categoryOrder.map(category => {
+     const categoryItems = itemsByCategory[category];
+     if (!categoryItems) return null;
+     return (
+       <div key={category}>
+         <h3>{category}</h3>
+         {categoryItems.map(item => <Card key={item.id} {...item} />)}
+       </div>
+     );
+   })}
+   ```
+   - Store category metadata in data files, not components
+   - Use ordered array to control display sequence
+   - Applied to maneuver selection page
+
+3. **Image Sizing Hierarchy**:
+   - **Selection/choice pages**: 32x32px (`w-32 h-32`) - Larger for visual recognition
+   - **Character sheet displays**: 16x16px (`w-16 h-16`) - Compact for space efficiency
+   - **Icon supplements**: 12x12px (`w-12 h-12`) - When image is secondary to text
+   - Always use `object-contain` to preserve aspect ratio
+
+4. **Conditional Display Logic**:
+   - Similar components may need different behaviors based on content
+   - Example: Maneuvers (short descriptions) show full text always, Spells (long descriptions) use expand/collapse
+   - Consider content length and user needs when choosing display patterns
+
 ### Critical Implementation Details
 
 **Streamlined mode weapon filtering:**

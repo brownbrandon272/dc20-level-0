@@ -220,6 +220,9 @@ function PreAdventurerSkillsPage() {
   const handleSubmit = () => {
     if (!canSubmit()) return;
 
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     // Convert boolean skills to numeric (adopted skill = 2 points)
     const numericSkills: Record<string, number> = {};
     Object.entries(skills).forEach(([skill, adopted]) => {

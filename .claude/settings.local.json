@@ -17,6 +17,7 @@
       "mcp__playwright__browser_resize",
       "mcp__playwright__browser_close",
       "mcp__playwright__browser_console_messages",
+      "mcp__playwright__browser_select_option",
       "mcp__playwright__browser_tab_close",
       "mcp__playwright__browser_type",
       "mcp__playwright__browser_*",
@@ -26,7 +27,15 @@
       "Bash(mcp list:*)",
       "Bash(claude mcp add:*)",
       "Bash(claude mcp list:*)",
-      "Bash(npx @playwright/mcp@latest --version)"
+      "Bash(npx @playwright/mcp@latest --version)",
+      "Bash(git log:*)",
+      "Bash(timeout /t 3)",
+      "Bash(python:*)",
+      "Bash(test:*)",
+      "Bash(if [ -f \"c:\\Users\\brown\\dev\\repos\\dc20-level-0\\src\\pages\\Level0MartialPathPage.tsx\" ])",
+      "Bash(then head -80 \"c:\\Users\\brown\\dev\\repos\\dc20-level-0\\src\\pages\\Level0MartialPathPage.tsx\")",
+      "Bash(else echo \"File not found\")",
+      "Bash(fi)"
     ],
     "deny": [],
     "ask": []

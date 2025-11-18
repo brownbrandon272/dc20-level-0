@@ -3,6 +3,7 @@
     "id": "lightningTeleportation",
     "name": "Lightning & Teleportation",
     "desc": "Harness the power of storms and electricity, and bend space to your will.",
+    "image": "/spellbook/spellbook-lightning-character.png",
     "spells": [
       {
         "id": "lightningBolt",
@@ -37,6 +38,7 @@
     "id": "psychicEnchantment",
     "name": "Psychic & Enchantment",
     "desc": "Manipulate minds and bend reality with mental power.",
+    "image": "/spellbook/spellbook-psychic-character.png",
     "spells": [
       {
         "id": "psiBolt",
@@ -71,6 +73,7 @@
     "id": "holyRestoration",
     "name": "Holy & Restoration",
     "desc": "Channel divine light to heal allies and smite foes.",
+    "image": "/spellbook/spellbook-holy-character.png",
     "spells": [
       {
         "id": "sacredBolt",

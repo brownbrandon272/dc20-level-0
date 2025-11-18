@@ -12,6 +12,8 @@ import otherData from '../data/other.json';
 function CharacterSheetPage() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('sheet');
+  const [expandedSpellId, setExpandedSpellId] = useState<string | null>(null);
+  const [expandedManeuverId, setExpandedManeuverId] = useState<string | null>(null);
   const character = useCharacterStore((state) => state.character);
   const setLastStep = useCharacterStore((state) => state.setLastStep);
 
@@ -54,7 +56,7 @@ function CharacterSheetPage() {
 
   // Get skill proficiency from character.skills
   // Pre-Adventurer skills are stored as 2 when learned, but should display as proficiency 1
-  // Level 0 can have proficiency 2 (expert)
+  // Level 0 can have proficiency 2 (expert) only if skill value > 2
   const getSkillProficiency = (skillName: string): 0 | 1 | 2 => {
     const prof = character.skills[skillName] || 0;
 
@@ -63,42 +65,45 @@ function CharacterSheetPage() {
       return (prof > 0 ? 1 : 0) as 0 | 1 | 2;
     }
 
-    // At Level 0, skills can be trained (1) or expert (2)
-    return (prof >= 2 ? 2 : prof >= 1 ? 1 : 0) as 0 | 1 | 2;
-  };
-
-  // Get available actions based on level
-  const getAvailableActions = () => {
-    const actions = [...otherData.baseActions];
-
+    // At Level 0:
+    // - Skills with value 2 (learned at Pre-Adventurer) display as proficiency 1 (trained)
+    // - Skills with value > 2 (upgraded by ancestry features) display as proficiency 2 (expert)
+    // - Skills with value 1 display as proficiency 1
     if (character.level === 'Level0') {
-      if (character.classType === 'Martial') {
-        const selectedManeuvers = maneuversData.filter(m =>
-          m.autoSelected || character.chosenManeuvers.includes(m.id)
-        );
-        actions.push(...selectedManeuvers.filter(m => m.type === 'action'));
-      } else if (character.classType === 'Caster' && character.chosenSpellList) {
-        const spellList = spellsData[character.chosenSpellList];
-        if (spellList && spellList.spells) {
-          actions.push(...spellList.spells);
-        }
-      }
+      return (prof > 2 ? 2 : prof >= 1 ? 1 : 0) as 0 | 1 | 2;
     }
 
-    return actions;
+    // Fallback for any other level
+    return (prof > 2 ? 2 : prof >= 1 ? 1 : 0) as 0 | 1 | 2;
   };
 
+  // Get available actions based on level (base actions only - no spells/maneuvers)
+  const getAvailableActions = () => {
+    return [...otherData.baseActions];
+  };
+
+  // Get available reactions (base reactions only - no maneuvers)
   const getAvailableReactions = () => {
-    const reactions = [...otherData.baseReactions];
+    return [...otherData.baseReactions];
+  };
 
-    if (character.level === 'Level0' && character.classType === 'Martial') {
-      const selectedManeuvers = maneuversData.filter(m =>
-        m.autoSelected || character.chosenManeuvers.includes(m.id)
-      );
-      reactions.push(...selectedManeuvers.filter(m => m.type === 'reaction'));
+  // Get character's selected maneuvers
+  const getSelectedManeuvers = () => {
+    if (character.level !== 'Level0' || character.classType !== 'Martial') {
+      return [];
     }
+    return maneuversData.filter(m =>
+      m.autoSelected || character.chosenManeuvers.includes(m.id)
+    );
+  };
 
-    return reactions;
+  // Get character's selected spells
+  const getSelectedSpells = () => {
+    if (character.level !== 'Level0' || character.classType !== 'Caster' || !character.chosenSpellList) {
+      return [];
+    }
+    const spellList = spellsData[character.chosenSpellList];
+    return spellList ? spellList.spells : [];
   };
 
   return (
@@ -354,12 +359,12 @@ function CharacterSheetPage() {
                 </div>
               </div>
 
-              {/* Attacks */}
+              {/* Attacks & Equipment */}
               <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 mb-6 shadow-parchment-lg">
                 <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
-                  Attacks
+                  Attacks & Equipment
                 </h2>
-                {character.inventory.weapon ? (
+                {character.inventory.weapon || character.inventory.additionalWeapon ? (
                   <div className="bg-parchment-light border border-brown-medium rounded-lg p-4">
                     {/* Table header */}
                     <div className="grid grid-cols-12 gap-2 mb-3 pb-2 border-b border-brown-medium">
@@ -374,42 +379,101 @@ function CharacterSheetPage() {
                       </div>
                     </div>
 
-                    {/* Attack row */}
-                    <div className="grid grid-cols-12 gap-2 items-center">
-                      <div className="col-span-6 flex items-center gap-2">
-                        <img
-                          src={`/weapon/weapon-${character.inventory.weapon.id}.png`}
-                          alt={character.inventory.weapon.name}
-                          className="w-10 h-10 object-contain"
-                          onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                        />
-                        <div>
-                          <div className="font-title text-base font-semibold text-brown-text">
-                            {character.inventory.weapon.name}
+                    {/* Main weapon row */}
+                    {character.inventory.weapon && (
+                      <div className="grid grid-cols-12 gap-2 items-center mb-3">
+                        <div className="col-span-6 flex items-center gap-2">
+                          <img
+                            src={`/weapon/weapon-${character.inventory.weapon.id}.png`}
+                            alt={character.inventory.weapon.name}
+                            className="w-10 h-10 object-contain"
+                            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                          />
+                          <div>
+                            <div className="font-title text-base font-semibold text-brown-text">
+                              {character.inventory.weapon.name}
+                            </div>
+                            <div className="text-xs text-brown-medium">
+                              {character.inventory.weapon.hands}
+                              {character.inventory.weapon.properties.length > 0 &&
+                                ` • ${character.inventory.weapon.properties.join(', ')}`
+                              }
+                            </div>
                           </div>
-                          <div className="text-xs text-brown-medium">
-                            {character.inventory.weapon.hands}
-                            {character.inventory.weapon.properties.length > 0 &&
-                              ` • ${character.inventory.weapon.properties.join(', ')}`
-                            }
+                        </div>
+                        <div className="col-span-3 text-center">
+                          <div className="font-title text-xl font-bold text-brown-text">
+                            +{stats.attackCheck}
+                          </div>
+                        </div>
+                        <div className="col-span-3 text-center">
+                          <div className="font-title text-xl font-bold text-brown-text">
+                            {character.inventory.weapon.damage}
                           </div>
                         </div>
                       </div>
-                      <div className="col-span-3 text-center">
-                        <div className="font-title text-xl font-bold text-brown-text">
-                          +{stats.attackCheck}
+                    )}
+
+                    {/* Additional weapon row */}
+                    {character.inventory.additionalWeapon && (
+                      <div className="grid grid-cols-12 gap-2 items-center mb-3">
+                        <div className="col-span-6 flex items-center gap-2">
+                          <img
+                            src={`/weapon/weapon-${character.inventory.additionalWeapon.id}.png`}
+                            alt={character.inventory.additionalWeapon.name}
+                            className="w-10 h-10 object-contain"
+                            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                          />
+                          <div>
+                            <div className="font-title text-base font-semibold text-brown-text">
+                              {character.inventory.additionalWeapon.name}
+                            </div>
+                            <div className="text-xs text-brown-medium">
+                              {character.inventory.additionalWeapon.hands}
+                              {character.inventory.additionalWeapon.properties.length > 0 &&
+                                ` • ${character.inventory.additionalWeapon.properties.join(', ')}`
+                              }
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-span-3 text-center">
+                          <div className="font-title text-xl font-bold text-brown-text">
+                            +{stats.attackCheck}
+                          </div>
+                        </div>
+                        <div className="col-span-3 text-center">
+                          <div className="font-title text-xl font-bold text-brown-text">
+                            {character.inventory.additionalWeapon.damage}
+                          </div>
                         </div>
                       </div>
-                      <div className="col-span-3 text-center">
-                        <div className="font-title text-xl font-bold text-brown-text">
-                          {character.inventory.weapon.damage}
+                    )}
+
+                    {/* Shield row */}
+                    {character.inventory.shield && (
+                      <div className="grid grid-cols-12 gap-2 items-center border-t border-brown-medium pt-3">
+                        <div className="col-span-6 flex items-center gap-2">
+                          <div className="w-10 h-10 flex items-center justify-center text-2xl">
+                            🛡️
+                          </div>
+                          <div>
+                            <div className="font-title text-base font-semibold text-brown-text">
+                              {character.inventory.shield.name}
+                            </div>
+                            <div className="text-xs text-brown-medium">
+                              +{character.inventory.shield.pdBonus} PD
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-span-6 text-sm text-brown-medium italic">
+                          Defensive equipment
                         </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 ) : (
                   <div className="text-center text-brown-medium py-4 bg-parchment-light border border-brown-medium rounded-lg">
-                    No weapon equipped
+                    No weapons equipped
                   </div>
                 )}
               </div>
@@ -491,21 +555,156 @@ function CharacterSheetPage() {
                 </div>
               )}
 
+              {/* Maneuvers (Level 0 Martial only) */}
+              {character.level === 'Level0' && character.classType === 'Martial' && getSelectedManeuvers().length > 0 && (
+                <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 mb-6 shadow-parchment-lg">
+                  <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
+                    Maneuvers
+                  </h2>
+                  <div className="space-y-3">
+                    {getSelectedManeuvers().map((maneuver) => {
+                      const isAction = (maneuver as any).type === 'action';
+
+                      return (
+                        <div
+                          key={maneuver.id}
+                          className="bg-parchment-light border border-brown-medium rounded-lg p-4"
+                        >
+                          <div className="flex items-start gap-3">
+                            {/* Maneuver Image */}
+                            {maneuver.image && (
+                              <img
+                                src={maneuver.image}
+                                alt={maneuver.name}
+                                className="w-16 h-16 object-contain flex-shrink-0"
+                              />
+                            )}
+
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-start justify-between mb-2">
+                                <h3 className="font-title text-lg font-semibold text-brown-text">
+                                  {maneuver.name}
+                                </h3>
+                                <div className="flex items-center gap-2 ml-2">
+                                  <span className={`px-2 py-0.5 rounded-full text-xs font-sans font-semibold ${
+                                    isAction
+                                      ? 'bg-blue-600 text-white'
+                                      : 'bg-purple-600 text-white'
+                                  }`}>
+                                    {isAction ? 'Action' : 'Reaction'}
+                                  </span>
+                                  <span className="bg-brown-accent text-parchment-light px-3 py-1 rounded-full text-sm font-sans font-semibold whitespace-nowrap">
+                                    {maneuver.cost}
+                                  </span>
+                                </div>
+                              </div>
+
+                              {/* Always show full description for maneuvers */}
+                              <p className="font-body text-sm text-brown-text whitespace-pre-wrap">
+                                {maneuver.desc}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Spells (Level 0 Caster only) */}
+              {character.level === 'Level0' && character.classType === 'Caster' && getSelectedSpells().length > 0 && (
+                <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 mb-6 shadow-parchment-lg">
+                  <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
+                    Spells
+                  </h2>
+                  <div className="space-y-3">
+                    {getSelectedSpells().map((spell) => {
+                      const isExpanded = expandedSpellId === spell.id;
+
+                      return (
+                        <div
+                          key={spell.id}
+                          className="bg-parchment-light border border-brown-medium rounded-lg p-4 cursor-pointer hover:border-brown-accent transition-all"
+                          onClick={() => setExpandedSpellId(isExpanded ? null : spell.id)}
+                        >
+                          <div className="flex items-start justify-between mb-2">
+                            <h3 className="font-title text-lg font-semibold text-brown-text">
+                              {spell.name}
+                            </h3>
+                            <div className="flex items-center gap-2 ml-2">
+                              <span className="px-2 py-0.5 rounded-full text-xs font-sans font-semibold bg-blue-600 text-white">
+                                Action
+                              </span>
+                              <span className="bg-gold text-parchment-light px-3 py-1 rounded-full text-sm font-sans font-semibold whitespace-nowrap">
+                                {spell.cost}
+                              </span>
+                            </div>
+                          </div>
+
+                          {!isExpanded ? (
+                            <p className="font-body text-sm text-brown-medium italic">
+                              {spell.descSummary}
+                            </p>
+                          ) : (
+                            <div className="font-body text-sm text-brown-text">
+                              {spell.desc.split('\n\n').map((paragraph, idx) => (
+                                <p key={idx} className="mb-2 last:mb-0 whitespace-pre-wrap">
+                                  {paragraph}
+                                </p>
+                              ))}
+                            </div>
+                          )}
+
+                          <div className="text-xs text-brown-medium mt-2 text-right">
+                            {isExpanded ? 'Click to collapse' : 'Click to expand'}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
               {/* Features */}
-              {ancestry?.noviceFeature && (
+              {ancestry && (
                 <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 shadow-parchment-lg">
                   <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
                     Features
                   </h2>
                   <div className="space-y-4">
-                    <div className="bg-parchment-light border border-brown-medium rounded-lg p-4">
-                      <h3 className="font-title text-lg font-semibold text-brown-text mb-2">
-                        {ancestry.noviceFeature.name}
-                      </h3>
-                      <p className="font-body text-brown-text">
-                        {ancestry.noviceFeature.desc}
-                      </p>
-                    </div>
+                    {/* Novice Feature */}
+                    {ancestry.noviceFeature && (
+                      <div className="bg-parchment-light border border-brown-medium rounded-lg p-4">
+                        <h3 className="font-title text-lg font-semibold text-brown-text mb-2">
+                          {ancestry.noviceFeature.name}
+                        </h3>
+                        <p className="font-body text-brown-text">
+                          {ancestry.noviceFeature.desc}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Level 0 Features */}
+                    {character.level === 'Level0' && character.ancestry.level0Choices.length > 0 && (
+                      <>
+                        {character.ancestry.level0Choices.map((choiceId) => {
+                          const feature = ancestry.level0Features?.find(f => f.id === choiceId);
+                          if (!feature) return null;
+
+                          return (
+                            <div key={choiceId} className="bg-parchment-light border border-brown-medium rounded-lg p-4">
+                              <h3 className="font-title text-lg font-semibold text-brown-text mb-2">
+                                {feature.name}
+                              </h3>
+                              <p className="font-body text-brown-text">
+                                {feature.desc}
+                              </p>
+                            </div>
+                          );
+                        })}
+                      </>
+                    )}
                   </div>
                 </div>
               )}

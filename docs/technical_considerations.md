@@ -10,6 +10,81 @@ This document outlines the key technical decisions made during development and p
 
 ## Recent Changes (Latest Session)
 
+### 2025-11-18 - UI/UX Enhancements: Images, Badges, and Categories
+
+**Changes Implemented:**
+1. **Maneuver Categorization System**: Added `maneuverCategory` field to maneuvers.json
+   - Categories: Save Maneuver, Defense Maneuver, Grapple Maneuver, Attack Maneuver
+   - Grouped display in Level0MartialPage with category headers
+   - Proper categorization: taunt (Defense), bodyBlock (Grapple), expose/hamstring/trip (Save)
+
+2. **Image Size Optimization**:
+   - Maneuver selection cards: 32x32 pixels (`w-32 h-32`)
+   - Character sheet maneuvers: 16x16 pixels (`w-16 h-16`)
+   - Weapon selection cards: 12x12 pixels (`w-12 h-12`)
+   - Spell images: Consistent sizing across selection and character sheet
+
+3. **Badge Layout Optimization**:
+   - Combined Action/Reaction and cost badges inline with `flex gap-2`
+   - Applied to both maneuvers AND spells in character sheet
+   - Significantly reduced vertical space in cards while maintaining readability
+   - Blue badge for Action (`bg-blue-600`), Purple badge for Reaction (`bg-purple-600`)
+
+4. **Full Description Display**:
+   - Maneuvers now always show full `desc` in character sheet (no expand/collapse)
+   - Spells retain expand/collapse functionality (descriptions are longer)
+   - Removed click handler and "Click to expand" text from maneuver cards
+
+5. **Weapon Card Enhancement**:
+   - Added weapon icons to right side of weapon selection cards
+   - 12x12 pixel images with flex layout for proper alignment
+
+**Files Modified:**
+- `src/data/maneuvers.json` - Added maneuverCategory field to all maneuvers
+- `src/pages/Level0MartialPage.tsx` - Grouping logic, image sizing, badge layout
+- `src/pages/CharacterSheetPage.tsx` - Image sizing, badge layout for both maneuvers and spells
+- `src/pages/Level0EquipmentPage.tsx` - Added weapon images to cards
+
+**Key Lessons Learned:**
+
+1. **Inline Badge Pattern**: For cards with multiple metadata badges (type, cost, etc.), use inline flex layout instead of stacked:
+   ```tsx
+   <div className="flex items-center gap-2">
+     <span className="badge-type">Action</span>
+     <span className="badge-cost">1 AP</span>
+   </div>
+   ```
+   This reduces vertical height while keeping badges visually associated.
+
+2. **Categorized Display Pattern**: When displaying large lists of similar items with natural categories:
+   - Group items using reduce: `items.reduce((acc, item) => { acc[item.category] = [...]; }, {})`
+   - Define category display order array: `['Category1', 'Category2', ...]`
+   - Map over ordered categories to ensure consistent display
+   - Add category headers with styling to differentiate sections
+
+3. **Image Sizing Strategy**:
+   - Selection/choice pages: Larger images (32x32) for better visual recognition
+   - Character sheet/compact displays: Smaller images (16x16) to save space
+   - Icon-only displays: Very small (12x12) when image is supplementary
+
+4. **Different Display Logic for Similar Components**:
+   - Not all similar components need identical behavior
+   - Maneuvers vs Spells: Both are abilities, but maneuvers have short descriptions (show all), spells have long descriptions (expand/collapse)
+   - Consider content length when deciding between always-visible vs expandable
+
+5. **Data-Driven Categorization**:
+   - Add category metadata to data files rather than hard-coding categories in components
+   - Allows flexibility for future category changes without touching component logic
+   - Makes the system more maintainable and scalable
+
+**Testing Notes:**
+- Verified all maneuver categories display correctly in their groups
+- Confirmed image sizes render at expected pixel dimensions
+- Tested badge alignment in both selection and character sheet views
+- Validated that spell cards still have expand/collapse while maneuvers show full descriptions
+
+---
+
 ### 2025-11-17 - Critical CSS Conflict Fix
 
 **Problem Identified:**

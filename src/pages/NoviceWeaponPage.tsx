@@ -18,6 +18,9 @@ function NoviceWeaponPage() {
     : weaponsData;
 
   const handleWeaponSelect = (weapon) => {
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     setWeapon(weapon);
 
     // Calculate Novice stats

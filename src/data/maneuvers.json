@@ -8,7 +8,9 @@
     "desc": "Your Melee Attack Range is increased by 1 Space (or your Ranged Attack Range is increased by 5 Spaces) for the Attack check.",
     "descSummary": "Increase melee range by 1 or ranged by 5",
     "descExtremeSummary": "Extend range",
-    "autoSelected": true
+    "autoSelected": true,
+    "image": "/maneuver/maneuver-extend.png",
+    "maneuverCategory": "Basic Maneuver"
   },
   {
     "id": "powerAttack",
@@ -19,7 +21,9 @@
     "desc": "You deal +1 damage with the Attack. You can use this Maneuver multiple times.",
     "descSummary": "Deal +1 damage (repeatable)",
     "descExtremeSummary": "+1 damage",
-    "autoSelected": true
+    "autoSelected": true,
+    "image": "/maneuver/maneuver-power.png",
+    "maneuverCategory": "Basic Maneuver"
   },
   {
     "id": "sweepAttack",
@@ -30,7 +34,9 @@
     "desc": "Choose 1 additional target within 1 Space of the original target that's within your Attack Range. Make 1 Attack Check against all targets. Attack Hit: The original target takes your Attack's damage, and each additional target Hit takes 1 damage of the same type.",
     "descSummary": "Attack original + 1 additional nearby target",
     "descExtremeSummary": "Sweep attack",
-    "autoSelected": true
+    "autoSelected": true,
+    "image": "/maneuver/maneuver-sweep.png",
+    "maneuverCategory": "Basic Maneuver"
   },
   {
     "id": "expose",
@@ -41,7 +47,9 @@
     "desc": "The target becomes Exposed (Attacks against it have ADV) against the next Attack made against it before the end of your next turn.",
     "descSummary": "Target gains Exposed condition",
     "descExtremeSummary": "Expose",
-    "autoSelected": false
+    "autoSelected": false,
+    "image": "/maneuver/maneuver-expose.png",
+    "maneuverCategory": "Save Maneuver"
   },
   {
     "id": "hamstring",
@@ -52,7 +60,9 @@
     "desc": "The target is Slowed (every 1 Space you move costs an extra 1 Space of movement) until the end of your next turn.",
     "descSummary": "Target becomes Slowed",
     "descExtremeSummary": "Slow",
-    "autoSelected": false
+    "autoSelected": false,
+    "image": "/maneuver/maneuver-hamstring.png",
+    "maneuverCategory": "Save Maneuver"
   },
   {
     "id": "trip",
@@ -63,7 +73,9 @@
     "desc": "The target falls Prone.",
     "descSummary": "Target falls Prone",
     "descExtremeSummary": "Trip",
-    "autoSelected": false
+    "autoSelected": false,
+    "image": "/maneuver/maneuver-trip.png",
+    "maneuverCategory": "Save Maneuver"
   },
   {
     "id": "parry",
@@ -74,7 +86,9 @@
     "desc": "Trigger: When a creature you can see within 1 Space (including yourself) is targeted by an Attack against its PD. Reaction (Maneuver): (1 AP) You grant the target a +5 bonus to PD against this Attack.",
     "descSummary": "Grant +5 PD to nearby ally",
     "descExtremeSummary": "+5 PD",
-    "autoSelected": false
+    "autoSelected": false,
+    "image": "/maneuver/maneuver-parry.png",
+    "maneuverCategory": "Defense Maneuver"
   },
   {
     "id": "raiseShield",
@@ -85,7 +99,9 @@
     "desc": "Requires: You're wielding a shield. Trigger: A creature within 1 Space (including yourself) is targeted by an Attack against its PD. Reaction (Maneuver): (1 AP) Reduce the damage against the target by an amount equal to your Shield's PD bonus.",
     "descSummary": "Reduce damage by shield's PD bonus",
     "descExtremeSummary": "Shield block",
-    "autoSelected": false
+    "autoSelected": false,
+    "image": "/maneuver/maneuver-raise-shield.png",
+    "maneuverCategory": "Defense Maneuver"
   },
   {
     "id": "taunt",
@@ -96,7 +112,9 @@
     "desc": "Choose an enemy creature that can see or hear you within 5 Spaces. Make an Attack Check, Influence Check, or Intimidation Check (your choice) contested by the target's Mental Save. Contest Success: The target is Taunted (DisADV on Attacks against creatures other than you) by you on their next Attack. Full Taunt: You can spend an additional 1 AP to have the Taunted Condition last until the end of your next turn.",
     "descSummary": "Target gets DisADV vs others (optional +1 AP for duration)",
     "descExtremeSummary": "Taunt",
-    "autoSelected": false
+    "autoSelected": false,
+    "image": "/maneuver/maneuver-taunt.png",
+    "maneuverCategory": "Defense Maneuver"
   },
   {
     "id": "bodyBlock",
@@ -107,7 +125,9 @@
     "desc": "Trigger: You are targeted by an Attack. Reaction (Maneuver): (1 AP) You reposition a creature Grappled by you to shield yourself from damage. Effect: You and the Grappled creature each take half the damage dealt by the attack. Aftermath: You can move the Grappled creature to any adjacent space immediately.",
     "descSummary": "Split damage with grappled creature",
     "descExtremeSummary": "Body block",
-    "autoSelected": false
+    "autoSelected": false,
+    "image": "/maneuver/maneuver-body-block.png",
+    "maneuverCategory": "Grapple Maneuver"
   },
   {
     "id": "restrain",
@@ -118,7 +138,9 @@
     "desc": "The target is Restrained until the Grapple ends. Target Options: On its turn, the target can spend 1 AP to end the Restrained condition but remains Grappled.",
     "descSummary": "Grappled target becomes Restrained",
     "descExtremeSummary": "Restrain",
-    "autoSelected": false
+    "autoSelected": false,
+    "image": "/maneuver/maneuver-restrain.png",
+    "maneuverCategory": "Grapple Maneuver"
   },
   {
     "id": "throw",
@@ -126,9 +148,11 @@
     "type": "action",
     "category": "maneuver",
     "cost": "1 AP",
-    "desc": "Requires: The Grappled creature is your size or smaller. Maneuver: (1 AP) The target is thrown up to a number of spaces equal to ½ of your Might, ending the Grappled condition. Additional Range: Add 1 extra space for every 5 points the target fails the Contest Check by.",
+    "desc": "Requires: The Grappled creature is your size or smaller. Maneuver: (1 AP) The target is thrown up to a number of spaces equal to \u00c2\u00bd of your Might, ending the Grappled condition. Additional Range: Add 1 extra space for every 5 points the target fails the Contest Check by.",
     "descSummary": "Throw grappled creature",
     "descExtremeSummary": "Throw",
-    "autoSelected": false
+    "autoSelected": false,
+    "image": "/maneuver/maneuver-throw.png",
+    "maneuverCategory": "Grapple Maneuver"
   }
 ]

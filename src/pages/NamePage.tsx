@@ -11,6 +11,9 @@ function NamePage() {
 
   const handleNext = () => {
     if (inputName.trim()) {
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
       setName(inputName.trim());
       setLastStep('/create/name');
       navigate('/create/novice/ancestry');

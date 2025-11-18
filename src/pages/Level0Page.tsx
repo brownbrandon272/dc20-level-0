@@ -8,27 +8,18 @@ function Level0Page() {
   const character = useCharacterStore((state) => state.character);
   const setLevel = useCharacterStore((state) => state.setLevel);
   const setClassType = useCharacterStore((state) => state.setClassType);
-  const setArmor = useCharacterStore((state) => state.setArmor);
   const setLastStep = useCharacterStore((state) => state.setLastStep);
 
   const handleClassSelect = (classType) => {
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     setLevel('Level0');
     setClassType(classType);
-    setArmor({ name: 'Light Armor', pdBonus: 1 });
     setLastStep('/create/level0');
 
-    if (character.creationMode === 'streamlined') {
-      // For streamlined, go directly to ancestry choices
-      // We'll auto-select options for martial/caster
-      navigate('/create/level0/ancestry');
-    } else {
-      // For customizable, go to class-specific page
-      if (classType === 'Martial') {
-        navigate('/create/level0/martial');
-      } else {
-        navigate('/create/level0/caster');
-      }
-    }
+    // Navigate to equipment selection page
+    navigate('/create/level0/equipment');
   };
 
   return (
@@ -43,11 +34,13 @@ function Level0Page() {
         <ChoiceCard
           title="Martial"
           description="Master weapons and physical combat. Use maneuvers and stamina to dominate the battlefield."
+          imageUrl="/character-archetype/character-brawler.png"
           onClick={() => handleClassSelect('Martial')}
         />
         <ChoiceCard
           title="Caster"
           description="Wield magical powers and spells. Use mana to cast spells and manipulate reality."
+          imageUrl="/spellbook/spellbook-psychic-character.png"
           onClick={() => handleClassSelect('Caster')}
         />
       </div>
