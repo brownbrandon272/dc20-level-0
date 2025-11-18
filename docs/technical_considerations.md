@@ -10,6 +10,52 @@ This document outlines the key technical decisions made during development and p
 
 ## Recent Changes (Latest Session)
 
+### 2025-11-17 - Critical CSS Conflict Fix
+
+**Problem Identified:**
+Tailwind utility classes (borders, padding, margins) were not being applied despite being present in the JSX. The issue was caused by conflicting global CSS rules in `src/styles/index.css` that had higher specificity than Tailwind utilities.
+
+**Root Cause:**
+Global CSS resets in index.css were overriding Tailwind classes:
+```css
+* { margin: 0; padding: 0; }  /* Overrode ALL Tailwind padding/margin */
+button { border: none; }       /* Overrode ALL Tailwind button borders */
+input, select {
+  padding: 0.5rem;            /* Overrode Tailwind padding on form elements */
+  border: 1px solid ...;      /* Overrode Tailwind borders on form elements */
+}
+h1, h2, h3 { margin-bottom: 1rem; }  /* Overrode Tailwind heading margins */
+```
+
+**Solution Implemented:**
+Removed conflicting properties from global CSS rules in `src/styles/index.css`:
+- Removed `margin: 0; padding: 0;` from universal selector
+- Removed `border: none;` from button selector
+- Removed `padding` and `border` from input/select/textarea selector
+- Removed `margin-bottom` from heading selectors
+- Removed focus state `border-color` (Tailwind handles this)
+
+**Result:**
+All Tailwind utility classes now work correctly:
+- ✅ Borders: `border-2 border-gray-600` applies correctly
+- ✅ Padding: `p-4`, `p-6` apply correctly
+- ✅ Margins: `mb-8`, `mb-6` apply correctly
+- ✅ All other Tailwind utilities functional
+
+**Files Modified:**
+- `src/styles/index.css` - Removed conflicting CSS properties
+
+**Testing:**
+Verified with Playwright MCP browser automation:
+- Borders: `borderWidth: "1.6px"` ✅
+- Padding: `padding: "16px"` ✅
+- Margins: `marginBottom: "32px"` ✅
+
+**Important Lesson:**
+When using Tailwind CSS, avoid global CSS resets that set specific values for padding, margin, borders, etc. Use Tailwind's `@layer base` directive for base styles instead, or ensure global CSS only sets properties that won't conflict with utility classes.
+
+---
+
 ### 2025-11-08 - Tailwind CSS Integration & Analysis
 
 **Major Changes:**

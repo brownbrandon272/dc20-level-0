@@ -22,7 +22,11 @@
       "mcp__playwright__browser_*",
       "Bash(npm test:*)",
       "Bash(npm run:*)",
-      "Bash(timeout 5 bash:*)"
+      "Bash(timeout 5 bash:*)",
+      "Bash(mcp list:*)",
+      "Bash(claude mcp add:*)",
+      "Bash(claude mcp list:*)",
+      "Bash(npx @playwright/mcp@latest --version)"
     ],
     "deny": [],
     "ask": []

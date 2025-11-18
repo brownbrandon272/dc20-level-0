@@ -53,8 +53,17 @@ function CharacterSheetPage() {
   };
 
   // Get skill proficiency from character.skills
+  // Pre-Adventurer skills are stored as 2 when learned, but should display as proficiency 1
+  // Level 0 can have proficiency 2 (expert)
   const getSkillProficiency = (skillName: string): 0 | 1 | 2 => {
     const prof = character.skills[skillName] || 0;
+
+    // At Pre-Adventurer level, all learned skills are proficiency 1 (trained)
+    if (character.level === 'PreAdventurer') {
+      return (prof > 0 ? 1 : 0) as 0 | 1 | 2;
+    }
+
+    // At Level 0, skills can be trained (1) or expert (2)
     return (prof >= 2 ? 2 : prof >= 1 ? 1 : 0) as 0 | 1 | 2;
   };
 
@@ -135,7 +144,7 @@ function CharacterSheetPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Left Column: Attributes (Only shown for Pre-Adventurer and Level 0) */}
             {character.level !== 'Novice' && (
-              <div className="lg:col-span-3 space-y-4">
+              <div className="lg:col-span-4 space-y-4">
                 <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
                   Attributes
                 </h2>
@@ -200,7 +209,7 @@ function CharacterSheetPage() {
             )}
 
             {/* Center/Right Column: Stats, Combat, Equipment, Resources */}
-            <div className={character.level !== 'Novice' ? 'lg:col-span-9' : 'lg:col-span-12'}>
+            <div className={character.level !== 'Novice' ? 'lg:col-span-8' : 'lg:col-span-12'}>
               {/* Health & Defense Stats */}
               <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 mb-6 shadow-parchment-lg">
                 <div className="px-2">

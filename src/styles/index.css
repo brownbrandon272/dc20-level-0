@@ -79,9 +79,8 @@
   --border-radius-ornate: 0.5rem;
 }
 
+/* Removed global margin/padding reset - conflicts with Tailwind utilities */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -104,10 +103,10 @@ body {
   flex-direction: column;
 }
 
+/* Removed margin-bottom - conflicts with Tailwind margin utilities */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.2;
-  margin-bottom: 1rem;
 }
 
 h1 {
@@ -122,10 +121,10 @@ h3 {
   font-size: 1.5rem;
 }
 
+/* Removed border: none - conflicts with Tailwind border utilities */
 button {
   font-family: inherit;
   cursor: pointer;
-  border: none;
   outline: none;
   transition: all 0.2s ease;
 }
@@ -135,19 +134,15 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* Removed padding and border - conflicts with Tailwind utilities */
 input, select, textarea {
   font-family: inherit;
   font-size: 1rem;
-  padding: 0.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
   outline: none;
   transition: border-color 0.2s ease;
 }
 
-input:focus, select:focus, textarea:focus {
-  border-color: var(--primary-color);
-}
+/* Removed focus border-color - Tailwind handles focus states */
 
 /* Utility Classes */
 .container {

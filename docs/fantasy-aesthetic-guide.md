@@ -300,6 +300,66 @@ Replace simple `<hr>` lines with ornate decorative dividers:
 
 ---
 
+## Tailwind CSS Integration - Critical Warning
+
+**⚠️ IMPORTANT: Avoid Global CSS Conflicts**
+
+When using Tailwind CSS, do NOT use global CSS resets that override utility classes. The following patterns WILL break Tailwind:
+
+```css
+/* ❌ BAD - Breaks all Tailwind padding/margin utilities */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* ❌ BAD - Breaks all Tailwind button borders */
+button {
+  border: none;
+}
+
+/* ❌ BAD - Breaks Tailwind padding/border on form elements */
+input, select, textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--color);
+}
+
+/* ❌ BAD - Breaks Tailwind heading margins */
+h1, h2, h3 {
+  margin-bottom: 1rem;
+}
+```
+
+**✅ SAFE Global CSS Patterns:**
+
+```css
+/* ✅ GOOD - Doesn't conflict with utilities */
+* {
+  box-sizing: border-box;
+}
+
+/* ✅ GOOD - Only sets properties Tailwind doesn't handle */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+/* ✅ GOOD - Use @layer base for Tailwind-aware resets */
+@layer base {
+  body {
+    @apply font-body text-brown-text bg-parchment-light;
+  }
+}
+```
+
+**Why This Matters:**
+Global CSS rules have specificity that can override Tailwind utility classes. This causes utilities like `border-2`, `p-4`, `mb-8` to be present in the HTML but not applied visually. Always prefer Tailwind utilities over global CSS for spacing, borders, colors, etc.
+
+**Fixed in:** 2025-11-17 session - See [technical_considerations.md](technical_considerations.md) for details.
+
+---
+
 ## Balance Between Flavor and Usability
 
 ### Critical Guidelines

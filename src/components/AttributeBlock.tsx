@@ -61,7 +61,7 @@ function AttributeBlock({ name, abbreviation, value, save, skills, isPrime = fal
         </div>
 
         {/* Right: Save and Skills */}
-        <div className="flex-1 flex flex-col justify-center">
+        <div className="flex-1 min-w-0 flex flex-col justify-center">
           {/* Attribute Name */}
           <div className="font-title text-lg font-semibold text-brown-text mb-2 px-1">
             {name}
@@ -83,7 +83,7 @@ function AttributeBlock({ name, abbreviation, value, save, skills, isPrime = fal
           {skills.length > 0 && (
             <div className="space-y-2">
               {skills.map((skill) => (
-                <div key={skill.name} className="flex items-center gap-3 px-1 py-1">
+                <div key={skill.name} className="flex items-center gap-2 px-1 py-1">
                   {/* Proficiency Circles */}
                   <div className="flex gap-0.5 shrink-0">
                     <div className={`w-3 h-3 rounded-full border-2 ${skill.proficiency >= 1 ? 'bg-brown-accent border-brown-accent' : 'bg-transparent border-brown-medium'}`}></div>
@@ -91,8 +91,10 @@ function AttributeBlock({ name, abbreviation, value, save, skills, isPrime = fal
                   </div>
 
                   {/* Skill Name */}
-                  <div className="font-sans text-sm text-brown-text flex-1">
-                    {skill.name}
+                  <div className="font-sans text-xs text-brown-text flex-1 min-w-0 overflow-hidden">
+                    <span className="block truncate" title={skill.name}>
+                      {skill.name}
+                    </span>
                   </div>
 
                   {/* Skill Modifier */}
