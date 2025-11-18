@@ -1,0 +1,92 @@
+{
+  "Ammo": {
+    "id": "Ammo",
+    "name": "Ammo",
+    "shortDesc": "Requires ammunition to make Attacks",
+    "fullDesc": "This Weapon requires ammunition to make Attacks. You can load a Weapon as part of an Attack made with it."
+  },
+  "Concealable": {
+    "id": "Concealable",
+    "name": "Concealable",
+    "shortDesc": "Drawing doesn't provoke, grants ADV on first attack",
+    "fullDesc": "Drawing the Weapon doesn't provoke Opportunity Attacks. If you draw the Weapon as part of an Attack, you have ADV on the Attack. You can only gain this benefit once against each creature per Combat."
+  },
+  "Guard": {
+    "id": "Guard",
+    "name": "Guard",
+    "shortDesc": "+1 PD while wielding",
+    "fullDesc": "You gain +1 PD while wielding the Weapon."
+  },
+  "Heavy": {
+    "id": "Heavy",
+    "name": "Heavy",
+    "shortDesc": "Weapon damage increases by 1",
+    "fullDesc": "The Weapon's damage increases by 1."
+  },
+  "Impact": {
+    "id": "Impact",
+    "name": "Impact",
+    "shortDesc": "+1 damage on Heavy Hits",
+    "fullDesc": "You deal +1 damage on Heavy Hits."
+  },
+  "Long-Ranged": {
+    "id": "Long-Ranged",
+    "name": "Long-Ranged",
+    "shortDesc": "Range increases to 30/90",
+    "fullDesc": "Your Range increases to 30/90."
+  },
+  "Multi-Faceted": {
+    "id": "Multi-Faceted",
+    "name": "Multi-Faceted",
+    "shortDesc": "Weapon has a second Weapon Style",
+    "fullDesc": "The Weapon gains a second Weapon Style. When you make an Attack with the Weapon, you must choose which Weapon Style to use. The chosen Weapon Style determines the Attack's damage type."
+  },
+  "Reach": {
+    "id": "Reach",
+    "name": "Reach",
+    "shortDesc": "Adds 1 Space to melee range",
+    "fullDesc": "This Weapon adds 1 Space to your Melee Range when you Attack with it."
+  },
+  "Reload": {
+    "id": "Reload",
+    "name": "Reload",
+    "shortDesc": "+1 damage, must spend 1 AP to reload",
+    "fullDesc": "The Weapon's damage increases by 1, but you must spend 1 AP and use a free hand to reload the Weapon. If you make a Ranged Attack with the Weapon using a Reaction, the Weapon must already be loaded to perform the Attack."
+  },
+  "Silent": {
+    "id": "Silent",
+    "name": "Silent",
+    "shortDesc": "Remain Unheard while Hidden",
+    "fullDesc": "When you make a Ranged Attack with the Weapon while Hidden, you remain Unheard by creatures you're Hidden from. You must be both Unseen and Unheard to be Hidden. If you become seen while making the Attack, you are no longer Hidden."
+  },
+  "Toss": {
+    "id": "Toss",
+    "name": "Toss (5/10)",
+    "shortDesc": "Can throw to make Ranged Attack (5/10)",
+    "fullDesc": "You can throw the Weapon to make a Ranged Martial Attack (5/10)."
+  },
+  "Thrown": {
+    "id": "Thrown",
+    "name": "Thrown (10/20)",
+    "shortDesc": "Can throw to make Ranged Attack (10/20)",
+    "fullDesc": "You can throw the Weapon to make a Ranged Martial Attack (10/20)."
+  },
+  "Two-Handed": {
+    "id": "Two-Handed",
+    "name": "Two-Handed",
+    "shortDesc": "Requires 2 hands when Attacking",
+    "fullDesc": "The Weapon requires 2 hands when you Attack with it."
+  },
+  "Unwieldy": {
+    "id": "Unwieldy",
+    "name": "Unwieldy",
+    "shortDesc": "DisADV on attacks within 1 Space",
+    "fullDesc": "You have DisADV on Attacks made with the Weapon against targets within 1 Space of you. The DisADV from Unwieldy stacks with the DisADV that Ranged Weapons get when they make Attacks against a target that are within 1 Space of you (making it DisADV 2)."
+  },
+  "Versatile": {
+    "id": "Versatile",
+    "name": "Versatile",
+    "shortDesc": "+2 to Hit when wielded with 2 hands",
+    "fullDesc": "This Weapon can be wielded with 1 or 2 hands. When you wield the Weapon with 2 hands, you gain a +2 bonus to Hit using it."
+  }
+}

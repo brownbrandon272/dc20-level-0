@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCharacterStore } from '../context/characterStore';
 import { recalculateStats } from '../utils/calculateStats';
@@ -9,7 +9,7 @@ import type { Attributes } from '../types';
 function Level0AncestryPage() {
   const navigate = useNavigate();
   const character = useCharacterStore((state) => state.character);
-  const addAncestryLevel0Choice = useCharacterStore((state) => state.addAncestryLevel0Choice);
+  const setAncestryLevel0Choices = useCharacterStore((state) => state.setAncestryLevel0Choices);
   const setAncestryFeatureChoice = useCharacterStore((state) => state.setAncestryFeatureChoice);
   const setAttributes = useCharacterStore((state) => state.setAttributes);
   const setSkills = useCharacterStore((state) => state.setSkills);
@@ -19,6 +19,19 @@ function Level0AncestryPage() {
   const [selectedChoices, setSelectedChoices] = useState<string[]>([]);
   const [attributeIncreaseChoice, setAttributeIncreaseChoice] = useState<string>('');
   const [skillExpertiseChoice, setSkillExpertiseChoice] = useState<string>('');
+
+  // Initialize state from existing character data when component mounts
+  useEffect(() => {
+    if (character.ancestry.level0Choices.length > 0) {
+      setSelectedChoices(character.ancestry.level0Choices);
+    }
+    if (character.ancestry.level0ChoiceDetails.attributeIncrease) {
+      setAttributeIncreaseChoice(character.ancestry.level0ChoiceDetails.attributeIncrease);
+    }
+    if (character.ancestry.level0ChoiceDetails.skillExpertise) {
+      setSkillExpertiseChoice(character.ancestry.level0ChoiceDetails.skillExpertise);
+    }
+  }, []);
 
   const ancestry = ancestriesData[character.ancestry.id as keyof typeof ancestriesData];
   const features = ancestry?.level0Features || [];
@@ -99,9 +112,8 @@ function Level0AncestryPage() {
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    selectedChoices.forEach(choiceId => {
-      addAncestryLevel0Choice(choiceId);
-    });
+    // Replace the entire level0Choices array instead of appending
+    setAncestryLevel0Choices(selectedChoices);
 
     // Recalculate stats with Level 0 bonuses
     const newCharacter = {

@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCharacterStore } from '../context/characterStore';
 import ChoiceCard from '../components/ChoiceCard';
+import WeaponPropertyTooltip from '../components/WeaponPropertyTooltip';
 import weaponsData from '../data/weapons.json';
 import { calculateNoviceStats } from '../utils/calculateStats';
 
@@ -31,8 +32,23 @@ function NoviceWeaponPage() {
     navigate('/character/sheet');
   };
 
-  const formatProperties = (properties) => {
-    return properties.length > 0 ? properties.join(', ') : 'None';
+  const renderPropertiesWithTooltips = (properties: string[]) => {
+    if (properties.length === 0) {
+      return <span className="font-body text-brown-medium">None</span>;
+    }
+
+    return (
+      <span>
+        {properties.map((prop, index) => (
+          <React.Fragment key={prop}>
+            <WeaponPropertyTooltip propertyName={prop}>
+              {prop}
+            </WeaponPropertyTooltip>
+            {index < properties.length - 1 && ', '}
+          </React.Fragment>
+        ))}
+      </span>
+    );
   };
 
   return (
@@ -45,13 +61,18 @@ function NoviceWeaponPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
         {weapons.map((weapon) => (
-          <ChoiceCard
-            key={weapon.id}
-            title={weapon.name}
-            description={`${weapon.hands} ${weapon.category} weapon. Damage: ${weapon.damage}. Properties: ${formatProperties(weapon.properties)}`}
-            imageUrl={weapon.icon}
-            onClick={() => handleWeaponSelect(weapon)}
-          />
+          <div key={weapon.id} className="flex flex-col">
+            <ChoiceCard
+              title={weapon.name}
+              description={`${weapon.hands} ${weapon.category} weapon. Damage: ${weapon.damage}.`}
+              imageUrl={weapon.icon}
+              onClick={() => handleWeaponSelect(weapon)}
+            />
+            <div className="mt-2 px-2 text-sm">
+              <span className="font-title text-brown-accent">Properties: </span>
+              {renderPropertiesWithTooltips(weapon.properties)}
+            </div>
+          </div>
         ))}
       </div>
     </div>

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useCharacterStore } from '../context/characterStore';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ChoiceCard from '../components/ChoiceCard';
+import WeaponPropertyTooltip from '../components/WeaponPropertyTooltip';
 import weaponsData from '../data/weapons.json';
+import shieldsData from '../data/shields.json';
 
 export default function Level0EquipmentPage() {
   const navigate = useNavigate();
@@ -50,7 +52,17 @@ export default function Level0EquipmentPage() {
     // Apply shield or weapon (Martial only)
     if (classType === 'Martial') {
       if (equipmentChoice === 'shield') {
-        setShield({ name: 'Shield', pdBonus: 2 });
+        // Use the first shield from shields.json (Buckler Sturdy)
+        const buckler = shieldsData[0];
+        if (buckler) {
+          setShield({
+            id: buckler.id,
+            name: buckler.name,
+            weight: buckler.weight,
+            pdBonus: buckler.pdBonus,
+            notes: buckler.notes
+          });
+        }
       } else if (equipmentChoice === 'weapon' && selectedWeaponId) {
         const weapon = weaponsData.find(w => w.id === selectedWeaponId);
         if (weapon) {
@@ -138,8 +150,8 @@ export default function Level0EquipmentPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             <ChoiceCard
-              title="Shield"
-              description="+2 PD, enables shield maneuvers like Raise Shield"
+              title={shieldsData[0]?.name || "Shield"}
+              description={`+${shieldsData[0]?.pdBonus || 2} PD. ${shieldsData[0]?.notes || ""}. Enables shield maneuvers like Raise Shield`}
               imageUrl="/maneuver/maneuver-raise-shield.png"
               selected={equipmentChoice === 'shield'}
               onClick={() => {
@@ -183,7 +195,14 @@ export default function Level0EquipmentPage() {
                         </p>
                         {weapon.properties && weapon.properties.length > 0 && (
                           <p className="font-body text-xs text-brown-medium">
-                            {weapon.properties.join(', ')}
+                            {weapon.properties.map((prop, index) => (
+                              <React.Fragment key={prop}>
+                                <WeaponPropertyTooltip propertyName={prop}>
+                                  {prop}
+                                </WeaponPropertyTooltip>
+                                {index < weapon.properties.length - 1 && ', '}
+                              </React.Fragment>
+                            ))}
                           </p>
                         )}
                       </div>

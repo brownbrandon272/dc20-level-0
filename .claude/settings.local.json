@@ -7,6 +7,7 @@
       "Bash(awk:*)",
       "Bash(taskkill:*)",
       "Bash(findstr:*)",
+      "mcp__playwright__browser_browser_hover",
       "mcp__playwright__browser_navigate",
       "mcp__playwright__browser_take_screenshot",
       "mcp__playwright__browser_snapshot",
@@ -35,7 +36,8 @@
       "Bash(if [ -f \"c:\\Users\\brown\\dev\\repos\\dc20-level-0\\src\\pages\\Level0MartialPathPage.tsx\" ])",
       "Bash(then head -80 \"c:\\Users\\brown\\dev\\repos\\dc20-level-0\\src\\pages\\Level0MartialPathPage.tsx\")",
       "Bash(else echo \"File not found\")",
-      "Bash(fi)"
+      "Bash(fi)",
+      "Bash(timeout /t 5)"
     ],
     "deny": [],
     "ask": []

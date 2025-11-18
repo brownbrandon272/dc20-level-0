@@ -4,6 +4,7 @@ import { useCharacterStore } from '../context/characterStore';
 import CharacterHeader from '../components/CharacterHeader';
 import FramedStat from '../components/FramedStat';
 import AttributeBlock from '../components/AttributeBlock';
+import WeaponPropertyTooltip from '../components/WeaponPropertyTooltip';
 import ancestriesData from '../data/ancestries.json';
 import maneuversData from '../data/maneuvers.json';
 import spellsData from '../data/spells.json';
@@ -395,9 +396,19 @@ function CharacterSheetPage() {
                             </div>
                             <div className="text-xs text-brown-medium">
                               {character.inventory.weapon.hands}
-                              {character.inventory.weapon.properties.length > 0 &&
-                                ` • ${character.inventory.weapon.properties.join(', ')}`
-                              }
+                              {character.inventory.weapon.properties.length > 0 && (
+                                <>
+                                  {' • '}
+                                  {character.inventory.weapon.properties.map((prop, index) => (
+                                    <React.Fragment key={prop}>
+                                      <WeaponPropertyTooltip propertyName={prop}>
+                                        {prop}
+                                      </WeaponPropertyTooltip>
+                                      {index < character.inventory.weapon.properties.length - 1 && ', '}
+                                    </React.Fragment>
+                                  ))}
+                                </>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -430,9 +441,19 @@ function CharacterSheetPage() {
                             </div>
                             <div className="text-xs text-brown-medium">
                               {character.inventory.additionalWeapon.hands}
-                              {character.inventory.additionalWeapon.properties.length > 0 &&
-                                ` • ${character.inventory.additionalWeapon.properties.join(', ')}`
-                              }
+                              {character.inventory.additionalWeapon.properties.length > 0 && (
+                                <>
+                                  {' • '}
+                                  {character.inventory.additionalWeapon.properties.map((prop, index) => (
+                                    <React.Fragment key={prop}>
+                                      <WeaponPropertyTooltip propertyName={prop}>
+                                        {prop}
+                                      </WeaponPropertyTooltip>
+                                      {index < character.inventory.additionalWeapon.properties.length - 1 && ', '}
+                                    </React.Fragment>
+                                  ))}
+                                </>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -462,7 +483,13 @@ function CharacterSheetPage() {
                             </div>
                             <div className="text-xs text-brown-medium">
                               +{character.inventory.shield.pdBonus} PD
+                              {character.inventory.shield.weight && ` • ${character.inventory.shield.weight}`}
                             </div>
+                            {character.inventory.shield.notes && (
+                              <div className="text-xs text-brown-medium italic mt-1">
+                                {character.inventory.shield.notes}
+                              </div>
+                            )}
                           </div>
                         </div>
                         <div className="col-span-6 text-sm text-brown-medium italic">

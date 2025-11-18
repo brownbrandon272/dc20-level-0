@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import ChoiceCard from '../components/ChoiceCard';
 import martialPathsData from '../data/martialPaths.json';
 import weaponsData from '../data/weapons.json';
+import shieldsData from '../data/shields.json';
 
 export default function Level0MartialPathPage() {
   const navigate = useNavigate();
@@ -31,8 +32,17 @@ export default function Level0MartialPathPage() {
       const hasLongsword = character.inventory.weapon?.id === 'longsword';
 
       if (hasLongsword) {
-        // Already has longsword, give shield
-        setShield({ name: 'Shield', pdBonus: 2 });
+        // Already has longsword, give shield from shields.json
+        const buckler = shieldsData[0];
+        if (buckler) {
+          setShield({
+            id: buckler.id,
+            name: buckler.name,
+            weight: buckler.weight,
+            pdBonus: buckler.pdBonus,
+            notes: buckler.notes
+          });
+        }
       } else {
         // Doesn't have longsword, give longsword
         const longsword = weaponsData.find(w => w.id === 'longsword');

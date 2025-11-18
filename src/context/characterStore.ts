@@ -107,6 +107,17 @@ export const useCharacterStore = create<CharacterStore>()(
         }
       })),
 
+      // Set (replace) level 0 ancestry choices
+      setAncestryLevel0Choices: (choices: string[]) => set((state) => ({
+        character: {
+          ...state.character,
+          ancestry: {
+            ...state.character.ancestry,
+            level0Choices: choices
+          }
+        }
+      })),
+
       // Set ancestry feature choice (for dropdown selections)
       setAncestryFeatureChoice: (featureId: string, selectedOption: string) => set((state) => ({
         character: {

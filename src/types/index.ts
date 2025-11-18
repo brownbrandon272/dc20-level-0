@@ -21,6 +21,8 @@ export interface Languages {
 export interface Weapon {
   id: string;
   name: string;
+  tagline?: string;
+  icon?: string;
   category: string;
   style: string;
   hands: string;
@@ -29,14 +31,28 @@ export interface Weapon {
   streamlined: boolean;
 }
 
+export interface WeaponProperty {
+  id: string;
+  name: string;
+  shortDesc: string;
+  fullDesc: string;
+}
+
+export interface WeaponPropertyMap {
+  [key: string]: WeaponProperty;
+}
+
 export interface Armor {
   name: string;
   pdBonus: number;
 }
 
 export interface Shield {
+  id?: string;
   name: string;
+  weight?: string;
   pdBonus: number;
+  notes?: string;
 }
 
 export interface Inventory {
@@ -194,6 +210,7 @@ export interface CharacterStore {
   setLastStep: (step: string) => void;
   setAncestry: (ancestryId: string) => void;
   addAncestryLevel0Choice: (choiceId: string) => void;
+  setAncestryLevel0Choices: (choices: string[]) => void;
   setAncestryFeatureChoice: (featureId: string, selectedOption: string) => void;
   setWeapon: (weapon: Weapon) => void;
   setLevel: (level: CharacterLevel) => void;

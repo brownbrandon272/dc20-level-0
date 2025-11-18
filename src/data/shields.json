@@ -1,0 +1,9 @@
+[
+  {
+    "id": "bucklerSturdy",
+    "name": "Buckler (Sturdy)",
+    "weight": "Light",
+    "pdBonus": 2,
+    "notes": "DisADV on Agility Saves"
+  }
+]
