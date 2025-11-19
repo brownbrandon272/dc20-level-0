@@ -14,7 +14,6 @@ function PreAdventurerPage() {
   const setSkills = useCharacterStore((state) => state.setSkills);
   const setLanguages = useCharacterStore((state) => state.setLanguages);
   const updateCalculatedStats = useCharacterStore((state) => state.updateCalculatedStats);
-  const setLastStep = useCharacterStore((state) => state.setLastStep);
 
   const archetypes = Object.values(otherData.archetypes);
 
@@ -57,11 +56,9 @@ function PreAdventurerPage() {
       const stats = recalculateStats(newCharacter);
       updateCalculatedStats(stats);
 
-      setLastStep('/create/pre-adventurer');
       navigate('/character/sheet');
     } else {
       // Customizable mode - go to attribute allocation
-      setLastStep('/create/pre-adventurer');
       navigate('/create/pre-adventurer/skills');
     }
   };

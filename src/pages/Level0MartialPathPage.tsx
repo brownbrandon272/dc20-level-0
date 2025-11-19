@@ -15,7 +15,6 @@ export default function Level0MartialPathPage() {
   const setAdditionalWeapon = useCharacterStore((state) => state.setAdditionalWeapon);
   const setShield = useCharacterStore((state) => state.setShield);
   const setMartialPath = useCharacterStore((state) => state.setMartialPath);
-  const setLastStep = useCharacterStore((state) => state.setLastStep);
 
   const [selectedPath, setSelectedPath] = useState<string | null>(null);
 
@@ -82,7 +81,6 @@ export default function Level0MartialPathPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     applyMartialPath(selectedPath);
-    setLastStep(location.pathname);
     navigate('/create/level0/ancestry');
   };
 

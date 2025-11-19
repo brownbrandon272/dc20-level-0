@@ -51,7 +51,6 @@ function PreAdventurerSkillsPage() {
   const setSkills = useCharacterStore((state) => state.setSkills);
   const setLanguages = useCharacterStore((state) => state.setLanguages);
   const updateCalculatedStats = useCharacterStore((state) => state.updateCalculatedStats);
-  const setLastStep = useCharacterStore((state) => state.setLastStep);
 
   // Standard Array: 3, 1, 0, -2, then +2 bonus points to allocate
   const [attributes, setAttributesLocal] = useState({
@@ -247,7 +246,6 @@ function PreAdventurerSkillsPage() {
     const stats = recalculateStats(newCharacter);
     updateCalculatedStats(stats);
 
-    setLastStep('/create/pre-adventurer/skills');
     navigate('/character/sheet');
   };
 

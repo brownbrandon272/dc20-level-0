@@ -6,14 +6,12 @@ import ChoiceCard from '../components/ChoiceCard';
 function ModePage() {
   const navigate = useNavigate();
   const setCreationMode = useCharacterStore((state) => state.setCreationMode);
-  const setLastStep = useCharacterStore((state) => state.setLastStep);
 
   const handleModeSelect = (mode) => {
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     setCreationMode(mode);
-    setLastStep('/create/mode');
     navigate('/create/name');
   };
 

@@ -14,7 +14,6 @@ function Level0AncestryPage() {
   const setAttributes = useCharacterStore((state) => state.setAttributes);
   const setSkills = useCharacterStore((state) => state.setSkills);
   const updateCalculatedStats = useCharacterStore((state) => state.updateCalculatedStats);
-  const setLastStep = useCharacterStore((state) => state.setLastStep);
 
   const [selectedChoices, setSelectedChoices] = useState<string[]>([]);
   const [attributeIncreaseChoice, setAttributeIncreaseChoice] = useState<string>('');
@@ -127,7 +126,6 @@ function Level0AncestryPage() {
     const stats = recalculateStats(newCharacter);
     updateCalculatedStats(stats);
 
-    setLastStep('/create/level0/ancestry');
     navigate('/character/sheet');
   };
 

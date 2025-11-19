@@ -11,7 +11,6 @@ function NoviceWeaponPage() {
   const character = useCharacterStore((state) => state.character);
   const setWeapon = useCharacterStore((state) => state.setWeapon);
   const updateCalculatedStats = useCharacterStore((state) => state.updateCalculatedStats);
-  const setLastStep = useCharacterStore((state) => state.setLastStep);
 
   // Filter weapons based on creation mode
   const weapons = character.creationMode === 'streamlined'
@@ -28,7 +27,6 @@ function NoviceWeaponPage() {
     const stats = calculateNoviceStats(character);
     updateCalculatedStats(stats);
 
-    setLastStep('/create/novice/weapon');
     navigate('/character/sheet');
   };
 

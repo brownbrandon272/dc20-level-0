@@ -6,21 +6,30 @@ function Footer() {
   const navigate = useNavigate();
   const location = useLocation();
   const character = useCharacterStore((state) => state.character);
+  const setLastStep = useCharacterStore((state) => state.setLastStep);
 
   const handleBack = () => {
+    // Save current location before going back
+    setLastStep(location.pathname);
     navigate(-1);
   };
 
   const handleReturn = () => {
     if (character.lastStep && character.lastStep !== location.pathname) {
-      navigate(character.lastStep);
+      const destination = character.lastStep;
+      // Clear lastStep when returning forward
+      setLastStep('');
+      navigate(destination);
     }
   };
 
+  // Show "Return to..." button only when:
+  // 1. lastStep exists and is different from current page
+  // 2. Current page is NOT the landing page
+  // 3. User has navigated backwards (lastStep was set by Back button)
   const showReturn = character.lastStep &&
                      character.lastStep !== location.pathname &&
-                     location.pathname !== '/' &&
-                     location.pathname !== '/character/sheet';
+                     location.pathname !== '/';
 
   const showBack = location.pathname !== '/';
 

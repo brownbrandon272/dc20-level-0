@@ -6,7 +6,6 @@ function NamePage() {
   const navigate = useNavigate();
   const character = useCharacterStore((state) => state.character);
   const setName = useCharacterStore((state) => state.setName);
-  const setLastStep = useCharacterStore((state) => state.setLastStep);
   const [inputName, setInputName] = useState(character.name || '');
 
   const handleNext = () => {
@@ -15,7 +14,6 @@ function NamePage() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
       setName(inputName.trim());
-      setLastStep('/create/name');
       navigate('/create/novice/ancestry');
     }
   };

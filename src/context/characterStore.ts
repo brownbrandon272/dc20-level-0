@@ -19,7 +19,7 @@ const initialCharacterState: Character = {
   name: '',
   creationMode: null,
   level: 'Novice',
-  lastStep: '/',
+  lastStep: '',
 
   ancestry: {
     id: null,

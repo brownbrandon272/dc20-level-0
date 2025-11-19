@@ -7,7 +7,6 @@ function Level0MartialPage() {
   const navigate = useNavigate();
   const character = useCharacterStore((state) => state.character);
   const setManeuvers = useCharacterStore((state) => state.setManeuvers);
-  const setLastStep = useCharacterStore((state) => state.setLastStep);
 
   const [selectedManeuvers, setSelectedManeuvers] = useState<string[]>([]);
 
@@ -53,7 +52,6 @@ function Level0MartialPage() {
     ];
     setManeuvers(allManeuverIds);
 
-    setLastStep('/create/level0/martial');
     navigate('/create/level0/ancestry');
   };
 

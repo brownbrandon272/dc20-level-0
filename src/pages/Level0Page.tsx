@@ -8,7 +8,6 @@ function Level0Page() {
   const character = useCharacterStore((state) => state.character);
   const setLevel = useCharacterStore((state) => state.setLevel);
   const setClassType = useCharacterStore((state) => state.setClassType);
-  const setLastStep = useCharacterStore((state) => state.setLastStep);
 
   const handleClassSelect = (classType) => {
     // Scroll to top
@@ -16,7 +15,6 @@ function Level0Page() {
 
     setLevel('Level0');
     setClassType(classType);
-    setLastStep('/create/level0');
 
     // Navigate to equipment selection page
     navigate('/create/level0/equipment');

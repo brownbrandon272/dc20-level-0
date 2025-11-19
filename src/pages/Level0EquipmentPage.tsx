@@ -16,7 +16,6 @@ export default function Level0EquipmentPage() {
   const setArmor = useCharacterStore((state) => state.setArmor);
   const setShield = useCharacterStore((state) => state.setShield);
   const setAdditionalWeapon = useCharacterStore((state) => state.setAdditionalWeapon);
-  const setLastStep = useCharacterStore((state) => state.setLastStep);
 
   const [hasLightArmor, setHasLightArmor] = useState(false);
   const [equipmentChoice, setEquipmentChoice] = useState<'shield' | 'weapon' | null>(null);
@@ -27,7 +26,6 @@ export default function Level0EquipmentPage() {
     if (creationMode === 'streamlined') {
       // Auto-apply light armor for everyone
       setArmor({ name: 'Light Armor', pdBonus: 1 });
-      setLastStep(location.pathname);
 
       // Navigate based on class
       if (classType === 'Martial') {
@@ -38,7 +36,7 @@ export default function Level0EquipmentPage() {
         navigate('/create/level0/caster');
       }
     }
-  }, [creationMode, classType, setArmor, setLastStep, location.pathname, navigate]);
+  }, [creationMode, classType, setArmor, navigate]);
 
   const handleContinue = () => {
     // Scroll to top
@@ -70,8 +68,6 @@ export default function Level0EquipmentPage() {
         }
       }
     }
-
-    setLastStep(location.pathname);
 
     // Customizable mode navigation
     if (classType === 'Martial') {

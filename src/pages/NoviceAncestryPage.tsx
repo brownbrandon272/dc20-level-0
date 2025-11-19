@@ -7,7 +7,6 @@ import ancestriesData from '../data/ancestries.json';
 function NoviceAncestryPage() {
   const navigate = useNavigate();
   const setAncestry = useCharacterStore((state) => state.setAncestry);
-  const setLastStep = useCharacterStore((state) => state.setLastStep);
 
   const ancestries = Object.values(ancestriesData);
 
@@ -16,7 +15,6 @@ function NoviceAncestryPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     setAncestry(ancestryId);
-    setLastStep('/create/novice/ancestry');
     navigate('/create/novice/weapon');
   };
 

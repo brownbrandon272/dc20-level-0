@@ -8,7 +8,6 @@ function Level0CasterPage() {
   const navigate = useNavigate();
   const character = useCharacterStore((state) => state.character);
   const setSpellList = useCharacterStore((state) => state.setSpellList);
-  const setLastStep = useCharacterStore((state) => state.setLastStep);
 
   const creationMode = character.creationMode;
   const isStreamlined = creationMode === 'streamlined';
@@ -19,7 +18,6 @@ function Level0CasterPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     setSpellList(spellListId);
-    setLastStep('/create/level0/caster');
     navigate('/create/level0/ancestry');
   };
 
