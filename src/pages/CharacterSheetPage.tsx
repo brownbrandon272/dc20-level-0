@@ -5,16 +5,19 @@ import CharacterHeader from '../components/CharacterHeader';
 import FramedStat from '../components/FramedStat';
 import AttributeBlock from '../components/AttributeBlock';
 import WeaponPropertyTooltip from '../components/WeaponPropertyTooltip';
+import ActionCard from '../components/ActionCard';
 import ancestriesData from '../data/ancestries.json';
 import maneuversData from '../data/maneuvers.json';
 import spellsData from '../data/spells.json';
 import otherData from '../data/other.json';
+import baseActionsExpanded from '../data/baseActionsExpanded.json';
 
 function CharacterSheetPage() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('sheet');
   const [expandedSpellId, setExpandedSpellId] = useState<string | null>(null);
   const [expandedManeuverId, setExpandedManeuverId] = useState<string | null>(null);
+  const [actionsDisplayMode, setActionsDisplayMode] = useState<'summary' | 'full'>('summary');
   const character = useCharacterStore((state) => state.character);
   const setLastStep = useCharacterStore((state) => state.setLastStep);
 
@@ -78,14 +81,37 @@ function CharacterSheetPage() {
     return (prof > 2 ? 2 : prof >= 1 ? 1 : 0) as 0 | 1 | 2;
   };
 
-  // Get available actions based on level (base actions only - no spells/maneuvers)
+  // Get available actions based on level (all categories combined with filtering)
   const getAvailableActions = () => {
-    return [...otherData.baseActions];
+    const allActions = [
+      ...baseActionsExpanded.defensiveActions,
+      ...baseActionsExpanded.offensiveActions,
+      ...baseActionsExpanded.utilityActions
+    ];
+
+    // Filter actions based on level and class requirements
+    return allActions.filter(action => {
+      if (action.levelRequirement && character.level !== action.levelRequirement) {
+        return false;
+      }
+      if (action.classRequirement && character.classType !== action.classRequirement) {
+        return false;
+      }
+      return true;
+    });
   };
 
-  // Get available reactions (base reactions only - no maneuvers)
+  // Get available reactions with filtering
   const getAvailableReactions = () => {
-    return [...otherData.baseReactions];
+    return baseActionsExpanded.reactions.filter(reaction => {
+      if (reaction.levelRequirement && character.level !== reaction.levelRequirement) {
+        return false;
+      }
+      if (reaction.classRequirement && character.classType !== reaction.classRequirement) {
+        return false;
+      }
+      return true;
+    });
   };
 
   // Get character's selected maneuvers
@@ -740,52 +766,64 @@ function CharacterSheetPage() {
         )}
 
         {activeTab === 'actions' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Actions Section */}
-            <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 shadow-parchment-lg">
-              <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
-                Actions
-              </h2>
-              <div className="space-y-3">
-                {getAvailableActions().map((action, index) => (
-                  <div key={action.id || index} className="bg-parchment-light border border-brown-medium rounded-lg p-4">
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-title text-lg font-semibold text-brown-text">
-                        {action.name}
-                      </h3>
-                      <span className="bg-brown-accent text-parchment-light px-3 py-1 rounded-full text-sm font-sans font-semibold">
-                        {action.cost}
-                      </span>
-                    </div>
-                    <p className="font-body text-sm text-brown-text">
-                      {action.desc}
-                    </p>
-                  </div>
-                ))}
+          <div className="space-y-6">
+            {/* Display Mode Toggle */}
+            <div className="flex justify-center">
+              <div className="inline-flex bg-parchment-light border-2 border-brown-medium rounded-lg p-1">
+                <button
+                  className={`px-6 py-2 font-sans font-semibold rounded-md transition-all ${
+                    actionsDisplayMode === 'summary'
+                      ? 'bg-brown-accent text-parchment-light shadow-parchment'
+                      : 'text-brown-text hover:bg-parchment-dark'
+                  }`}
+                  onClick={() => setActionsDisplayMode('summary')}
+                >
+                  Summary
+                </button>
+                <button
+                  className={`px-6 py-2 font-sans font-semibold rounded-md transition-all ${
+                    actionsDisplayMode === 'full'
+                      ? 'bg-brown-accent text-parchment-light shadow-parchment'
+                      : 'text-brown-text hover:bg-parchment-dark'
+                  }`}
+                  onClick={() => setActionsDisplayMode('full')}
+                >
+                  Full Details
+                </button>
               </div>
             </div>
 
-            {/* Reactions Section */}
-            <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 shadow-parchment-lg">
-              <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
-                Reactions
-              </h2>
-              <div className="space-y-3">
-                {getAvailableReactions().map((reaction, index) => (
-                  <div key={reaction.id || index} className="bg-parchment-light border border-gold-dark rounded-lg p-4">
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-title text-lg font-semibold text-brown-text">
-                        {reaction.name}
-                      </h3>
-                      <span className="bg-gold text-parchment-light px-3 py-1 rounded-full text-sm font-sans font-semibold">
-                        {reaction.cost}
-                      </span>
-                    </div>
-                    <p className="font-body text-sm text-brown-text">
-                      {reaction.desc}
-                    </p>
-                  </div>
-                ))}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Actions Section */}
+              <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 shadow-parchment-lg">
+                <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
+                  Actions
+                </h2>
+                <div className="space-y-3">
+                  {getAvailableActions().map((action) => (
+                    <ActionCard
+                      key={action.id}
+                      action={action}
+                      displayMode={actionsDisplayMode}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Reactions Section */}
+              <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 shadow-parchment-lg">
+                <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
+                  Reactions
+                </h2>
+                <div className="space-y-3">
+                  {getAvailableReactions().map((reaction) => (
+                    <ActionCard
+                      key={reaction.id}
+                      action={reaction}
+                      displayMode={actionsDisplayMode}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>

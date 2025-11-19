@@ -1,28 +1,40 @@
 {
   "defensiveActions": [
     {
-      "id": "dodge",
-      "name": "Dodge",
-      "cost": "1 AP",
-      "desc": "Until the start of your next turn, attacks against you have disadvantage.",
-      "descSummary": "Dodge (1 AP): Attacks vs you have DisADV until your next turn.",
-      "descExtremeSummary": "Attacks have DisADV"
-    },
-    {
-      "id": "dash",
-      "name": "Dash",
-      "cost": "1 AP",
-      "desc": "Your movement Speed is doubled until the end of your turn.",
-      "descSummary": "Dash (1 AP): Double movement Speed this turn.",
-      "descExtremeSummary": "Double Speed"
-    },
-    {
       "id": "disengage",
       "name": "Disengage",
       "cost": "1 AP",
-      "desc": "Your movement doesn't provoke opportunity attacks for the rest of your turn.",
-      "descSummary": "Disengage (1 AP): No opportunity attacks this turn.",
-      "descExtremeSummary": "No opp attacks"
+      "desc": "Impose DisADV on Opportunity Attacks against you until the start of your next turn.",
+      "descSummary": "Disengage (1 AP): DisADV on Opportunity Attacks until your next turn.",
+      "descExtremeSummary": "Safer movement",
+      "variant": {
+        "id": "fullDisengage",
+        "name": "Full Disengage",
+        "cost": "2 AP",
+        "desc": "Be immune to Opportunity Attacks until the start of your next turn."
+      }
+    },
+    {
+      "id": "dodge",
+      "name": "Dodge",
+      "cost": "1 AP",
+      "desc": "Impose DisADV on the next Attack or Grapple against you until the start of your next turn.",
+      "descSummary": "Dodge (1 AP): Next attack against you has DisADV.",
+      "descExtremeSummary": "Harder to hit",
+      "variant": {
+        "id": "fullDodge",
+        "name": "Full Dodge",
+        "cost": "2 AP",
+        "desc": "Impose DisADV on all Attacks or Grapples against you until the start of your next turn."
+      }
+    },
+    {
+      "id": "hide",
+      "name": "Hide",
+      "cost": "1 AP",
+      "desc": "Make a Stealth Check vs Passive Awareness to hide from creatures.",
+      "descSummary": "Hide (1 AP): Stealth Check vs Passive Awareness.",
+      "descExtremeSummary": "Become hidden"
     }
   ],
   "offensiveActions": [
@@ -30,8 +42,8 @@
       "id": "attack",
       "name": "Attack",
       "cost": "1 AP",
-      "desc": "Make a weapon attack or unarmed strike against a target within range.",
-      "descSummary": "Attack (1 AP): Basic weapon attack.",
+      "desc": "Make 1 Attack Check.",
+      "descSummary": "Attack (1 AP): Make an attack check.",
       "descExtremeSummary": "Basic attack"
     },
     {
@@ -54,19 +66,100 @@
       "id": "shove",
       "name": "Shove",
       "cost": "1 AP",
-      "desc": "Athletics Check vs Martial Check to push 1 space or knock Prone.",
-      "descSummary": "Shove (1 AP): Push 1 space or knock Prone.",
-      "descExtremeSummary": "Push or Prone"
+      "desc": "Athletics vs Martial.",
+      "descSummary": "Shove (1 AP): Push target with contested check.",
+      "descExtremeSummary": "Push target away"
+    },
+    {
+      "id": "tackle",
+      "name": "Tackle",
+      "cost": "1 AP",
+      "desc": "Move 2+ Spaces straight and Tackle (Grappled, you and target move 1 Space and fall Prone) a same Size or smaller creature, Athletics vs Martial.",
+      "descSummary": "Tackle (1 AP): Charge and grapple, both fall prone.",
+      "descExtremeSummary": "Charging grapple"
     }
   ],
-  "otherActions": [
+  "utilityActions": [
     {
-      "id": "ready",
-      "name": "Ready",
+      "id": "move",
+      "name": "Move",
       "cost": "1 AP",
-      "desc": "Choose a trigger and an action. When the trigger occurs, you can use your reaction to perform that action.",
-      "descSummary": "Ready (1 AP): Set trigger for reaction.",
-      "descExtremeSummary": "Set trigger"
+      "desc": "Move up to your Speed. Can split movement but cannot end your turn in an occupied Space.",
+      "descSummary": "Move (1 AP): Move up to your Speed.",
+      "descExtremeSummary": "Move around"
+    },
+    {
+      "id": "help",
+      "name": "Help",
+      "cost": "1 AP",
+      "desc": "Grant a creature a d8 Help Die (lasts until the start of your next turn). Applies to Attack or Skill check.",
+      "descSummary": "Help (1 AP): Give ally d8 Help Die.",
+      "descExtremeSummary": "Aid an ally"
+    },
+    {
+      "id": "object",
+      "name": "Object",
+      "cost": "1 AP",
+      "desc": "e.g. Drink/administer a Potion, Lock/unlock a lock, transfer/toss an item",
+      "descSummary": "Object (1 AP): Interact with objects or items.",
+      "descExtremeSummary": "Use an item"
+    },
+    {
+      "id": "spell",
+      "name": "Spell",
+      "cost": "Variable",
+      "desc": "Cast a Spell you know. May require MP.",
+      "descSummary": "Spell (Variable): Cast a known spell.",
+      "descExtremeSummary": "Cast spell",
+      "levelRequirement": "Level0",
+      "classRequirement": "Caster"
+    },
+    {
+      "id": "comboSpellcasting",
+      "name": "Combo Spellcasting",
+      "cost": "Variable",
+      "desc": "2+ creatures can combine AP and MP to enhance a Spell.",
+      "descSummary": "Combo Spellcasting: Multiple casters combine resources for enhanced spell.",
+      "descExtremeSummary": "Team casting",
+      "levelRequirement": "Level0",
+      "classRequirement": "Caster"
+    }
+  ],
+  "reactions": [
+    {
+      "id": "heldAction",
+      "name": "Held Actions",
+      "cost": "Variable",
+      "desc": "Declare an action and a trigger outside of your turn.",
+      "descSummary": "Held Actions: Prepare action with trigger.",
+      "descExtremeSummary": "Ready an action"
+    },
+    {
+      "id": "gritPoints",
+      "name": "Grit Points (GP)",
+      "cost": "1 GP",
+      "desc": "Reduce 1 damage from an attack or give yourself ADV on a save.",
+      "descSummary": "Grit Points (1 GP): Reduce damage by 1 or gain ADV on save.",
+      "descExtremeSummary": "Damage reduction"
+    },
+    {
+      "id": "opportunityAttack",
+      "name": "Opportunity Attack",
+      "cost": "1 AP",
+      "desc": "Spend 1 AP to make a melee attack.",
+      "descSummary": "Opportunity Attack (1 AP): Attack when enemy leaves reach.",
+      "descExtremeSummary": "Punish movement",
+      "classRequirement": "Martial"
+    },
+    {
+      "id": "spellDuel",
+      "name": "Spell Duel",
+      "cost": "2 AP, 1+ MP",
+      "desc": "Spend 2 AP and 1+ MP to challenge the creature with a Spell Duel.",
+      "descSummary": "Spell Duel (2 AP, 1+ MP): Counter enemy spell with contested check.",
+      "descExtremeSummary": "Counter spell",
+      "levelRequirement": "Level0",
+      "classRequirement": "Caster"
     }
   ]
 }

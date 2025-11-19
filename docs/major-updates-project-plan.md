@@ -1419,7 +1419,7 @@ const [actionsDisplayMode, setActionsDisplayMode] = useState<'summary' | 'full'>
 </div>
 ```
 
-### 5.3 Create Spell/Maneuver Modal
+### 5.3 Create Spell/Maneuver Modal - ⏳ NOT NEEDED
 
 **New file:** `src/components/SpellManeuverModal.tsx`
 
