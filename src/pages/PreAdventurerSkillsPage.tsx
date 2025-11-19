@@ -353,8 +353,8 @@ function PreAdventurerSkillsPage() {
 
             // Determine impact text
             const impactText = {
-              might: 'Impacts PD',
-              agility: 'Impacts PD',
+              might: 'Impacts AD and HP',
+              agility: 'Impacts PD and Initiative',
               intelligence: 'Impacts PD and Skills',
               charisma: 'Impacts AD and Grit'
             }[attrKey] || '';
@@ -455,7 +455,7 @@ function PreAdventurerSkillsPage() {
             Prime
           </h3>
           <p className="font-body text-xs text-brown-medium mb-2 text-center italic">
-            Impacts Attack
+            Impacts Attack, Spells, and Save DC
           </p>
           <p className="font-body text-sm text-brown-medium mb-2 text-center">
             Based on {attributeNames[primeAttributeName as keyof typeof attributeNames]}

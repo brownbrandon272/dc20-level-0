@@ -60,7 +60,7 @@ const initialCharacterState: Character = {
     saveDC: 10,
     martialCheck: 0,
     spellCheck: 0,
-    speed: 6,
+    speed: 5,
     stamina: 2,
     mana: 2,
     actionPoints: 4,

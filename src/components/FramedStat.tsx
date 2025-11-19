@@ -31,6 +31,8 @@ function FramedStat({
   const framePaths = {
     'gold-circle': '/frame/frame-circle-gold-double-ring-rubies.png',
     'silver-circle': '/frame/frame-circle-silver-double-ring-sapphires.png',
+    'gold-circle-alt': '/frame/frame-circle-gold-double-with-flourishes.png',
+    'silver-circle-alt': '/frame/frame-circle-silver-double-with-flourishes.png',
     'gold-square': '/frame/frame-square-gold-1.png',
     'silver-square': '/frame/frame-square-silver-1.png',
     'rectangle-gold': '/frame/frame-rectangle-gold.png',

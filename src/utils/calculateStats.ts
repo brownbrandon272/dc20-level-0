@@ -14,7 +14,7 @@ export function calculateNoviceStats(_character: Character): CalculatedStats {
     saveDC: 10,
     martialCheck: 0,
     spellCheck: 0,
-    speed: 6,
+    speed: 5,
     stamina: 2,
     mana: 2,
     actionPoints: 4,
@@ -32,7 +32,7 @@ export function recalculateStats(character: Character): CalculatedStats {
 
   // Base stats
   const stats: CalculatedStats = {
-    speed: 6,
+    speed: 5,
     actionPoints: 4,
     stamina: 2,
     mana: 2,
@@ -56,18 +56,23 @@ export function recalculateStats(character: Character): CalculatedStats {
   // Character Modifier (CM) = 0 for Novice, 1 for Pre-Adventurer and Level 0
   const cm = level === 'Novice' ? 0 : 1;
 
-  // Attack Check = CM + highest physical attribute (Might or Agility)
-  stats.attackCheck = cm + Math.max(might, agility);
+  // Prime = highest attribute value
+  const prime = Math.max(might, agility, charisma, intelligence);
 
-  // Save DC = 10 + CM + highest mental attribute (Charisma or Intelligence)
-  stats.saveDC = 10 + cm + Math.max(charisma, intelligence);
+  // Attack Check = CM + Prime
+  stats.attackCheck = cm + prime;
+
+  // Save DC = 10 + CM + Prime
+  stats.saveDC = 10 + cm + prime;
 
   // Martial Check = CM + highest of Athletics or Acrobatics skill
-  // For simplicity, we'll use the higher physical attribute as proxy
-  stats.martialCheck = cm + Math.max(might, agility);
+  // Get skill values (default to 0 if not present)
+  const athleticsSkill = character.skills['Athletics'] || 0;
+  const acrobaticsSkill = character.skills['Acrobatics'] || 0;
+  stats.martialCheck = cm + Math.max(athleticsSkill, acrobaticsSkill);
 
-  // Spell Check = CM + highest mental attribute
-  stats.spellCheck = cm + Math.max(charisma, intelligence);
+  // Spell Check = CM + Prime
+  stats.spellCheck = cm + prime;
 
   // Calculate Defenses
   if (level === 'Novice') {

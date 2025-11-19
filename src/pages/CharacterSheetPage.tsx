@@ -275,7 +275,7 @@ function CharacterSheetPage() {
                       value={stats.pd}
                       frameType="silver-square"
                       size="large"
-                      tooltip="Precision Defense: Defense against targeted attacks"
+                      tooltip="8 + Combat Mastery (+1) + Agility + Intelligence + Armor Bonus + Shield Bonus"
                     />
                     {/* Heavy and Brutal limits for PD */}
                     <div className="mt-1 bg-parchment-light border border-brown-medium rounded px-4 py-2 text-center">
@@ -296,7 +296,7 @@ function CharacterSheetPage() {
                       value={stats.ad}
                       frameType="silver-square"
                       size="large"
-                      tooltip="Area Defense: Defense against area effects"
+                      tooltip="8 + Combat Mastery (+1) + Might + Charisma"
                     />
                     {/* Heavy and Brutal limits for AD */}
                     <div className="mt-1 bg-parchment-light border border-brown-medium rounded px-4 py-2 text-center">
@@ -317,7 +317,7 @@ function CharacterSheetPage() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="bg-parchment-light border border-brown-medium rounded-lg p-4 text-center">
                     <div className="text-sm font-sans uppercase tracking-wide text-brown-medium mb-2">
-                      Attack Check
+                      Attack/Spell Check
                     </div>
                     <div className="font-title text-3xl font-bold text-brown-text">
                       +{stats.attackCheck}
@@ -350,15 +350,6 @@ function CharacterSheetPage() {
                       CM + AGI
                     </div>
                   </div>
-                </div>
-              </div>
-
-              {/* Physical Stats */}
-              <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 mb-6 shadow-parchment-lg">
-                <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
-                  Physical
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="bg-parchment-light border border-brown-medium rounded-lg p-4 text-center">
                     <div className="text-sm font-sans uppercase tracking-wide text-brown-medium mb-2">
                       Move Speed
@@ -369,10 +360,13 @@ function CharacterSheetPage() {
                   </div>
                   <div className="bg-parchment-light border border-brown-medium rounded-lg p-4 text-center">
                     <div className="text-sm font-sans uppercase tracking-wide text-brown-medium mb-2">
-                      Hold Breath
+                      Physical Check
                     </div>
                     <div className="font-title text-3xl font-bold text-brown-text">
-                      {character.attributes.might + combatMastery} min
+                      +{stats.martialCheck}
+                    </div>
+                    <div className="text-xs text-brown-medium mt-1">
+                      CM + Max of Athletics and Acrobatics
                     </div>
                   </div>
                   <div className="bg-parchment-light border border-brown-medium rounded-lg p-4 text-center">
@@ -380,11 +374,133 @@ function CharacterSheetPage() {
                       Jump Distance
                     </div>
                     <div className="font-title text-3xl font-bold text-brown-text">
-                      {stats.speed / 2}
+                      {Math.max(1, character.attributes.agility)}
+                    </div>
+                    <div className="text-xs text-brown-medium mt-1">
+                      AGI (min 1)
                     </div>
                   </div>
                 </div>
               </div>
+
+              {/* Resources (Level 0 only) */}
+              {character.level === 'Level0' && (
+                <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 mb-6 shadow-parchment-lg">
+                  <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
+                    Resources
+                  </h2>
+                  <div className="flex flex-wrap gap-6 justify-center">
+                    {character.classType === 'Martial' && (
+                      <div className="relative">
+                        <FramedStat
+                          label="Stamina"
+                          value={stats.stamina}
+                          frameType="silver-circle"
+                          size="medium"
+                        />
+                        <div className="group absolute top-0 right-0">
+                          <div className="w-5 h-5 bg-brown-accent rounded-full flex items-center justify-center text-parchment-light text-xs font-bold cursor-help">
+                            i
+                          </div>
+                          <div className="hidden group-hover:block absolute z-50 bottom-full right-0 mb-2 w-64 pointer-events-none">
+                            <div className="bg-parchment-dark border-2 border-brown-accent rounded-lg p-3 shadow-elevated">
+                              <div className="font-body text-xs text-brown-text leading-relaxed">
+                                Martial resource. Refreshes at end of combat, or spend 2 AP to refresh 1 SP.
+                              </div>
+                              <div className="absolute top-full right-4 transform -mt-px">
+                                <div className="border-8 border-transparent border-t-brown-accent"></div>
+                                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full">
+                                  <div className="border-6 border-transparent border-t-parchment-dark"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    {character.classType === 'Caster' && (
+                      <div className="relative">
+                        <FramedStat
+                          label="Mana"
+                          value={stats.mana}
+                          frameType="gold-circle"
+                          size="medium"
+                        />
+                        <div className="group absolute top-0 right-0">
+                          <div className="w-5 h-5 bg-brown-accent rounded-full flex items-center justify-center text-parchment-light text-xs font-bold cursor-help">
+                            i
+                          </div>
+                          <div className="hidden group-hover:block absolute z-50 bottom-full right-0 mb-2 w-64 pointer-events-none">
+                            <div className="bg-parchment-dark border-2 border-brown-accent rounded-lg p-3 shadow-elevated">
+                              <div className="font-body text-xs text-brown-text leading-relaxed">
+                                Caster resource. Refreshes on long rest.
+                              </div>
+                              <div className="absolute top-full right-4 transform -mt-px">
+                                <div className="border-8 border-transparent border-t-brown-accent"></div>
+                                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full">
+                                  <div className="border-6 border-transparent border-t-parchment-dark"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    <div className="relative">
+                      <FramedStat
+                        label="Grit"
+                        value={stats.gritPoints}
+                        frameType="silver-circle-alt"
+                        size="medium"
+                      />
+                      <div className="group absolute top-0 right-0">
+                        <div className="w-5 h-5 bg-brown-accent rounded-full flex items-center justify-center text-parchment-light text-xs font-bold cursor-help">
+                          i
+                        </div>
+                        <div className="hidden group-hover:block absolute z-50 bottom-full right-0 mb-2 w-64 pointer-events-none">
+                          <div className="bg-parchment-dark border-2 border-brown-accent rounded-lg p-3 shadow-elevated">
+                            <div className="font-body text-xs text-brown-text leading-relaxed">
+                              2 + Charisma. Use to reduce damage by 1 or gain ADV on save.
+                            </div>
+                            <div className="absolute top-full right-4 transform -mt-px">
+                              <div className="border-8 border-transparent border-t-brown-accent"></div>
+                              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full">
+                                <div className="border-6 border-transparent border-t-parchment-dark"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="relative">
+                      <FramedStat
+                        label="Rest"
+                        value={stats.hpMax}
+                        frameType="gold-circle-alt"
+                        size="medium"
+                      />
+                      <div className="group absolute top-0 right-0">
+                        <div className="w-5 h-5 bg-brown-accent rounded-full flex items-center justify-center text-parchment-light text-xs font-bold cursor-help">
+                          i
+                        </div>
+                        <div className="hidden group-hover:block absolute z-50 bottom-full right-0 mb-2 w-64 pointer-events-none">
+                          <div className="bg-parchment-dark border-2 border-brown-accent rounded-lg p-3 shadow-elevated">
+                            <div className="font-body text-xs text-brown-text leading-relaxed">
+                              Rest Points: Max HP
+                            </div>
+                            <div className="absolute top-full right-4 transform -mt-px">
+                              <div className="border-8 border-transparent border-t-brown-accent"></div>
+                              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full">
+                                <div className="border-6 border-transparent border-t-parchment-dark"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Attacks & Equipment */}
               <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 mb-6 shadow-parchment-lg">
@@ -561,49 +677,6 @@ function CharacterSheetPage() {
                         No languages learned yet
                       </div>
                     )}
-                  </div>
-                </div>
-              )}
-
-              {/* Resources (Level 0 only) */}
-              {character.level === 'Level0' && (
-                <div className="bg-parchment rounded-lg border-2 border-brown-accent p-6 mb-6 shadow-parchment-lg">
-                  <h2 className="font-title text-2xl text-brown-text mb-4 border-b-2 border-brown-accent pb-3 px-2">
-                    Resources
-                  </h2>
-                  <div className="flex flex-wrap gap-6 justify-center">
-                    {character.classType === 'Martial' && (
-                      <FramedStat
-                        label="Stamina"
-                        value={stats.stamina}
-                        frameType="silver-circle"
-                        size="medium"
-                        tooltip="Stamina Points: Used for martial maneuvers"
-                      />
-                    )}
-                    {character.classType === 'Caster' && (
-                      <FramedStat
-                        label="Mana"
-                        value={stats.mana}
-                        frameType="gold-circle"
-                        size="medium"
-                        tooltip="Mana Points: Used for casting spells"
-                      />
-                    )}
-                    <FramedStat
-                      label="Grit"
-                      value={character.attributes.charisma + 2}
-                      frameType="silver-square"
-                      size="medium"
-                      tooltip="Grit Points: CHA + 2"
-                    />
-                    <FramedStat
-                      label="Rest"
-                      value={stats.hpMax}
-                      frameType="gold-square"
-                      size="medium"
-                      tooltip="Rest Points: Max HP"
-                    />
                   </div>
                 </div>
               )}

@@ -1805,8 +1805,8 @@ stats.ad = 8 + cm + might + charisma;
 All formula tooltips have been added in the sections above (7.1.3 and 7.2.1).
 
 **Summary of tooltips:**
-- **PD:** "8 + Combat Mastery (+1) + Agility + Intelligence + Armor Bonus + Shield Bonus"
-- **AD:** "8 + Combat Mastery (+1) + Might + Charisma"
+- **PD:** "8 + Combat Mastery (+1) + Agility + Intelligence + Bonus"
+- **AD:** "8 + Combat Mastery (+1) + Might + Charisma + Bonus"
 - **Grit:** "2 + Charisma. Use to reduce damage by 1 or gain ADV on save."
 - **Stamina:** "Martial resource. Refreshes at end of combat, or spend 2 AP to refresh 1 SP."
 - **Mana:** "Caster resource. Refreshes on long rest."
@@ -1926,7 +1926,7 @@ Human, Dwarven, Elvish, Gnomish, Halfling, Orcish
   - [ ] Grit = 2 + CHA
   - [ ] Stamina = 1 (Martial)
   - [ ] Mana = 3 (Caster)
-  - [ ] PD = 8 + 1 + AGI + INT + Armor(1) + Shield(1) (NEW FORMULA - Q5)
+  - [ ] PD = 8 + 1 + AGI + INT + Armor(1) + Shield(2) (NEW FORMULA - Q5)
   - [ ] AD = 8 + 1 + MIG + CHA (NEW FORMULA - Q5)
   - [ ] Dwarven Resilience = +1 HP (not +2)
   - [ ] **NO MD** - removed from game (Q5)
